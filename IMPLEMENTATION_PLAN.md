@@ -61,11 +61,11 @@
 
 | Task                | Details                                               | Tests                                      | Done |
 | ------------------- | ----------------------------------------------------- | ------------------------------------------ | :---: |
-| `Result<T, E>` type | Type-safe error handling without exceptions           | Unit: Result creation, mapping, unwrapping | [ ] |
-| ULID generator      | `generateId(): ULID`                                  | Unit: uniqueness, sortability              | [ ] |
-| Typed event emitter | `EventEmitter<EventMap>` with type-safe on/off/emit   | Unit: subscribe, emit, unsubscribe         | [ ] |
-| Date utilities      | Formatters, range helpers, timezone-aware comparisons | Unit: edge cases (DST, boundaries)         | [ ] |
-| Zod schema helpers  | Shared validation schemas (ULID, DateTime, etc.)      | Unit: valid/invalid inputs                 | [ ] |
+| `Result<T, E>` type | Type-safe error handling without exceptions           | Unit: Result creation, mapping, unwrapping | [x] |
+| ULID generator      | `generateId(): ULID`                                  | Unit: uniqueness, sortability              | [x] |
+| Typed event emitter | `EventEmitter<EventMap>` with type-safe on/off/emit   | Unit: subscribe, emit, unsubscribe         | [x] |
+| Date utilities      | Formatters, range helpers, timezone-aware comparisons | Unit: edge cases (DST, boundaries)         | [x] |
+| Zod schema helpers  | Shared validation schemas (ULID, DateTime, etc.)      | Unit: valid/invalid inputs                 | [x] |
 
 
 ### 0.5 Internationalization (`@locus/i18n`)
