@@ -27,9 +27,5 @@
       "biome format --write --no-errors-on-unmatched"
     ]
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild"
-    ]
-  }
+  "pnpm": {}
 }
