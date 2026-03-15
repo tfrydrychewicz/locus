@@ -1,4 +1,4 @@
-import { HelpButton } from '@locus/help'
+import { HelpButton, HelpPanel } from '@locus/help'
 import { useTranslation } from '@locus/i18n'
 import { type NavItemConfig, Sidebar } from '@locus/ui'
 import {
@@ -42,7 +42,7 @@ function makeTab(note?: Note, fallbackLabel = 'New Tab'): TabState {
 }
 
 export function App() {
-  const { t } = useTranslation('common')
+  const { t, i18n } = useTranslation('common')
   const newTabLabel = t('newTab')
   const [activePage, setActivePage] = useState<PageId>('today')
   const [tabs, setTabs] = useState<TabState[]>(() => [makeTab()])
@@ -318,6 +318,9 @@ export function App() {
           onClose={() => setPaletteOpen(false)}
         />
       )}
+
+      {/* ── Help Panel ── */}
+      <HelpPanel locale={i18n.language} />
     </div>
   )
 }
