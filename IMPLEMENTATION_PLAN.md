@@ -135,18 +135,16 @@
 | Count cache table            | `count_cache` table + trigger infrastructure                      | Integration: counts maintained                             | [x]  |
 
 
-
-
 ### 1.2 Core Domain — Notes (`@locus/core`)
 
 
 | Task                      | Details                                                            | Tests                              | Done |
 | ------------------------- | ------------------------------------------------------------------ | ---------------------------------- | ---- |
-| `Note` domain model       | Interface + factory + validation (Zod schema)                      | Unit: creation, validation         | [ ]  |
-| `NoteRepository` port     | Interface for CRUD + FTS search + cursor-paginated list            | — (port only)                      | [ ]  |
-| `Page<T>` pagination type | Cursor-based pagination response with totalEstimate                | Unit: type construction            | [ ]  |
-| Note use cases            | `CreateNote`, `UpdateNote`, `DeleteNote`, `SearchNotes`, `GetNote` | Unit: each use case with mock repo | [ ]  |
-| `NoteFilter` value object | Filter by archived, date range, template                           | Unit: filter logic                 | [ ]  |
+| `Note` domain model       | Interface + factory + validation (Zod schema)                      | Unit: creation, validation         | [x]  |
+| `NoteRepository` port     | Interface for CRUD + FTS search + cursor-paginated list            | — (port only)                      | [x]  |
+| `Page<T>` pagination type | Cursor-based pagination response with totalEstimate                | Unit: type construction            | [x]  |
+| Note use cases            | `CreateNote`, `UpdateNote`, `DeleteNote`, `SearchNotes`, `GetNote` | Unit: each use case with mock repo | [x]  |
+| `NoteFilter` value object | Filter by archived, date range, template                           | Unit: filter logic                 | [x]  |
 
 
 ### 1.3 Data Layer — Notes
