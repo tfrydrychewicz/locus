@@ -41,7 +41,7 @@
 | Define color tokens (light + dark)           | Semantic colors for both themes from DESIGN.md §9    | Unit: both themes export correctly  | [x] |
 | Define spacing, typography, animation tokens | Complete token set                                   | Unit: tokens are type-safe          | [x] |
 | Create Tailwind preset                       | `tailwind.preset.ts` with `dark:` variant support    | Build: Tailwind resolves all tokens | [x] |
-| Document tokens                              | Token catalog page in Storybook (both themes)        | Visual: token showcase renders in light + dark | [ ] |
+| Document tokens                              | Token catalog page in Storybook (both themes)        | Visual: token showcase renders in light + dark | [x] |
 
 
 ### 0.3 Storybook Setup
@@ -49,11 +49,11 @@
 
 | Task                     | Details                                    | Tests                      | Done |
 | ------------------------ | ------------------------------------------ | -------------------------- | :---: |
-| Configure Storybook 8    | `apps/storybook/` consuming `@locus/ui`     | `storybook build` succeeds | [ ] |
-| Add Tailwind integration | PostCSS + Tailwind in Storybook             | Styles render correctly    | [ ] |
-| Add accessibility addon  | `@storybook/addon-a11y`                     | a11y checks run on stories | [ ] |
-| Add theme toggle         | Toolbar addon to switch light/dark; both themes render all stories | Visual: both themes render | [ ] |
-| Add i18n decorator       | Storybook decorator with i18next provider + locale switcher (en/pl) | Visual: stories render in both locales | [ ] |
+| Configure Storybook 8    | `apps/storybook/` consuming `@locus/ui`     | `storybook build` succeeds | [x] |
+| Add Tailwind integration | PostCSS + Tailwind in Storybook             | Styles render correctly    | [x] |
+| Add accessibility addon  | `@storybook/addon-a11y`                     | a11y checks run on stories | [x] |
+| Add theme toggle         | Toolbar addon to switch light/dark; both themes render all stories | Visual: both themes render | [x] |
+| Add i18n decorator       | Storybook decorator with i18next provider + locale switcher (en/pl) | Visual: stories render in both locales | [x] |
 
 
 ### 0.4 Shared Utilities (`@locus/shared`)
