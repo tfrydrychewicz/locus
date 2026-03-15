@@ -1,0 +1,28 @@
+---
+description: Track task completion in IMPLEMENTATION_PLAN.md by marking the Done column
+alwaysApply: true
+---
+
+# Implementation Plan Tracking
+
+`IMPLEMENTATION_PLAN.md` in the project root is the single source of truth for project progress.
+
+## Done Column
+
+- Every task table has a **Done** column with a checkbox (`[ ]` = pending, `[x]` = complete).
+- When a task from `IMPLEMENTATION_PLAN.md` is fully implemented (code written, tests passing, Storybook story added where applicable), mark it done by changing `[ ]` to `[x]` in the corresponding row.
+- Mark a task done in the **same response** that completes the implementation — do not defer it.
+- Do NOT mark a task done if only partially implemented or if tests are missing/failing.
+- If a task is removed or no longer applicable, replace `[ ]` with `[~]` and add a brief note in the Details column explaining why.
+
+## When Implementing Features
+
+1. Before starting work, check `IMPLEMENTATION_PLAN.md` to find the relevant task row(s).
+2. After completing the task, update the Done column from `[ ]` to `[x]`.
+3. If a single user request covers multiple tasks, mark all completed tasks done.
+
+## Integrity
+
+- Never remove or reorder existing tasks without user approval.
+- New tasks may be added to the appropriate phase table with `[ ]` in the Done column.
+- The Done column is the project's progress tracker — keep it accurate.
