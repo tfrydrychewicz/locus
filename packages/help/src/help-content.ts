@@ -16,6 +16,35 @@ type HelpContentMap = Record<string, Record<string, HelpArticle>>
 
 const content: HelpContentMap = {
   en: {
+    'settings/overview': {
+      title: 'Settings Overview',
+      quickAnswer:
+        'Settings let you personalise Locus: choose your theme, switch language, configure the editor, and control AI features — all stored locally on your device.',
+      sections: [
+        {
+          heading: 'Appearance',
+          content:
+            'Choose between Light, Dark, or System theme. System automatically follows your OS dark-mode preference. You can also switch the app language between English and Polish — the change takes effect immediately without restarting.',
+        },
+        {
+          heading: 'Editor',
+          content:
+            'Configure auto-save interval (default 500 ms), spell-check, and default note format. These settings apply to every note you create or edit.',
+        },
+        {
+          heading: 'AI & Models',
+          content:
+            'Locus is privacy-first: AI features are opt-in and require you to supply your own API key or download a local model. No data leaves your device without your explicit consent.',
+        },
+        {
+          heading: 'Data & Privacy',
+          content:
+            'All your notes, tasks, and cognitive data are stored locally in a SQLite database on your machine. You can export your data at any time from Settings → Data & Storage.',
+        },
+      ],
+      adhdTip:
+        "Don't try to configure everything at once. Start with the theme that feels comfortable and the language you prefer — everything else has sensible defaults.",
+    },
     'getting-started': {
       title: 'Getting Started with Locus',
       quickAnswer:
@@ -47,6 +76,35 @@ const content: HelpContentMap = {
     },
   },
   pl: {
+    'settings/overview': {
+      title: 'Przegląd ustawień',
+      quickAnswer:
+        'Ustawienia pozwalają spersonalizować Locus: wybrać motyw, zmienić język, skonfigurować edytor oraz kontrolować funkcje AI — wszystko przechowywane lokalnie na Twoim urządzeniu.',
+      sections: [
+        {
+          heading: 'Wygląd',
+          content:
+            'Wybierz między motywem Jasnym, Ciemnym lub Systemowym. Motyw Systemowy automatycznie podąża za trybem ciemnym systemu operacyjnego. Możesz też przełączyć język aplikacji między angielskim a polskim — zmiana następuje natychmiast bez restartu.',
+        },
+        {
+          heading: 'Edytor',
+          content:
+            'Skonfiguruj interwał automatycznego zapisu (domyślnie 500 ms), sprawdzanie pisowni i domyślny format notatki. Ustawienia te dotyczą każdej notatki, którą tworzysz lub edytujesz.',
+        },
+        {
+          heading: 'AI i modele',
+          content:
+            'Locus stawia prywatność na pierwszym miejscu: funkcje AI są opcjonalne i wymagają podania własnego klucza API lub pobrania lokalnego modelu. Żadne dane nie opuszczają Twojego urządzenia bez Twojej wyraźnej zgody.',
+        },
+        {
+          heading: 'Dane i prywatność',
+          content:
+            'Wszystkie Twoje notatki, zadania i dane poznawcze są przechowywane lokalnie w bazie danych SQLite na Twoim komputerze. W dowolnym momencie możesz wyeksportować dane z Ustawienia → Dane i pamięć.',
+        },
+      ],
+      adhdTip:
+        'Nie próbuj konfigurować wszystkiego naraz. Zacznij od motywu, który jest dla Ciebie wygodny, i preferowanego języka — reszta ma sensowne wartości domyślne.',
+    },
     'getting-started': {
       title: 'Pierwsze kroki z Locus',
       quickAnswer:

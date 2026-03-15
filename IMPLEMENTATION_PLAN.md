@@ -215,13 +215,13 @@
 
 | Task                         | Details                                                                                          | Tests                                                 | Done |
 | ---------------------------- | ------------------------------------------------------------------------------------------------ | ----------------------------------------------------- | ---- |
-| `SettingsModal` layout       | Two-pane modal: left nav (180px, category tree) + right content pane + single Save/Cancel footer | Storybook: open, with categories                      | [ ]  |
-| `SettingsNav` component      | Category groups (icon + bold label) with indented subcategory items; active state highlighting   | Storybook: all categories, active states              | [ ]  |
-| Dirty tracking               | Settings store tracks modified fields; confirmation dialog on navigate-away with unsaved changes | Unit: dirty detection; Component: confirmation dialog | [ ]  |
-| Appearance → Theme           | System / Dark / Light selector; persisted in settings DB                                         | Integration: theme switches, persists                 | [ ]  |
-| Appearance → Language        | English / Polish selector; persisted; reloads i18n namespace                                     | Integration: locale switches, all strings update      | [ ]  |
-| `settings.json` locale files | EN + PL for all settings labels and descriptions                                                 | CI: 100% PL coverage                                  | [ ]  |
-| Help content: Settings       | `settings/overview.mdx` (EN + PL)                                                                | HelpPanel renders content                             | [ ]  |
+| `SettingsModal` layout       | Two-pane modal: left nav (180px, category tree) + right content pane + single Save/Cancel footer | Storybook: open, with categories                      | [x]  |
+| `SettingsNav` component      | Category groups (icon + bold label) with indented subcategory items; active state highlighting   | Storybook: all categories, active states              | [x]  |
+| Dirty tracking               | Settings store tracks modified fields; confirmation dialog on navigate-away with unsaved changes | Unit: dirty detection; Component: confirmation dialog | [x]  |
+| Appearance → Theme           | System / Dark / Light selector; persisted in settings DB                                         | Integration: theme switches, persists                 | [x]  |
+| Appearance → Language        | English / Polish selector; persisted; reloads i18n namespace                                     | Integration: locale switches, all strings update      | [x]  |
+| `settings.json` locale files | EN + PL for all settings labels and descriptions                                                 | CI: 100% PL coverage                                  | [x]  |
+| Help content: Settings       | `settings/overview.mdx` (EN + PL)                                                                | HelpPanel renders content                             | [x]  |
 
 
 ### 1.9 i18n & Help for Notes

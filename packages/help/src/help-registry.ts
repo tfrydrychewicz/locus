@@ -80,6 +80,13 @@ const helpTopics = {
     namespace: 'settings',
     file: 'settings/general',
   },
+  'settings.overview': {
+    title: 'Settings Overview',
+    titleKey: 'help:topics.settings',
+    namespace: 'settings',
+    file: 'settings/overview',
+    relatedTopics: ['settings.general', 'settings.ai'],
+  },
   shortcuts: {
     title: 'Keyboard Shortcuts',
     titleKey: 'help:topics.shortcuts',

@@ -11,6 +11,13 @@ export { FormField, type FormFieldProps } from './molecules/FormField.js'
 export { NavItem, type NavItemProps } from './molecules/NavItem.js'
 export { NoteListItem, type NoteListItemProps } from './molecules/NoteListItem.js'
 export { SearchBar, type SearchBarProps } from './molecules/SearchBar.js'
+export { SettingsModal, type SettingsModalProps } from './molecules/SettingsModal.js'
+export {
+  type SettingsCategory,
+  SettingsNav,
+  type SettingsNavProps,
+  type SettingsSubcategory,
+} from './molecules/SettingsNav.js'
 export {
   type NavItemConfig,
   Sidebar,
