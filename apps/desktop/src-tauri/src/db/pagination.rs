@@ -8,7 +8,7 @@ pub struct Page<T> {
     pub total_estimate: u64,
 }
 
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, Deserialize, Default)]
 pub struct PaginationParams {
     pub cursor: Option<String>,
     pub limit: Option<u32>,

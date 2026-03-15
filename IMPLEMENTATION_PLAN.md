@@ -152,10 +152,10 @@
 
 | Task                    | Details                                       | Tests                                     | Done |
 | ----------------------- | --------------------------------------------- | ----------------------------------------- | ---- |
-| `notes` table migration | Schema from DESIGN.md §8                      | Integration: table exists after migration | [ ]  |
-| `notes_fts` FTS5 table  | Virtual table + triggers for sync             | Integration: FTS search returns results   | [ ]  |
-| SQLite note repository  | Implements `NoteRepository` port via rusqlite | Integration: CRUD + search with real DB   | [ ]  |
-| Tauri note commands     | IPC handlers calling use cases                | Integration: invoke from frontend works   | [ ]  |
+| `notes` table migration | Schema from DESIGN.md §8                      | Integration: table exists after migration | [x]  |
+| `notes_fts` FTS5 table  | Virtual table + triggers for sync             | Integration: FTS search returns results   | [x]  |
+| SQLite note repository  | Implements `NoteRepository` port via rusqlite | Integration: CRUD + search with real DB   | [x]  |
+| Tauri note commands     | IPC handlers calling use cases                | Integration: invoke from frontend works   | [x]  |
 
 
 ### 1.4 Atom Components (`@locus/ui`)

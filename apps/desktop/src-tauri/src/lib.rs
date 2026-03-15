@@ -1,5 +1,6 @@
 mod commands;
 mod db;
+mod notes;
 
 use db::Database;
 use std::path::PathBuf;
@@ -25,6 +26,12 @@ pub fn run() {
         .invoke_handler(tauri::generate_handler![
             commands::ping,
             commands::get_db_status,
+            notes::commands::notes_create,
+            notes::commands::notes_get,
+            notes::commands::notes_list,
+            notes::commands::notes_update,
+            notes::commands::notes_delete,
+            notes::commands::notes_search,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
