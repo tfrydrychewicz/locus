@@ -36,8 +36,9 @@ describe('help-content', () => {
     expect(article?.title).toBe('Getting Started with Locus')
   })
 
-  it('returns null for unknown topic', () => {
-    const article = getHelpContent('notes.editor', 'en')
+  it('returns null for a topic with no content yet', () => {
+    // notes.mentions is a registered topic ID but has no content written yet
+    const article = getHelpContent('notes.mentions', 'en')
     expect(article).toBeNull()
   })
 

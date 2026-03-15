@@ -254,5 +254,12 @@ export function registerHelpContent(locale: string, topicId: string, article: He
   if (!content[locale]) {
     content[locale] = {}
   }
-  content[locale][topicId] = article
+  // Resolve known topic IDs to their file path so the key is consistent with getHelpContent
+  let key = topicId
+  try {
+    key = getHelpTopic(topicId as HelpTopicId).file
+  } catch {
+    // topicId is not a registered topic — store as-is (custom content)
+  }
+  content[locale][key] = article
 }
