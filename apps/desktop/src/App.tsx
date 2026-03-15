@@ -4,11 +4,15 @@ import { type NavItemConfig, Sidebar } from '@locus/ui'
 import {
   Calendar,
   FileText,
+  Folder,
   MessageSquare,
   PanelLeft,
+  Scale,
   Search,
   Settings,
+  Target,
   Trash2,
+  User,
   Users,
   Zap,
 } from 'lucide-react'
@@ -20,6 +24,15 @@ import { SettingsPage } from './pages/SettingsPage.js'
 import { TodayPage } from './pages/TodayPage.js'
 import type { Note } from './tauri/commands.js'
 import type { PaneState, TabState } from './view-pane/types.js'
+
+/** Maps sidebar nav item IDs for built-in entity types to their slugs. */
+const ENTITY_NAV_SLUG: Record<string, string> = {
+  people: 'person',
+  projects: 'project',
+  team: 'team',
+  decisions: 'decision',
+  okrs: 'okr',
+}
 
 function makePane(content: PaneState['content'] = { type: 'empty' }, label = 'New Tab'): PaneState {
   return { id: crypto.randomUUID(), label, content }
@@ -43,6 +56,7 @@ export function App() {
   const { isOpen: helpOpen } = useHelp()
   const newTabLabel = t('newTab')
   const [activePage, setActivePage] = useState<PageId>('today')
+  const [activeEntityTypeSlug, setActiveEntityTypeSlug] = useState<string | null>(null)
   const [tabs, setTabs] = useState<TabState[]>(() => [makeTab()])
   const [activeTabId, setActiveTabId] = useState<string | null>(() => tabs[0]?.id ?? null)
   const [paletteOpen, setPaletteOpen] = useState(false)
@@ -135,10 +149,34 @@ export function App() {
     ],
     [
       {
-        id: 'entities',
+        id: 'people',
+        icon: <User size={16} />,
+        label: t('nav.people'),
+        active: activePage === 'entities' && activeEntityTypeSlug === 'person',
+      },
+      {
+        id: 'projects',
+        icon: <Folder size={16} />,
+        label: t('nav.projects'),
+        active: activePage === 'entities' && activeEntityTypeSlug === 'project',
+      },
+      {
+        id: 'team',
         icon: <Users size={16} />,
-        label: t('nav.entities'),
-        active: activePage === 'entities',
+        label: t('nav.team'),
+        active: activePage === 'entities' && activeEntityTypeSlug === 'team',
+      },
+      {
+        id: 'decisions',
+        icon: <Scale size={16} />,
+        label: t('nav.decisions'),
+        active: activePage === 'entities' && activeEntityTypeSlug === 'decision',
+      },
+      {
+        id: 'okrs',
+        icon: <Target size={16} />,
+        label: t('nav.okrs'),
+        active: activePage === 'entities' && activeEntityTypeSlug === 'okr',
       },
     ],
     [
@@ -164,9 +202,15 @@ export function App() {
   ]
 
   const handleNavClick = useCallback((id: string) => {
-    const navigable: PageId[] = ['today', 'notes', 'settings', 'search', 'entities']
+    if (id in ENTITY_NAV_SLUG) {
+      setActivePage('entities')
+      setActiveEntityTypeSlug(ENTITY_NAV_SLUG[id] ?? null)
+      return
+    }
+    const navigable: PageId[] = ['today', 'notes', 'settings', 'search']
     if (navigable.includes(id as PageId)) {
       setActivePage(id as PageId)
+      setActiveEntityTypeSlug(null)
     }
   }, [])
 
@@ -289,7 +333,12 @@ export function App() {
               onOpenInNewTab={openInNewTab}
             />
           )}
-          {activePage === 'entities' && <EntitiesPage />}
+          {activePage === 'entities' && (
+            <EntitiesPage
+              key={activeEntityTypeSlug ?? 'all'}
+              initialTypeSlug={activeEntityTypeSlug}
+            />
+          )}
           {activePage === 'settings' && <SettingsPage />}
           {activePage === 'search' && (
             <div className="flex h-full flex-col">
