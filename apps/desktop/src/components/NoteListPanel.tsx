@@ -1,3 +1,4 @@
+import { useTranslation } from '@locus/i18n'
 import { Button, EmptyState, NoteListItem, SearchBar } from '@locus/ui'
 import { FileText } from 'lucide-react'
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
@@ -26,6 +27,7 @@ export const NoteListPanel = forwardRef<NoteListPanelHandle, NoteListPanelProps>
     { selectedId, onSelectNote, onOpenInNewPane, onOpenInNewTab, className = '' },
     ref,
   ) {
+    const { t } = useTranslation('notes')
     const [notes, setNotes] = useState<Note[]>([])
     const [searchQuery, setSearchQuery] = useState('')
     const [loading, setLoading] = useState(false)
@@ -73,10 +75,10 @@ export const NoteListPanel = forwardRef<NoteListPanelHandle, NoteListPanelProps>
     )
 
     const handleNewNote = useCallback(async () => {
-      const note = await notesCreate({ title: 'Untitled', body: '' })
+      const note = await notesCreate({ title: t('untitled'), body: '' })
       setNotes((prev) => [note, ...prev])
       onSelectNote(note)
-    }, [onSelectNote])
+    }, [onSelectNote, t])
 
     useImperativeHandle(
       ref,
@@ -110,22 +112,22 @@ export const NoteListPanel = forwardRef<NoteListPanelHandle, NoteListPanelProps>
           <SearchBar
             value={searchQuery}
             onChange={handleSearchChange}
-            placeholder="Search notes..."
+            placeholder={t('searchPlaceholder')}
             loading={loading}
           />
           <Button variant="primary" size="sm" className="w-full" onClick={handleNewNote}>
-            New note
+            {t('newNote')}
           </Button>
         </div>
         <div className="flex-1 overflow-y-auto p-2">
           {notes.length === 0 && !loading ? (
             <EmptyState
               icon={FileText}
-              title="No notes yet"
-              description="Create your first note to get started."
+              title={t('emptyTitle')}
+              description={t('emptyDescription')}
               action={
                 <Button variant="primary" size="sm" onClick={handleNewNote}>
-                  New note
+                  {t('newNote')}
                 </Button>
               }
             />
@@ -134,7 +136,7 @@ export const NoteListPanel = forwardRef<NoteListPanelHandle, NoteListPanelProps>
               {notes.map((note) => (
                 <li key={note.id}>
                   <NoteListItem
-                    title={note.title || 'Untitled'}
+                    title={note.title || t('untitled')}
                     excerpt={note.bodyPlain?.slice(0, 80)}
                     updatedAt={note.updatedAt}
                     onClick={(e) => handleNoteClick(e, note)}

@@ -1,3 +1,4 @@
+import { useTranslation } from '@locus/i18n'
 import { Input } from '@locus/ui'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { NoteListPanel, type NoteListPanelHandle } from '../components/NoteListPanel.js'
@@ -21,6 +22,7 @@ export interface NotesPageProps {
 }
 
 export function NotesPage({ tab, onTabChange, onOpenInNewTab }: NotesPageProps) {
+  const { t } = useTranslation('notes')
   const listPanelRef = useRef<NoteListPanelHandle>(null)
   const [activePaneId, setActivePaneId] = useState<string | null>(() => tab.activePaneId)
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -68,43 +70,43 @@ export function NotesPage({ tab, onTabChange, onOpenInNewTab }: NotesPageProps) 
   /** Replace the active pane's content. (Regular click) */
   const openInCurrentPane = useCallback(
     (note: Note) => {
-      onTabChange((t) => ({
-        ...t,
-        label: note.title || 'Untitled',
-        panes: t.panes.map((p) =>
+      onTabChange((tab) => ({
+        ...tab,
+        label: note.title || t('untitled'),
+        panes: tab.panes.map((p) =>
           p.id === activePaneId
             ? {
                 ...p,
-                label: note.title || 'Untitled',
+                label: note.title || t('untitled'),
                 content: { type: 'note' as const, noteId: note.id },
               }
             : p,
         ),
       }))
     },
-    [activePaneId, onTabChange],
+    [activePaneId, onTabChange, t],
   )
 
   /** Add a new pane to the right. (Shift-click) */
   const openInNewPane = useCallback(
     (note: Note) => {
-      const pane = makePane({ type: 'note', noteId: note.id }, note.title || 'Untitled')
-      onTabChange((t) => ({ ...t, panes: [...t.panes, pane] }))
+      const pane = makePane({ type: 'note', noteId: note.id }, note.title || t('untitled'))
+      onTabChange((tab) => ({ ...tab, panes: [...tab.panes, pane] }))
       setActivePaneId(pane.id)
     },
-    [onTabChange],
+    [onTabChange, t],
   )
 
   const handleClosePane = useCallback(
     (paneId: string) => {
-      onTabChange((t) => {
-        const idx = t.panes.findIndex((p) => p.id === paneId)
-        const next = t.panes.filter((p) => p.id !== paneId)
-        if (next.length === 0) return t // never close the last pane
+      onTabChange((tab) => {
+        const idx = tab.panes.findIndex((p) => p.id === paneId)
+        const next = tab.panes.filter((p) => p.id !== paneId)
+        if (next.length === 0) return tab // never close the last pane
         const nextActiveId =
           activePaneId === paneId ? (next[idx]?.id ?? next[idx - 1]?.id ?? null) : activePaneId
         setActivePaneId(nextActiveId)
-        return { ...t, panes: next }
+        return { ...tab, panes: next }
       })
     },
     [activePaneId, onTabChange],
@@ -167,6 +169,8 @@ interface PaneContentProps {
 }
 
 function PaneContent({ content, onSave }: PaneContentProps) {
+  const { t } = useTranslation('notes')
+  const { t: tCommon } = useTranslation('common')
   const [note, setNote] = useState<Note | null>(null)
   const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
@@ -213,7 +217,7 @@ function PaneContent({ content, onSave }: PaneContentProps) {
   if (content.type === 'empty') {
     return (
       <div className="flex h-full items-center justify-center bg-[var(--color-bg)] text-sm text-[var(--color-text-muted)]">
-        Select a note or create a new one
+        {t('selectNote')}
       </div>
     )
   }
@@ -221,7 +225,7 @@ function PaneContent({ content, onSave }: PaneContentProps) {
   if (!note) {
     return (
       <div className="flex h-full items-center justify-center bg-[var(--color-bg)] text-sm text-[var(--color-text-muted)]">
-        Loading…
+        {tCommon('loading')}
       </div>
     )
   }
@@ -232,7 +236,7 @@ function PaneContent({ content, onSave }: PaneContentProps) {
         <Input
           value={title}
           onChange={handleTitleChange}
-          placeholder="Note title"
+          placeholder={t('titlePlaceholder')}
           className="border-0 bg-transparent text-lg font-semibold shadow-none focus:ring-0"
         />
       </div>
@@ -240,7 +244,7 @@ function PaneContent({ content, onSave }: PaneContentProps) {
         <NoteEditor
           content={body}
           onUpdate={handleEditorUpdate}
-          placeholder="Write something…"
+          placeholder={t('bodyPlaceholder')}
           className="h-full rounded-none border-0"
         />
       </div>

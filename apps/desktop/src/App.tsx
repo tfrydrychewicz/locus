@@ -27,14 +27,14 @@ function makePane(content: PaneState['content'] = { type: 'empty' }, label = 'Ne
   return { id: crypto.randomUUID(), label, content }
 }
 
-function makeTab(note?: Note): TabState {
+function makeTab(note?: Note, fallbackLabel = 'New Tab'): TabState {
   const pane = makePane(
     note ? { type: 'note', noteId: note.id } : { type: 'empty' },
-    note?.title || 'New Tab',
+    note?.title || fallbackLabel,
   )
   return {
     id: crypto.randomUUID(),
-    label: note?.title || 'New Tab',
+    label: note?.title || fallbackLabel,
     panes: [pane],
     activePaneId: pane.id,
   }
@@ -42,6 +42,7 @@ function makeTab(note?: Note): TabState {
 
 export function App() {
   const { t } = useTranslation('common')
+  const newTabLabel = t('newTab')
   const [activePage, setActivePage] = useState<PageId>('today')
   const [tabs, setTabs] = useState<TabState[]>(() => [makeTab()])
   const [activeTabId, setActiveTabId] = useState<string | null>(() => tabs[0]?.id ?? null)
@@ -62,22 +63,25 @@ export function App() {
       // Switch to notes page and open note in current tab
       setActivePage('notes')
       setTabs((prev) =>
-        prev.map((t) => {
-          if (t.id !== activeTabId) return t
-          const pane = makePane({ type: 'note', noteId: note.id }, note.title || 'Untitled')
-          return { ...t, label: note.title || 'Untitled', panes: [pane], activePaneId: pane.id }
+        prev.map((tab) => {
+          if (tab.id !== activeTabId) return tab
+          const pane = makePane({ type: 'note', noteId: note.id }, note.title || newTabLabel)
+          return { ...tab, label: note.title || newTabLabel, panes: [pane], activePaneId: pane.id }
         }),
       )
     },
-    [activeTabId],
+    [activeTabId, newTabLabel],
   )
 
-  const openInNewTab = useCallback((note: Note) => {
-    const tab = makeTab(note)
-    setTabs((prev) => [...prev, tab])
-    setActiveTabId(tab.id)
-    setActivePage('notes')
-  }, [])
+  const openInNewTab = useCallback(
+    (note: Note) => {
+      const tab = makeTab(note, newTabLabel)
+      setTabs((prev) => [...prev, tab])
+      setActiveTabId(tab.id)
+      setActivePage('notes')
+    },
+    [newTabLabel],
+  )
 
   const closeTab = useCallback(
     (tabId: string) => {
@@ -85,7 +89,7 @@ export function App() {
         const idx = prev.findIndex((t) => t.id === tabId)
         const next = prev.filter((t) => t.id !== tabId)
         if (next.length === 0) {
-          const fresh = makeTab()
+          const fresh = makeTab(undefined, newTabLabel)
           setActiveTabId(fresh.id)
           return [fresh]
         }
@@ -96,7 +100,7 @@ export function App() {
         return next
       })
     },
-    [activeTabId],
+    [activeTabId, newTabLabel],
   )
 
   // Cmd+K → open command palette
@@ -245,7 +249,7 @@ export function App() {
           title="New tab"
           className="mr-2 shrink-0 rounded px-2 py-0.5 text-sm text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]"
           onClick={() => {
-            const tab = makeTab()
+            const tab = makeTab(undefined, newTabLabel)
             setTabs((prev) => [...prev, tab])
             setActiveTabId(tab.id)
             setActivePage('notes')
