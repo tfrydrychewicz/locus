@@ -1,5 +1,6 @@
 mod commands;
 mod db;
+mod entities;
 mod notes;
 
 use db::Database;
@@ -32,6 +33,29 @@ pub fn run() {
             notes::commands::notes_update,
             notes::commands::notes_delete,
             notes::commands::notes_search,
+            entities::commands::entity_types_list,
+            entities::commands::entity_types_get,
+            entities::commands::entity_types_get_by_slug,
+            entities::commands::entity_types_create,
+            entities::commands::entity_types_update,
+            entities::commands::entity_types_trash,
+            entities::commands::entity_types_hard_delete,
+            entities::commands::entities_create,
+            entities::commands::entities_get,
+            entities::commands::entities_list,
+            entities::commands::entities_update,
+            entities::commands::entities_trash,
+            entities::commands::entities_restore,
+            entities::commands::entities_hard_delete,
+            entities::commands::entities_search,
+            entities::commands::entities_evaluate_computed,
+            entities::commands::entities_parse_query,
+            entities::commands::entity_mentions_replace,
+            entities::commands::entity_mentions_for_note,
+            entities::commands::entity_mentions_for_entity,
+            entities::commands::note_relations_replace,
+            entities::commands::note_relations_for_note,
+            entities::commands::note_backlinks,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

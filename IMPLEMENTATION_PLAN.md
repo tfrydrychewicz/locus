@@ -276,10 +276,10 @@
 
 | Task                                           | Details                                                               | Tests                       | Done |
 | ---------------------------------------------- | --------------------------------------------------------------------- | --------------------------- | ---- |
-| `entity_types`, `entities` migrations          | Schema + seed built-in types (Person, Project, Team, Decision, OKR)   | Integration: types seeded   | [ ]  |
-| `entity_mentions`, `note_relations` migrations | Schema with foreign keys                                              | Integration: tables created | [ ]  |
-| SQLite entity repositories                     | Full CRUD + search + mention tracking + computed field queries        | Integration: all operations | [ ]  |
-| Tauri entity commands                          | IPC handlers for entities incl. `evaluate-computed` and `parse-query` | Integration: invoke works   | [ ]  |
+| `entity_types`, `entities` migrations          | Schema + seed built-in types (Person, Project, Team, Decision, OKR)   | Integration: types seeded   | [x]  |
+| `entity_mentions`, `note_relations` migrations | Schema with foreign keys                                              | Integration: tables created | [x]  |
+| SQLite entity repositories                     | Full CRUD + search + mention tracking + computed field queries        | Integration: all operations | [x]  |
+| Tauri entity commands                          | IPC handlers for entities incl. `evaluate-computed` and `parse-query` | Integration: invoke works   | [x]  |
 
 
 ### 2.3 Note Templates
