@@ -7,6 +7,8 @@
   "bodyPlaceholder": "Write something…",
   "emptyTitle": "No notes yet",
   "emptyDescription": "Create your first note to get started.",
+  "emptySearchTitle": "No results",
+  "emptySearchDescription": "No notes match your search.",
   "deleteConfirm": "Delete this note?",
   "noteCount": "{count, plural, one {# note} other {# notes}}",
   "lastEdited": "Last edited {date}",

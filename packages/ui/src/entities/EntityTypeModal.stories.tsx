@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { EntityTypeModal } from './EntityTypeModal.js'
-import type { UiEntityType } from './types.js'
+import type { FieldDef, UiEntityType } from './types.js'
 
 const PERSON_TYPE: UiEntityType = {
   id: '01J00000000000000000000001',
   slug: 'person',
   name: 'Person',
-  icon: '👤',
+  icon: 'user',
   color: '#3b82f6',
   fields: JSON.stringify([
     { id: 'email', label: 'Email', type: 'email', order: 0 },
@@ -22,7 +22,7 @@ const CUSTOM_TYPE: UiEntityType = {
   id: 'custom1',
   slug: 'vendor',
   name: 'Vendor',
-  icon: '🏢',
+  icon: 'folder',
   color: '#10b981',
   fields: JSON.stringify([
     { id: 'website', label: 'Website', type: 'url', order: 0 },
@@ -42,6 +42,24 @@ const CUSTOM_TYPE: UiEntityType = {
   updatedAt: '2025-01-01T00:00:00',
   trashedAt: null,
 }
+
+const VENDOR_WITH_RELATION: UiEntityType = {
+  ...CUSTOM_TYPE,
+  fields: JSON.stringify([
+    ...(JSON.parse(CUSTOM_TYPE.fields) as FieldDef[]),
+    {
+      id: 'primary_contact',
+      label: 'Primary contact',
+      type: 'relation',
+      order: 2,
+      relationTarget: 'entity',
+      relatedTypeSlug: 'person',
+      relationCardinality: 'one',
+    },
+  ]),
+}
+
+const ENTITY_TYPES_FOR_STORY = [PERSON_TYPE, CUSTOM_TYPE]
 
 const meta = {
   title: 'Entities/EntityTypeModal',
@@ -78,6 +96,15 @@ export const Edit: Story = {
 export const BuiltIn: Story = {
   args: {
     entityType: PERSON_TYPE,
+    onSave: (data) => console.log('save', data),
+    onClose: () => console.log('close'),
+  },
+}
+
+export const WithRelationField: Story = {
+  args: {
+    entityType: VENDOR_WITH_RELATION,
+    entityTypes: ENTITY_TYPES_FOR_STORY,
     onSave: (data) => console.log('save', data),
     onClose: () => console.log('close'),
   },

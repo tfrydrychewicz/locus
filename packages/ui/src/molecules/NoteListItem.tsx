@@ -24,11 +24,11 @@ export function NoteListItem({
   trailing,
 }: NoteListItemProps) {
   const baseClass = [
-    'flex flex-col gap-0.5 rounded-lg border px-3 py-2.5 text-left',
+    'flex w-full min-w-0 max-w-full flex-col gap-1 overflow-hidden rounded-lg border px-3 py-2.5 text-left',
     'transition-colors duration-150',
     'border-[var(--color-border)] bg-[var(--color-bg-surface)]',
     selected && 'border-[var(--color-accent)] bg-[var(--color-accent-muted)]',
-    archived && 'opacity-70',
+    archived && 'opacity-60',
     onClick &&
       'cursor-pointer hover:bg-[var(--color-bg-elevated)] hover:border-[var(--color-text-muted)]',
     className,
@@ -45,7 +45,9 @@ export function NoteListItem({
         {trailing}
       </div>
       {excerpt !== undefined && excerpt !== '' && (
-        <p className="line-clamp-2 text-xs text-[var(--color-text-muted)]">{excerpt}</p>
+        <p className="min-w-0 overflow-hidden text-xs text-[var(--color-text-muted)] line-clamp-2 break-all">
+          {excerpt}
+        </p>
       )}
       <time className="text-xs text-[var(--color-text-muted)]" dateTime={updatedAt}>
         {updatedAt}

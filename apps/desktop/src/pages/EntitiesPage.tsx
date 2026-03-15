@@ -6,13 +6,15 @@ import {
   EntityList,
   type EntityTypeFormData,
   EntityTypeModal,
+  type FieldDef,
   getEntityTypeIcon,
   type UiEntity,
   type UiEntityType,
 } from '@locus/ui'
 import { Pencil, Plus, Settings2 } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
-import type { Entity, EntityType } from '../tauri/commands.js'
+import { RelationFieldContainer } from '../components/RelationFieldContainer.js'
+import type { Entity, EntityType, Note } from '../tauri/commands.js'
 import {
   entitiesCreate,
   entitiesEvaluateComputed,
@@ -36,9 +38,11 @@ const PAGE_LIMIT = 50
 export interface EntitiesPageProps {
   /** Pre-select a type filter, e.g. 'person' from the sidebar nav */
   initialTypeSlug?: string | null
+  /** Called when opening a note from a relation chip popup (e.g. navigate to note) */
+  onOpenNote?: (note: Note) => void
 }
 
-export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
+export function EntitiesPage({ initialTypeSlug = null, onOpenNote }: EntitiesPageProps) {
   const { t } = useTranslation('entities')
   const { t: tc } = useTranslation('common')
   /** When navigated from a sidebar type item, lock the view to that type only. */
@@ -172,6 +176,30 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
     [entityTypes],
   )
 
+  const renderRelationField = useCallback(
+    (
+      _fieldId: string,
+      field: FieldDef,
+      value: string | null,
+      onChange: (v: string | null) => void,
+    ) => {
+      return (
+        <RelationFieldContainer
+          field={field}
+          value={value}
+          onChange={onChange}
+          entityTypes={entityTypes.map(toUiEntityType)}
+          onOpenNote={onOpenNote}
+          onOpenEntity={(entity) => {
+            const e = entities.find((x) => x.id === entity.id) ?? (entity as Entity)
+            void handleSelectEntity(e)
+          }}
+        />
+      )
+    },
+    [entityTypes, entities, handleSelectEntity, onOpenNote],
+  )
+
   const handleSaveType = useCallback(
     async (data: EntityTypeFormData) => {
       try {
@@ -253,9 +281,7 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
                 setTypeModalOpen(true)
               }}
               className="rounded p-1.5 text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]"
-              title={t('typeModal.editTitle', {
-                name: entityTypes.find((et) => et.slug === initialTypeSlug)?.name ?? '',
-              })}
+              title={`${t('typeModal.editTitle')}: ${entityTypes.find((et) => et.slug === initialTypeSlug)?.name ?? ''}`}
             >
               <Pencil size={14} aria-hidden />
             </button>
@@ -309,6 +335,7 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
               onSave={(u) => void handleSave(u)}
               onTrash={() => void handleTrash()}
               renderComputedField={renderComputedField}
+              renderRelationField={renderRelationField}
               labels={{
                 saveLabel: tc('save'),
                 trashLabel: tc('delete'),
@@ -328,6 +355,7 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
       {typeModalOpen && (
         <EntityTypeModal
           entityType={editingType ? toUiEntityType(editingType) : undefined}
+          entityTypes={entityTypes.map(toUiEntityType)}
           onSave={(data) => void handleSaveType(data)}
           onClose={() => {
             setTypeModalOpen(false)
@@ -335,7 +363,7 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
           }}
           labels={{
             createTitle: t('typeModal.createTitle'),
-            editTitle: t('typeModal.editTitle', { name: editingType?.name ?? '' }),
+            editTitle: t('typeModal.editTitle'),
             nameLabel: t('typeModal.nameLabel'),
             namePlaceholder: t('typeModal.namePlaceholder'),
             slugLabel: t('typeModal.slugLabel'),
@@ -348,7 +376,13 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
             fieldLabelLabel: t('typeModal.fieldLabelLabel'),
             fieldTypeLabel: t('typeModal.fieldTypeLabel'),
             removeField: t('typeModal.removeField'),
-            builtInWarning: t('typeModal.builtInWarning'),
+            relationTargetLabel: t('typeModal.relationTargetLabel'),
+            relationTargetNote: t('typeModal.relationTargetNote'),
+            relationTargetEntity: t('typeModal.relationTargetEntity'),
+            relationEntityTypeLabel: t('typeModal.relationEntityTypeLabel'),
+            relationCardinalityLabel: t('typeModal.relationCardinalityLabel'),
+            relationCardinalityOne: t('typeModal.relationCardinalityOne'),
+            relationCardinalityMany: t('typeModal.relationCardinalityMany'),
             saveLabel: tc('save'),
             cancelLabel: tc('cancel'),
           }}

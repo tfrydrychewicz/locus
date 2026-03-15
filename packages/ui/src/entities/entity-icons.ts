@@ -69,6 +69,23 @@ const SLUG_ICONS: Record<string, LucideIcon> = {
   okr: Target,
 }
 
+/** Slug → icon name for Select/IconPicker when stored icon is empty. */
+const SLUG_TO_ICON_NAME: Record<string, string> = {
+  person: 'user',
+  project: 'folder',
+  team: 'users',
+  decision: 'scale',
+  okr: 'target',
+}
+
+/**
+ * Returns the default icon name for a built-in slug when no icon is stored.
+ * Use when initializing IconPicker value for entity types that may have empty icon.
+ */
+export function getDefaultIconNameForSlug(slug: string): string {
+  return SLUG_TO_ICON_NAME[slug] ?? 'tag'
+}
+
 /**
  * Returns the Lucide icon for an entity type.
  * Prefers the stored icon name if it resolves to a known icon,

@@ -337,6 +337,7 @@ export function App() {
             <EntitiesPage
               key={activeEntityTypeSlug ?? 'all'}
               initialTypeSlug={activeEntityTypeSlug}
+              onOpenNote={openNoteInTab}
             />
           )}
           {activePage === 'settings' && <SettingsPage />}

@@ -22,6 +22,8 @@ export {
   PRESET_COLORS,
   parseFields,
   parseFieldValues,
+  parseRelationValue,
+  serializeRelationValue,
   type UiEntity,
   type UiEntityType,
   type UiNote,

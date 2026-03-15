@@ -86,7 +86,7 @@ export function EntityList({
       data-testid="entity-list"
     >
       {/* Header */}
-      <div className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] px-3 py-2">
+      <div className="flex h-14 shrink-0 items-center justify-between border-b border-[var(--color-border)] px-3">
         <SearchBar
           value={search}
           onChange={onSearch}
@@ -100,11 +100,10 @@ export function EntityList({
           size="sm"
           icon={Plus}
           onClick={onCreateEntity}
-          className="ml-2 shrink-0"
+          className="ml-2 shrink-0 !p-0 !h-8 !w-8"
           aria-label={L.newEntity}
-        >
-          {L.newEntity}
-        </Button>
+          title={L.newEntity}
+        />
       </div>
 
       {/* Type filter tabs */}
@@ -162,11 +161,11 @@ export function EntityList({
         )}
 
         {entities.length > 0 && (
-          <ul className="flex flex-col gap-1.5 p-3">
+          <ul className="flex w-full flex-col gap-1.5 p-3">
             {entities.map((entity) => {
               const et = typeForEntity(entity)
               return (
-                <li key={entity.id}>
+                <li key={entity.id} className="w-full min-w-0">
                   <EntityItem
                     name={entity.name}
                     entityType={et}
@@ -174,6 +173,7 @@ export function EntityList({
                     selected={entity.id === selectedEntityId}
                     trashed={entity.trashedAt !== null}
                     trashedLabel={L.trashedBadge}
+                    showTypeBadge={selectedTypeSlug === null}
                     onClick={(e) => onSelectEntity(entity, e)}
                   />
                 </li>

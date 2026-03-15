@@ -65,7 +65,9 @@ export interface FieldDef {
   /** For computed_query fields */
   query?: string
   /** For relation fields */
+  relationTarget?: 'note' | 'entity'
   relatedTypeSlug?: string
+  relationCardinality?: 'one' | 'many'
 }
 
 export type FieldValues = Record<string, string | number | boolean | null>
@@ -88,6 +90,29 @@ export function parseFieldValues(jsonStr: string): FieldValues {
   } catch {
     return {}
   }
+}
+
+/** Parse relation field value to array of IDs. One = [id], many = [id1, id2, ...]. */
+export function parseRelationValue(value: string | number | boolean | null): string[] {
+  if (value == null || value === '') return []
+  const s = String(value).trim()
+  if (!s) return []
+  if (s.startsWith('[')) {
+    try {
+      const arr = JSON.parse(s) as unknown
+      return Array.isArray(arr) ? arr.filter((x): x is string => typeof x === 'string') : []
+    } catch {
+      return []
+    }
+  }
+  return [s]
+}
+
+/** Serialize relation IDs to stored value. One = "id", many = '["id1","id2"]'. */
+export function serializeRelationValue(ids: string[], cardinality: 'one' | 'many'): string | null {
+  if (ids.length === 0) return null
+  if (cardinality === 'one') return ids[0] ?? null
+  return JSON.stringify(ids)
 }
 
 export const PRESET_COLORS = [

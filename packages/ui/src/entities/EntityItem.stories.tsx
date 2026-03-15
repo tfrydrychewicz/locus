@@ -58,3 +58,13 @@ export const NoTypeColor: Story = {
     onClick: () => {},
   },
 }
+
+export const WithoutTypeBadge: Story = {
+  args: {
+    name: 'Alice Johnson',
+    entityType: personType,
+    updatedAt: '2 hours ago',
+    showTypeBadge: false,
+    onClick: () => {},
+  },
+}

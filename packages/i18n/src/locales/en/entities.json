@@ -28,12 +28,12 @@
   },
   "typeModal": {
     "createTitle": "New entity type",
-    "editTitle": "Edit type: {name}",
+    "editTitle": "Edit type",
     "nameLabel": "Display name",
     "namePlaceholder": "e.g. Contact",
     "slugLabel": "Slug (unique identifier)",
     "slugPlaceholder": "e.g. contact",
-    "iconLabel": "Icon (emoji)",
+    "iconLabel": "Icon",
     "colorLabel": "Color",
     "fieldsLabel": "Fields",
     "addField": "Add field",
@@ -41,13 +41,33 @@
     "fieldLabelLabel": "Label",
     "fieldTypeLabel": "Type",
     "removeField": "Remove",
-    "builtInWarning": "Built-in entity types cannot be modified here.",
-    "fieldIdHint": "Lowercase letters and underscores only"
+    "fieldIdHint": "Lowercase letters and underscores only",
+    "relationTargetLabel": "Relation to",
+    "relationTargetNote": "Note",
+    "relationTargetEntity": "Entity",
+    "relationEntityTypeLabel": "Entity type",
+    "relationCardinalityLabel": "Cardinality",
+    "relationCardinalityOne": "One",
+    "relationCardinalityMany": "Many"
   },
   "queryEditor": {
     "placeholder": "e.g. entity_type = 'person' and name contains 'alice'",
     "validSuffix": "Valid",
     "syntaxError": "Syntax error"
+  },
+  "relationField": {
+    "emptyNote": "No note linked",
+    "emptyEntity": "No entity linked",
+    "addNote": "Add note",
+    "addEntity": "Add entity",
+    "changeNote": "Change note",
+    "changeEntity": "Change entity",
+    "selectNote": "Select note",
+    "selectEntity": "Select entity",
+    "searchPlaceholder": "Search…",
+    "noResults": "No results",
+    "loading": "Loading…",
+    "searching": "Searching…"
   },
   "computedField": {
     "loading": "Running query…",

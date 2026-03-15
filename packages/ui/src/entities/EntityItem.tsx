@@ -10,6 +10,8 @@ export interface EntityItemProps {
   selected?: boolean
   trashed?: boolean
   trashedLabel?: string
+  /** When false, the type badge is hidden (e.g. when list is filtered to a single type). Default true. */
+  showTypeBadge?: boolean
   onClick?: (e: React.MouseEvent) => void
   className?: string
   trailing?: ReactNode
@@ -22,12 +24,13 @@ export function EntityItem({
   selected = false,
   trashed = false,
   trashedLabel = 'Trashed',
+  showTypeBadge = true,
   onClick,
   className = '',
   trailing,
 }: EntityItemProps) {
   const baseClass = [
-    'flex flex-col gap-1 rounded-lg border px-3 py-2.5 text-left',
+    'flex w-full min-w-0 flex-col gap-1 rounded-lg border px-3 py-2.5 text-left',
     'transition-colors duration-150',
     'border-[var(--color-border)] bg-[var(--color-bg-surface)]',
     selected && 'border-[var(--color-accent)] bg-[var(--color-accent-muted)]',
@@ -50,19 +53,21 @@ export function EntityItem({
         {trailing}
       </div>
 
-      <div className="flex items-center gap-2">
-        <span
-          className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium"
-          style={{
-            backgroundColor: entityType.color
-              ? `${entityType.color}20`
-              : 'var(--color-bg-elevated)',
-            color: entityType.color ?? 'var(--color-text-muted)',
-          }}
-        >
-          <Icon icon={TypeIcon} size={10} aria-hidden />
-          {entityType.name}
-        </span>
+      <div className="flex min-w-0 flex-wrap items-center gap-2">
+        {showTypeBadge && (
+          <span
+            className="inline-flex shrink-0 items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-medium"
+            style={{
+              backgroundColor: entityType.color
+                ? `${entityType.color}20`
+                : 'var(--color-bg-elevated)',
+              color: entityType.color ?? 'var(--color-text-muted)',
+            }}
+          >
+            <Icon icon={TypeIcon} size={10} aria-hidden />
+            {entityType.name}
+          </span>
+        )}
 
         {trashed && (
           <span className="rounded-full bg-[var(--color-bg-elevated)] px-2 py-0.5 text-[11px] text-[var(--color-text-muted)]">

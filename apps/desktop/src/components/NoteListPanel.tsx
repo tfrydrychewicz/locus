@@ -1,6 +1,5 @@
 import { useTranslation } from '@locus/i18n'
-import { Button, EmptyState, NoteListItem, SearchBar } from '@locus/ui'
-import { FileText } from 'lucide-react'
+import { NoteList } from '@locus/ui'
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import type { Note } from '../tauri/commands.js'
 import { notesCreate, notesList, notesSearch } from '../tauri/commands.js'
@@ -49,29 +48,23 @@ export const NoteListPanel = forwardRef<NoteListPanelHandle, NoteListPanelProps>
       }
     }, [])
 
-    const handleSearchChange = useCallback(
-      (value: string) => {
-        setSearchQuery(value)
-        loadNotes(value)
-      },
-      [loadNotes],
-    )
-
     const handleNoteClick = useCallback(
-      (e: React.MouseEvent, note: Note) => {
+      (note: { id: string }, e: React.MouseEvent) => {
+        const fullNote = notes.find((n) => n.id === note.id)
+        if (!fullNote) return
         if (e.shiftKey && onOpenInNewPane) {
           e.preventDefault()
-          onOpenInNewPane(note)
+          onOpenInNewPane(fullNote)
           return
         }
         if ((e.metaKey || e.ctrlKey) && onOpenInNewTab) {
           e.preventDefault()
-          onOpenInNewTab(note)
+          onOpenInNewTab(fullNote)
           return
         }
-        onSelectNote(note)
+        onSelectNote(fullNote)
       },
-      [onSelectNote, onOpenInNewPane, onOpenInNewTab],
+      [notes, onSelectNote, onOpenInNewPane, onOpenInNewTab],
     )
 
     const handleNewNote = useCallback(async () => {
@@ -102,51 +95,33 @@ export const NoteListPanel = forwardRef<NoteListPanelHandle, NoteListPanelProps>
       <div
         ref={panelRef}
         className={[
-          'flex h-full w-[240px] shrink-0 flex-col border-r border-[var(--color-border)] bg-[var(--color-bg-sidebar)]',
+          'flex h-full w-72 shrink-0 flex-col border-r border-[var(--color-border)]',
           className,
         ]
           .filter(Boolean)
           .join(' ')}
       >
-        <div className="flex shrink-0 flex-col gap-2 border-b border-[var(--color-border)] p-2">
-          <SearchBar
-            value={searchQuery}
-            onChange={handleSearchChange}
-            placeholder={t('searchPlaceholder')}
-            loading={loading}
-          />
-          <Button variant="primary" size="sm" className="w-full" onClick={handleNewNote}>
-            {t('newNote')}
-          </Button>
-        </div>
-        <div className="flex-1 overflow-y-auto p-2">
-          {notes.length === 0 && !loading ? (
-            <EmptyState
-              icon={FileText}
-              title={t('emptyTitle')}
-              description={t('emptyDescription')}
-              action={
-                <Button variant="primary" size="sm" onClick={handleNewNote}>
-                  {t('newNote')}
-                </Button>
-              }
-            />
-          ) : (
-            <ul className="flex flex-col gap-1">
-              {notes.map((note) => (
-                <li key={note.id}>
-                  <NoteListItem
-                    title={note.title || t('untitled')}
-                    excerpt={note.bodyPlain?.slice(0, 80)}
-                    updatedAt={note.updatedAt}
-                    onClick={(e) => handleNoteClick(e, note)}
-                    selected={selectedId === note.id}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <NoteList
+          notes={notes}
+          search={searchQuery}
+          loading={loading}
+          selectedNoteId={selectedId}
+          onSearch={(q) => {
+            setSearchQuery(q)
+            loadNotes(q)
+          }}
+          onSelectNote={handleNoteClick}
+          onCreateNote={handleNewNote}
+          labels={{
+            newNote: t('newNote'),
+            searchPlaceholder: t('searchPlaceholder'),
+            emptyTitle: t('emptyTitle'),
+            emptyDescription: t('emptyDescription'),
+            emptySearchTitle: t('emptySearchTitle'),
+            emptySearchDescription: t('emptySearchDescription'),
+            untitled: t('untitled'),
+          }}
+        />
       </div>
     )
   },

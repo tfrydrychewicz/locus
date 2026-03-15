@@ -28,12 +28,12 @@
   },
   "typeModal": {
     "createTitle": "Nowy typ encji",
-    "editTitle": "Edytuj typ: {name}",
+    "editTitle": "Edytuj typ",
     "nameLabel": "Wyświetlana nazwa",
     "namePlaceholder": "np. Kontakt",
     "slugLabel": "Slug (unikalny identyfikator)",
     "slugPlaceholder": "np. kontakt",
-    "iconLabel": "Ikona (emoji)",
+    "iconLabel": "Ikona",
     "colorLabel": "Kolor",
     "fieldsLabel": "Pola",
     "addField": "Dodaj pole",
@@ -41,13 +41,33 @@
     "fieldLabelLabel": "Etykieta",
     "fieldTypeLabel": "Typ",
     "removeField": "Usuń",
-    "builtInWarning": "Wbudowanych typów encji nie można tutaj modyfikować.",
-    "fieldIdHint": "Tylko małe litery i podkreślenia"
+    "fieldIdHint": "Tylko małe litery i podkreślenia",
+    "relationTargetLabel": "Relacja do",
+    "relationTargetNote": "Notatka",
+    "relationTargetEntity": "Encja",
+    "relationEntityTypeLabel": "Typ encji",
+    "relationCardinalityLabel": "Kardynalność",
+    "relationCardinalityOne": "Jedna",
+    "relationCardinalityMany": "Wiele"
   },
   "queryEditor": {
     "placeholder": "np. entity_type = 'person' and name contains 'alice'",
     "validSuffix": "Poprawne",
     "syntaxError": "Błąd składni"
+  },
+  "relationField": {
+    "emptyNote": "Brak powiązanej notatki",
+    "emptyEntity": "Brak powiązanej encji",
+    "addNote": "Dodaj notatkę",
+    "addEntity": "Dodaj encję",
+    "changeNote": "Zmień notatkę",
+    "changeEntity": "Zmień encję",
+    "selectNote": "Wybierz notatkę",
+    "selectEntity": "Wybierz encję",
+    "searchPlaceholder": "Szukaj…",
+    "noResults": "Brak wyników",
+    "loading": "Ładowanie…",
+    "searching": "Szukam…"
   },
   "computedField": {
     "loading": "Wykonuję zapytanie…",

@@ -22,6 +22,11 @@ const MIGRATIONS: &[Migration] = &[
         name: "entities",
         sql: include_str!("../../migrations/0003_entities.sql"),
     },
+    Migration {
+        version: 4,
+        name: "entity_type_icons",
+        sql: include_str!("../../migrations/0004_entity_type_icons.sql"),
+    },
 ];
 
 pub fn run(conn: &Connection) -> Result<(), rusqlite::Error> {

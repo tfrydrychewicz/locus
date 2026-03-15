@@ -2,7 +2,9 @@ import { Trash2 } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { useState } from 'react'
 import { Button } from '../atoms/Button.js'
+import { EditableText } from '../atoms/EditableText.js'
 import { Input } from '../atoms/Input.js'
+import { Select } from '../atoms/Select.js'
 import { FormField } from '../molecules/FormField.js'
 import type { FieldDef, FieldValues, UiEntity, UiEntityType } from './types.js'
 import { parseFields, parseFieldValues } from './types.js'
@@ -14,6 +16,13 @@ export interface EntityDetailProps {
   onTrash: () => void
   /** Render prop for computed_query fields — keeps this component Tauri-free */
   renderComputedField?: (fieldId: string, query: string, entityId: string) => ReactNode
+  /** Render prop for relation fields — parent provides RelationField with picker logic */
+  renderRelationField?: (
+    fieldId: string,
+    field: FieldDef,
+    value: string | null,
+    onChange: (value: string | null) => void,
+  ) => ReactNode
   labels?: {
     saveLabel?: string
     trashLabel?: string
@@ -36,6 +45,7 @@ export function EntityDetail({
   onSave,
   onTrash,
   renderComputedField,
+  renderRelationField,
   labels: labelsProp,
   className = '',
 }: EntityDetailProps) {
@@ -65,33 +75,24 @@ export function EntityDetail({
     setValues(initialValues)
   }
 
-  const typeColor = entityType.color ?? undefined
-
   return (
     <div
       className={['flex h-full flex-col overflow-hidden', className].filter(Boolean).join(' ')}
       data-testid="entity-detail"
     >
       {/* Header */}
-      <div className="flex shrink-0 items-center justify-between border-b border-[var(--color-border)] px-4 py-2.5">
-        <div className="flex min-w-0 items-center gap-2">
-          {entityType.icon && (
-            <span className="text-base" aria-hidden="true">
-              {entityType.icon}
-            </span>
-          )}
-          <span
-            className="rounded-full px-2 py-0.5 text-xs font-medium"
-            style={{
-              backgroundColor: typeColor ? `${typeColor}20` : 'var(--color-bg-elevated)',
-              color: typeColor ?? 'var(--color-text-muted)',
-            }}
-          >
-            {entityType.name}
-          </span>
+      <div className="flex h-14 shrink-0 items-center justify-between gap-2 border-b border-[var(--color-border)] px-4">
+        <div className="flex min-w-0 flex-1 items-center gap-2">
+          <EditableText
+            value={name}
+            onChange={setName}
+            placeholder="Untitled"
+            size="lg"
+            editLabel={L.nameLabel}
+          />
           {isDirty && (
             <span
-              className="text-xs text-[var(--color-accent)]"
+              className="shrink-0 text-xs text-[var(--color-accent)]"
               title="Unsaved changes"
               role="status"
               aria-live="polite"
@@ -119,16 +120,6 @@ export function EntityDetail({
       {/* Body — scrollable */}
       <div className="min-h-0 flex-1 overflow-y-auto px-4 py-4">
         <div className="flex flex-col gap-4">
-          {/* Name field (always first) */}
-          <FormField label={L.nameLabel} htmlFor="entity-name">
-            <Input
-              id="entity-name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Untitled"
-            />
-          </FormField>
-
           {/* Dynamic fields */}
           {fields
             .slice()
@@ -141,6 +132,7 @@ export function EntityDetail({
                 onChange={(v) => setField(field.id, v)}
                 entityId={entity.id}
                 renderComputedField={renderComputedField}
+                renderRelationField={renderRelationField}
               />
             ))}
         </div>
@@ -155,12 +147,14 @@ function DynamicField({
   onChange,
   entityId,
   renderComputedField,
+  renderRelationField,
 }: {
   field: FieldDef
   value: FieldValues[string]
   onChange: (v: FieldValues[string]) => void
   entityId: string
   renderComputedField?: EntityDetailProps['renderComputedField']
+  renderRelationField?: EntityDetailProps['renderRelationField']
 }) {
   const id = `field-${field.id}`
 
@@ -196,25 +190,18 @@ function DynamicField({
 
   if (field.type === 'enum') {
     const options = field.options ?? []
+    const selectOptions = [
+      { value: '', label: '—' },
+      ...options.map((opt) => ({ value: opt.value, label: opt.label })),
+    ]
     return (
       <FormField label={field.label} htmlFor={id} key={field.id}>
-        <select
+        <Select
           id={id}
+          options={selectOptions}
           value={String(value ?? '')}
-          onChange={(e) => onChange(e.target.value || null)}
-          className={[
-            'w-full rounded-md border border-[var(--color-border)] bg-[var(--color-bg-surface)]',
-            'px-3 py-1.5 text-sm text-[var(--color-text-primary)] outline-none',
-            'focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)]',
-          ].join(' ')}
-        >
-          <option value="">—</option>
-          {options.map((opt) => (
-            <option key={opt.value} value={opt.value}>
-              {opt.label}
-            </option>
-          ))}
-        </select>
+          onChange={(v) => onChange(v || null)}
+        />
       </FormField>
     )
   }
@@ -222,9 +209,15 @@ function DynamicField({
   if (field.type === 'relation') {
     return (
       <FormField label={field.label} htmlFor={id} key={field.id}>
-        <span className="text-xs text-[var(--color-text-muted)] italic">
-          {value ? String(value) : '—'}
-        </span>
+        {renderRelationField ? (
+          renderRelationField(field.id, field, value != null ? String(value) : null, (v) =>
+            onChange(v),
+          )
+        ) : (
+          <span className="text-xs text-[var(--color-text-muted)] italic">
+            {value ? String(value) : '—'}
+          </span>
+        )}
       </FormField>
     )
   }

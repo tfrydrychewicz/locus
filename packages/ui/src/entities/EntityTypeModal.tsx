@@ -1,23 +1,39 @@
-import { GripVertical, Plus, Trash2, X } from 'lucide-react'
+import {
+  AlignLeft,
+  Binary,
+  Braces,
+  Calendar,
+  GripVertical,
+  Hash,
+  Link2,
+  List,
+  Mail,
+  Plus,
+  Share2,
+  Trash2,
+  X,
+} from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { Button } from '../atoms/Button.js'
-import { Icon } from '../atoms/Icon.js'
 import { Input } from '../atoms/Input.js'
+import type { SelectOption } from '../atoms/Select.js'
+import { Select } from '../atoms/Select.js'
 import { FormField } from '../molecules/FormField.js'
-import { ENTITY_TYPE_ICON_OPTIONS, getEntityTypeIcon } from './entity-icons.js'
+import { IconPicker } from '../molecules/IconPicker.js'
+import { ENTITY_TYPE_ICON_OPTIONS, getDefaultIconNameForSlug } from './entity-icons.js'
 import type { EnumOption, FieldDef, FieldType, UiEntityType } from './types.js'
 import { PRESET_COLORS, parseFields } from './types.js'
 
-const FIELD_TYPES: { value: FieldType; label: string }[] = [
-  { value: 'text', label: 'Text' },
-  { value: 'number', label: 'Number' },
-  { value: 'date', label: 'Date' },
-  { value: 'boolean', label: 'Boolean' },
-  { value: 'url', label: 'URL' },
-  { value: 'email', label: 'Email' },
-  { value: 'enum', label: 'Select' },
-  { value: 'relation', label: 'Relation' },
-  { value: 'computed_query', label: 'Computed query' },
+const FIELD_TYPE_OPTIONS: SelectOption[] = [
+  { value: 'text', label: 'Text', icon: AlignLeft },
+  { value: 'number', label: 'Number', icon: Hash },
+  { value: 'date', label: 'Date', icon: Calendar },
+  { value: 'boolean', label: 'Boolean', icon: Binary },
+  { value: 'url', label: 'URL', icon: Link2 },
+  { value: 'email', label: 'Email', icon: Mail },
+  { value: 'enum', label: 'Select', icon: List },
+  { value: 'relation', label: 'Relation', icon: Share2 },
+  { value: 'computed_query', label: 'Computed query', icon: Braces },
 ]
 
 export interface EntityTypeFormData {
@@ -31,6 +47,8 @@ export interface EntityTypeFormData {
 export interface EntityTypeModalProps {
   /** Existing entity type to edit; undefined = create new */
   entityType?: UiEntityType
+  /** All entity types (for relation field target selector). Pass when editing. */
+  entityTypes?: UiEntityType[]
   onSave: (data: EntityTypeFormData) => void
   onClose: () => void
   labels?: {
@@ -48,8 +66,14 @@ export interface EntityTypeModalProps {
     fieldLabelLabel?: string
     fieldTypeLabel?: string
     removeField?: string
-    builtInWarning?: string
     fieldIdHint?: string
+    relationTargetLabel?: string
+    relationTargetNote?: string
+    relationTargetEntity?: string
+    relationEntityTypeLabel?: string
+    relationCardinalityLabel?: string
+    relationCardinalityOne?: string
+    relationCardinalityMany?: string
     saveLabel?: string
     cancelLabel?: string
   }
@@ -62,7 +86,7 @@ const DEFAULT_LABELS = {
   namePlaceholder: 'e.g. Contact',
   slugLabel: 'Slug',
   slugPlaceholder: 'e.g. contact',
-  iconLabel: 'Icon (emoji)',
+  iconLabel: 'Icon',
   colorLabel: 'Color',
   fieldsLabel: 'Fields',
   addField: 'Add field',
@@ -70,8 +94,14 @@ const DEFAULT_LABELS = {
   fieldLabelLabel: 'Label',
   fieldTypeLabel: 'Type',
   removeField: 'Remove',
-  builtInWarning: 'Built-in entity types cannot be modified here.',
   fieldIdHint: 'Lowercase letters and underscores only',
+  relationTargetLabel: 'Relation to',
+  relationTargetNote: 'Note',
+  relationTargetEntity: 'Entity',
+  relationEntityTypeLabel: 'Entity type',
+  relationCardinalityLabel: 'Cardinality',
+  relationCardinalityOne: 'One',
+  relationCardinalityMany: 'Many',
   saveLabel: 'Save',
   cancelLabel: 'Cancel',
 }
@@ -100,6 +130,7 @@ function newField(order: number): FieldRowItem {
 
 export function EntityTypeModal({
   entityType,
+  entityTypes = [],
   onSave,
   onClose,
   labels: labelsProp,
@@ -110,7 +141,13 @@ export function EntityTypeModal({
 
   const [name, setName] = useState(entityType?.name ?? '')
   const [slug, setSlug] = useState(entityType?.slug ?? '')
-  const [icon, setIcon] = useState(entityType?.icon ?? '')
+  const [icon, setIcon] = useState(() => {
+    const stored = entityType?.icon?.trim()
+    const isKnownIcon = stored && ENTITY_TYPE_ICON_OPTIONS.some((o) => o.name === stored)
+    if (isKnownIcon) return stored
+    if (entityType?.slug) return getDefaultIconNameForSlug(entityType.slug)
+    return ''
+  })
   const [color, setColor] = useState(entityType?.color ?? PRESET_COLORS[0] ?? '#3b82f6')
   const [fields, setFields] = useState<FieldRowItem[]>(() =>
     entityType
@@ -142,7 +179,7 @@ export function EntityTypeModal({
     onSave({ name, slug, icon, color, fields: cleanFields })
   }
 
-  const canSave = name.trim().length > 0 && slug.trim().length > 0 && !isBuiltIn
+  const canSave = name.trim().length > 0 && slug.trim().length > 0
 
   const title = isEdit ? `${L.editTitle}: ${entityType?.name ?? ''}` : L.createTitle
 
@@ -173,12 +210,6 @@ export function EntityTypeModal({
 
         {/* Body */}
         <div className="min-h-0 flex-1 overflow-y-auto px-5 py-4">
-          {isBuiltIn && (
-            <div className="mb-4 rounded-md border border-[var(--color-border)] bg-[var(--color-bg-surface)] px-3 py-2 text-xs text-[var(--color-text-muted)]">
-              {L.builtInWarning}
-            </div>
-          )}
-
           <div className="flex flex-col gap-4">
             {/* Name */}
             <FormField label={L.nameLabel} htmlFor="et-name">
@@ -187,11 +218,10 @@ export function EntityTypeModal({
                 value={name}
                 onChange={(e) => handleNameChange(e.target.value)}
                 placeholder={L.namePlaceholder}
-                disabled={isBuiltIn}
               />
             </FormField>
 
-            {/* Slug */}
+            {/* Slug — read-only for built-in types to preserve nav mapping */}
             <FormField label={`${L.slugLabel} (${L.fieldIdHint})`} htmlFor="et-slug">
               <Input
                 id="et-slug"
@@ -202,45 +232,16 @@ export function EntityTypeModal({
                 }}
                 placeholder={L.slugPlaceholder}
                 disabled={isBuiltIn}
+                title={isBuiltIn ? 'Slug cannot be changed for built-in types' : undefined}
               />
             </FormField>
 
             {/* Icon + Color in a row */}
             <div className="flex gap-3">
-              {/* Icon picker — grid of Lucide icons */}
-              <div className="flex flex-col gap-1.5">
-                <span className="text-xs font-medium text-[var(--color-text-secondary)]">
-                  {L.iconLabel}
-                </span>
-                <div className="flex flex-wrap gap-1">
-                  {ENTITY_TYPE_ICON_OPTIONS.map(({ name, icon: Ic }) => (
-                    <button
-                      key={name}
-                      type="button"
-                      disabled={isBuiltIn}
-                      onClick={() => setIcon(name)}
-                      className={[
-                        'flex h-7 w-7 items-center justify-center rounded border transition-colors',
-                        icon === name
-                          ? 'border-[var(--color-accent)] bg-[var(--color-accent-muted)] text-[var(--color-accent)]'
-                          : 'border-[var(--color-border)] bg-[var(--color-bg-surface)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
-                        isBuiltIn && 'opacity-50 cursor-not-allowed',
-                      ]
-                        .filter(Boolean)
-                        .join(' ')}
-                      aria-label={name}
-                      aria-pressed={icon === name}
-                    >
-                      <Icon icon={Ic} size={14} aria-hidden />
-                    </button>
-                  ))}
-                </div>
-                {/* Preview of current selection */}
-                <div className="flex items-center gap-1 text-xs text-[var(--color-text-muted)]">
-                  <Icon icon={getEntityTypeIcon(slug, icon)} size={12} aria-hidden />
-                  <span>{icon || 'tag'}</span>
-                </div>
-              </div>
+              {/* Icon picker */}
+              <FormField label={L.iconLabel} htmlFor="et-icon">
+                <IconPicker id="et-icon" value={icon} onChange={setIcon} selectSize="md" />
+              </FormField>
 
               <FormField label={L.colorLabel} htmlFor="et-color" className="flex-1">
                 <div className="flex flex-wrap gap-1.5 pt-1">
@@ -248,7 +249,6 @@ export function EntityTypeModal({
                     <button
                       key={c}
                       type="button"
-                      disabled={isBuiltIn}
                       onClick={() => setColor(c)}
                       className={[
                         'h-6 w-6 rounded-full border-2 transition-transform',
@@ -271,11 +271,9 @@ export function EntityTypeModal({
                 <span className="text-sm font-medium text-[var(--color-text-primary)]">
                   {L.fieldsLabel}
                 </span>
-                {!isBuiltIn && (
-                  <Button variant="ghost" size="sm" icon={Plus} onClick={addField}>
-                    {L.addField}
-                  </Button>
-                )}
+                <Button variant="ghost" size="sm" icon={Plus} onClick={addField}>
+                  {L.addField}
+                </Button>
               </div>
 
               {fields.length === 0 && (
@@ -288,7 +286,7 @@ export function EntityTypeModal({
                 <FieldRow
                   key={field._key}
                   field={field}
-                  disabled={isBuiltIn}
+                  entityTypes={entityTypes}
                   onChange={(patch) => updateField(idx, patch)}
                   onRemove={() => removeField(idx)}
                   labels={{
@@ -296,6 +294,13 @@ export function EntityTypeModal({
                     labelLabel: L.fieldLabelLabel,
                     typeLabel: L.fieldTypeLabel,
                     removeLabel: L.removeField,
+                    relationTargetLabel: L.relationTargetLabel,
+                    relationTargetNote: L.relationTargetNote,
+                    relationTargetEntity: L.relationTargetEntity,
+                    relationEntityTypeLabel: L.relationEntityTypeLabel,
+                    relationCardinalityLabel: L.relationCardinalityLabel,
+                    relationCardinalityOne: L.relationCardinalityOne,
+                    relationCardinalityMany: L.relationCardinalityMany,
                   }}
                 />
               ))}
@@ -319,16 +324,30 @@ export function EntityTypeModal({
 
 function FieldRow({
   field,
-  disabled,
+  entityTypes = [],
+  disabled = false,
   onChange,
   onRemove,
   labels,
 }: {
   field: FieldRowItem
-  disabled: boolean
+  entityTypes?: UiEntityType[]
+  disabled?: boolean
   onChange: (patch: Partial<FieldDef>) => void
   onRemove: () => void
-  labels: { idLabel: string; labelLabel: string; typeLabel: string; removeLabel: string }
+  labels: {
+    idLabel: string
+    labelLabel: string
+    typeLabel: string
+    removeLabel: string
+    relationTargetLabel?: string
+    relationTargetNote?: string
+    relationTargetEntity?: string
+    relationEntityTypeLabel?: string
+    relationCardinalityLabel?: string
+    relationCardinalityOne?: string
+    relationCardinalityMany?: string
+  }
 }) {
   const rowKey = field._key.replace(/-/g, '').slice(0, 8)
   const idInputId = `fr-id-${rowKey}`
@@ -336,6 +355,19 @@ function FieldRow({
   const typeSelectId = `fr-type-${rowKey}`
   const queryInputId = `fr-query-${rowKey}`
   const optInputId = `fr-opts-${rowKey}`
+  const relTargetId = `fr-rel-target-${rowKey}`
+  const relEntityId = `fr-rel-entity-${rowKey}`
+  const relCardId = `fr-rel-card-${rowKey}`
+
+  const relationTargetOpts = [
+    { value: 'note', label: labels.relationTargetNote ?? 'Note' },
+    { value: 'entity', label: labels.relationTargetEntity ?? 'Entity' },
+  ]
+  const entityTypeOpts = entityTypes.map((et) => ({ value: et.slug, label: et.name }))
+  const relationCardOpts = [
+    { value: 'one', label: labels.relationCardinalityOne ?? 'One' },
+    { value: 'many', label: labels.relationCardinalityMany ?? 'Many' },
+  ]
 
   return (
     <div className="flex items-start gap-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-surface)] p-2">
@@ -376,27 +408,29 @@ function FieldRow({
         </div>
 
         {/* Type */}
-        <div className="flex w-32 shrink-0 flex-col gap-0.5">
+        <div className="flex w-36 shrink-0 flex-col gap-0.5">
           <label htmlFor={typeSelectId} className="text-[10px] text-[var(--color-text-muted)]">
             {labels.typeLabel}
           </label>
-          <select
+          <Select
             id={typeSelectId}
+            options={FIELD_TYPE_OPTIONS}
             value={field.type}
-            onChange={(e) => onChange({ type: e.target.value as FieldType })}
+            onChange={(v) => {
+              const newType = v as FieldType
+              if (newType === 'relation') {
+                onChange({
+                  type: newType,
+                  relationTarget: field.relationTarget ?? 'entity',
+                  relationCardinality: field.relationCardinality ?? 'one',
+                })
+              } else {
+                onChange({ type: newType })
+              }
+            }}
             disabled={disabled}
-            className={[
-              'w-full rounded border border-[var(--color-border)] bg-[var(--color-bg-surface)]',
-              'px-2 py-1 text-xs text-[var(--color-text-primary)] outline-none',
-              'focus:border-[var(--color-accent)]',
-            ].join(' ')}
-          >
-            {FIELD_TYPES.map((ft) => (
-              <option key={ft.value} value={ft.value}>
-                {ft.label}
-              </option>
-            ))}
-          </select>
+            selectSize="sm"
+          />
         </div>
 
         {/* Query (for computed_query) */}
@@ -439,6 +473,58 @@ function FieldRow({
               disabled={disabled}
             />
           </div>
+        )}
+
+        {/* Relation config */}
+        {field.type === 'relation' && (
+          <>
+            <div className="flex w-28 shrink-0 flex-col gap-0.5">
+              <label htmlFor={relTargetId} className="text-[10px] text-[var(--color-text-muted)]">
+                {labels.relationTargetLabel ?? 'Relation to'}
+              </label>
+              <Select
+                id={relTargetId}
+                options={relationTargetOpts}
+                value={field.relationTarget ?? 'entity'}
+                onChange={(v) =>
+                  onChange({
+                    relationTarget: v as 'note' | 'entity',
+                    ...(v === 'note' ? { relatedTypeSlug: undefined } : {}),
+                  })
+                }
+                disabled={disabled}
+                selectSize="sm"
+              />
+            </div>
+            {field.relationTarget === 'entity' && entityTypes.length > 0 && (
+              <div className="flex w-32 shrink-0 flex-col gap-0.5">
+                <label htmlFor={relEntityId} className="text-[10px] text-[var(--color-text-muted)]">
+                  {labels.relationEntityTypeLabel ?? 'Entity type'}
+                </label>
+                <Select
+                  id={relEntityId}
+                  options={entityTypeOpts}
+                  value={field.relatedTypeSlug ?? entityTypes[0]?.slug ?? ''}
+                  onChange={(v) => onChange({ relatedTypeSlug: v || undefined })}
+                  disabled={disabled}
+                  selectSize="sm"
+                />
+              </div>
+            )}
+            <div className="flex w-24 shrink-0 flex-col gap-0.5">
+              <label htmlFor={relCardId} className="text-[10px] text-[var(--color-text-muted)]">
+                {labels.relationCardinalityLabel ?? 'Cardinality'}
+              </label>
+              <Select
+                id={relCardId}
+                options={relationCardOpts}
+                value={field.relationCardinality ?? 'one'}
+                onChange={(v) => onChange({ relationCardinality: v as 'one' | 'many' })}
+                disabled={disabled}
+                selectSize="sm"
+              />
+            </div>
+          </>
         )}
       </div>
 

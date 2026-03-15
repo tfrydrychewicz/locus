@@ -123,8 +123,8 @@ CREATE INDEX idx_note_relations_to   ON note_relations(to_note_id);
 -- ── Seed built-in entity types ────────────────────────────────────────────────
 -- IDs use fixed ULID-format strings (valid Crockford base32, 26 chars)
 INSERT INTO entity_types (id, slug, name, icon, color, fields, is_built_in) VALUES
-    ('01J00000000000000000000001', 'person',   'Person',   '👤', '#3b82f6', '[]', 1),
-    ('01J00000000000000000000002', 'project',  'Project',  '📁', '#8b5cf6', '[]', 1),
-    ('01J00000000000000000000003', 'team',     'Team',     '👥', '#10b981', '[]', 1),
-    ('01J00000000000000000000004', 'decision', 'Decision', '⚖️', '#f59e0b', '[]', 1),
-    ('01J00000000000000000000005', 'okr',      'OKR',      '🎯', '#ef4444', '[]', 1);
+    ('01J00000000000000000000001', 'person',   'Person',   'user',   '#3b82f6', '[]', 1),
+    ('01J00000000000000000000002', 'project',  'Project',  'folder', '#8b5cf6', '[]', 1),
+    ('01J00000000000000000000003', 'team',     'Team',     'users',  '#10b981', '[]', 1),
+    ('01J00000000000000000000004', 'decision', 'Decision', 'scale',  '#f59e0b', '[]', 1),
+    ('01J00000000000000000000005', 'okr',      'OKR',      'target', '#ef4444', '[]', 1);

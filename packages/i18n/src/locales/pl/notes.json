@@ -7,6 +7,8 @@
   "bodyPlaceholder": "Napisz coś…",
   "emptyTitle": "Brak notatek",
   "emptyDescription": "Utwórz pierwszą notatkę, aby rozpocząć.",
+  "emptySearchTitle": "Brak wyników",
+  "emptySearchDescription": "Żadna notatka nie pasuje do wyszukiwania.",
   "deleteConfirm": "Usunąć tę notatkę?",
   "noteCount": "{count, plural, one {# notatka} few {# notatki} many {# notatek} other {# notatek}}",
   "lastEdited": "Ostatnio edytowano {date}",
