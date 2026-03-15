@@ -1,0 +1,39 @@
+{
+  "today": "Today",
+  "day": "Day",
+  "week": "Week",
+  "month": "Month",
+  "agenda": "Agenda",
+  "newEvent": "New event",
+  "editEvent": "Edit event",
+  "deleteEvent": "Delete event",
+  "allDay": "All day",
+  "startTime": "Start time",
+  "endTime": "End time",
+  "location": "Location",
+  "description": "Description",
+  "attendees": "Attendees",
+  "reminder": "Reminder",
+  "reminders": {
+    "none": "None",
+    "atTime": "At time of event",
+    "5min": "5 minutes before",
+    "15min": "15 minutes before",
+    "30min": "30 minutes before",
+    "1hour": "1 hour before",
+    "1day": "1 day before"
+  },
+  "repeat": "Repeat",
+  "repeatOptions": {
+    "none": "Does not repeat",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "custom": "Custom…"
+  },
+  "noEvents": "No events scheduled",
+  "timeBlock": "Time block",
+  "focusBlock": "Focus block",
+  "eventCount": "{count, plural, one {# event} other {# events}}"
+}

@@ -1,0 +1,33 @@
+{
+  "button": {
+    "tooltip": "Help",
+    "ariaLabel": "Open help"
+  },
+  "panel": {
+    "title": "Help",
+    "close": "Close help",
+    "loading": "Loading help content…",
+    "notFound": "Help topic not found",
+    "notFoundDescription": "We couldn't find help for this topic. Try searching for something else.",
+    "searchPlaceholder": "Search help…"
+  },
+  "topics": {
+    "gettingStarted": "Getting started",
+    "notes": "Working with notes",
+    "tasks": "Managing tasks",
+    "calendar": "Calendar & scheduling",
+    "search": "Search & discovery",
+    "ai": "AI assistant",
+    "entities": "Entities & knowledge base",
+    "cognitive": "Cognitive support",
+    "settings": "Settings & preferences",
+    "shortcuts": "Keyboard shortcuts"
+  },
+  "adhdTips": {
+    "label": "ADHD Tip",
+    "voiceCapture": "Use voice capture if typing feels slow today.",
+    "breakTasks": "Break large tasks into smaller steps — each one should take under 15 minutes.",
+    "bodyDouble": "Try the focus session feature as a virtual body double.",
+    "externalBrain": "Locus is your external brain — capture everything, organize later."
+  }
+}

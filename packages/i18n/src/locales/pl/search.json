@@ -1,0 +1,30 @@
+{
+  "placeholder": "Szukaj wszędzie…",
+  "noResults": "Brak wyników",
+  "noResultsDescription": "Spróbuj zmienić kryteria wyszukiwania lub filtry.",
+  "resultCount": "{count, plural, one {# wynik} few {# wyniki} many {# wyników} other {# wyników}}",
+  "recentSearches": "Ostatnie wyszukiwania",
+  "clearRecent": "Wyczyść ostatnie wyszukiwania",
+  "filters": {
+    "type": "Typ",
+    "date": "Data",
+    "tag": "Tag",
+    "status": "Status",
+    "project": "Projekt"
+  },
+  "types": {
+    "all": "Wszystko",
+    "notes": "Notatki",
+    "tasks": "Zadania",
+    "events": "Wydarzenia",
+    "entities": "Encje"
+  },
+  "sortBy": {
+    "relevance": "Trafność",
+    "dateModified": "Data modyfikacji",
+    "dateCreated": "Data utworzenia",
+    "title": "Tytuł"
+  },
+  "searchIn": "Szukaj w…",
+  "advancedSearch": "Zaawansowane wyszukiwanie"
+}

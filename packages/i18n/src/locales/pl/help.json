@@ -1,0 +1,33 @@
+{
+  "button": {
+    "tooltip": "Pomoc",
+    "ariaLabel": "Otwórz pomoc"
+  },
+  "panel": {
+    "title": "Pomoc",
+    "close": "Zamknij pomoc",
+    "loading": "Ładowanie treści pomocy…",
+    "notFound": "Nie znaleziono tematu pomocy",
+    "notFoundDescription": "Nie mogliśmy znaleźć pomocy dla tego tematu. Spróbuj wyszukać coś innego.",
+    "searchPlaceholder": "Szukaj w pomocy…"
+  },
+  "topics": {
+    "gettingStarted": "Pierwsze kroki",
+    "notes": "Praca z notatkami",
+    "tasks": "Zarządzanie zadaniami",
+    "calendar": "Kalendarz i planowanie",
+    "search": "Wyszukiwanie i odkrywanie",
+    "ai": "Asystent AI",
+    "entities": "Encje i baza wiedzy",
+    "cognitive": "Wsparcie poznawcze",
+    "settings": "Ustawienia i preferencje",
+    "shortcuts": "Skróty klawiszowe"
+  },
+  "adhdTips": {
+    "label": "Porada ADHD",
+    "voiceCapture": "Użyj przechwytywania głosowego, jeśli pisanie jest dziś trudne.",
+    "breakTasks": "Dziel duże zadania na mniejsze kroki — każdy powinien zająć mniej niż 15 minut.",
+    "bodyDouble": "Wypróbuj funkcję sesji skupienia jako wirtualnego towarzysza.",
+    "externalBrain": "Locus to Twój zewnętrzny mózg — zapisuj wszystko, organizuj później."
+  }
+}

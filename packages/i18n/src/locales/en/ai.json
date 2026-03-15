@@ -1,0 +1,46 @@
+{
+  "chat": {
+    "title": "AI Assistant",
+    "placeholder": "Ask anything…",
+    "send": "Send",
+    "stop": "Stop",
+    "regenerate": "Regenerate",
+    "copyResponse": "Copy response",
+    "newConversation": "New conversation",
+    "thinking": "Thinking…"
+  },
+  "dailyBrief": {
+    "title": "Daily Brief",
+    "greeting": "Good {timeOfDay}, here's your brief.",
+    "tasksOverview": "Tasks overview",
+    "energyForecast": "Energy forecast",
+    "suggestions": "Suggestions for today"
+  },
+  "entityReview": {
+    "title": "Entity review",
+    "suggestion": "Suggested entities",
+    "accept": "Accept",
+    "reject": "Reject",
+    "modify": "Modify"
+  },
+  "providers": {
+    "anthropic": "Anthropic",
+    "openai": "OpenAI",
+    "ollama": "Ollama (Local)",
+    "local": "Local Model"
+  },
+  "status": {
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "error": "Error",
+    "processing": "Processing…"
+  },
+  "taskBreakdown": {
+    "title": "Task breakdown",
+    "description": "Let AI break this task into smaller steps."
+  },
+  "toneCheck": {
+    "title": "Tone check",
+    "description": "Review the tone of your writing."
+  }
+}

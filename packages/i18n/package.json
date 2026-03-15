@@ -24,9 +24,20 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.2.3",
+    "i18next-parser": "^9.4.0",
+    "jsdom": "^29.0.0",
     "react": "^19.0.0",
+    "react-dom": "^19.2.4",
     "typescript": "^5.7.0",
     "vitest": "^3.2.1"
+  },
+  "dependencies": {
+    "i18next": "^25.8.18",
+    "intl-messageformat": "^11.1.2",
+    "react-i18next": "^16.5.8"
   }
 }

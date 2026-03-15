@@ -1,0 +1,89 @@
+{
+  "title": "Settings",
+  "save": "Save changes",
+  "saved": "Settings saved",
+  "unsavedChanges": "You have unsaved changes",
+  "categories": {
+    "general": "General",
+    "appearance": "Appearance",
+    "editor": "Editor",
+    "ai": "AI & Models",
+    "cognitive": "Cognitive Support",
+    "notifications": "Notifications",
+    "data": "Data & Storage",
+    "privacy": "Privacy",
+    "advanced": "Advanced",
+    "about": "About"
+  },
+  "general": {
+    "language": "Language",
+    "languageDescription": "Choose your preferred language",
+    "startOnBoot": "Start on system boot",
+    "startMinimized": "Start minimized",
+    "defaultView": "Default view"
+  },
+  "appearance": {
+    "theme": "Theme",
+    "themeOptions": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    },
+    "fontSize": "Font size",
+    "fontSizeOptions": {
+      "small": "Small",
+      "medium": "Medium",
+      "large": "Large"
+    },
+    "compactMode": "Compact mode",
+    "sidebarPosition": "Sidebar position"
+  },
+  "editor": {
+    "spellCheck": "Spell check",
+    "autoSave": "Auto-save",
+    "autoSaveInterval": "Auto-save interval",
+    "defaultNoteFormat": "Default note format"
+  },
+  "ai": {
+    "provider": "AI Provider",
+    "apiKey": "API Key",
+    "apiKeyPlaceholder": "Enter your API key",
+    "model": "Model",
+    "localModels": "Local models",
+    "downloadModel": "Download model",
+    "enableAI": "Enable AI features",
+    "dataConsent": "Allow AI to process your data"
+  },
+  "cognitive": {
+    "enableEnergyTracking": "Enable energy tracking",
+    "enableInterventions": "Enable proactive interventions",
+    "interventionLevel": "Intervention frequency",
+    "interventionLevels": {
+      "minimal": "Minimal",
+      "moderate": "Moderate",
+      "proactive": "Proactive"
+    },
+    "breakReminders": "Break reminders",
+    "focusSessionDuration": "Focus session duration"
+  },
+  "notifications": {
+    "enableNotifications": "Enable notifications",
+    "sound": "Sound",
+    "taskReminders": "Task reminders",
+    "dailyBrief": "Daily brief",
+    "energyAlerts": "Energy alerts"
+  },
+  "data": {
+    "storageLocation": "Storage location",
+    "exportData": "Export all data",
+    "importData": "Import data",
+    "clearCache": "Clear cache",
+    "databaseSize": "Database size"
+  },
+  "privacy": {
+    "localProcessing": "Process data locally",
+    "analyticsOptIn": "Share anonymous analytics",
+    "whatWeKnow": "What Locus knows about you",
+    "deleteAllData": "Delete all data"
+  }
+}

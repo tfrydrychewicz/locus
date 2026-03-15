@@ -1,0 +1,55 @@
+{
+  "energy": {
+    "title": "Energy Level",
+    "states": {
+      "high": "High energy",
+      "medium": "Moderate energy",
+      "low": "Low energy",
+      "depleted": "Depleted"
+    },
+    "updatePrompt": "How's your energy right now?",
+    "trackingLabel": "Energy tracking"
+  },
+  "modes": {
+    "title": "Current Mode",
+    "hyperfocus": "Hyperfocus",
+    "hyperfocusDescription": "Deep, sustained attention — ride the wave",
+    "flow": "Flow",
+    "flowDescription": "Productive and balanced — great state",
+    "drift": "Drift",
+    "driftDescription": "Attention is wandering — consider switching tasks",
+    "depleted": "Depleted",
+    "depletedDescription": "Take a break — your brain needs rest",
+    "dysregulated": "Dysregulated",
+    "dysregulatedDescription": "Feeling overwhelmed — let's simplify",
+    "startup": "Starting up",
+    "startupDescription": "Warming up — start with something small"
+  },
+  "interventions": {
+    "title": "Suggestions",
+    "breakReminder": "You've been working for {minutes} minutes. Consider a break.",
+    "taskSwitch": "This task seems stuck. Want to try something else?",
+    "energyDrop": "Your energy seems lower. Here are some lighter tasks.",
+    "hyperfocusAlert": "You're in hyperfocus mode. Remember to hydrate!",
+    "endOfDay": "Great work today. Time to wind down.",
+    "dismiss": "Dismiss",
+    "snooze": "Snooze {minutes} min",
+    "accept": "Good idea"
+  },
+  "focus": {
+    "title": "Focus Session",
+    "start": "Start focus session",
+    "stop": "End session",
+    "pause": "Pause",
+    "resume": "Resume",
+    "duration": "Duration",
+    "elapsed": "{minutes} min elapsed",
+    "completed": "Focus session complete!"
+  },
+  "daily": {
+    "checkIn": "Daily check-in",
+    "howFeeling": "How are you feeling today?",
+    "topPriorities": "Top priorities",
+    "reflection": "End-of-day reflection"
+  }
+}

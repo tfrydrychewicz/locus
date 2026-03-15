@@ -72,12 +72,12 @@
 
 | Task | Details | Tests | Done |
 |------|---------|-------| :---: |
-| i18next + react-i18next setup | Configure with namespace lazy-loading; ICU MessageFormat | Unit: provider renders | [ ] |
-| EN locale namespace files | `common.json` with shared strings (buttons, labels, status) | Unit: all keys parse | [ ] |
-| PL locale namespace files | Mirror of EN; 100% coverage | CI: `i18next-parser` flags missing keys | [ ] |
-| Typed `useTranslation` hook | Generate TypeScript types from EN namespace files | Unit: type-safe `t()` calls | [ ] |
-| i18next-parser config | Auto-extract keys from source; CI step to detect missing translations | CI: missing key = build failure | [ ] |
-| Date/number formatting | Locale-aware via `Intl.DateTimeFormat` / `Intl.NumberFormat` | Unit: formatting in en and pl | [ ] |
+| i18next + react-i18next setup | Configure with namespace lazy-loading; ICU MessageFormat | Unit: provider renders | [x] |
+| EN locale namespace files | `common.json` with shared strings (buttons, labels, status) | Unit: all keys parse | [x] |
+| PL locale namespace files | Mirror of EN; 100% coverage | CI: `i18next-parser` flags missing keys | [x] |
+| Typed `useTranslation` hook | Generate TypeScript types from EN namespace files | Unit: type-safe `t()` calls | [x] |
+| i18next-parser config | Auto-extract keys from source; CI step to detect missing translations | CI: missing key = build failure | [x] |
+| Date/number formatting | Locale-aware via `Intl.DateTimeFormat` / `Intl.NumberFormat` | Unit: formatting in en and pl | [x] |
 
 ### 0.6 Contextual Help (`@locus/help`)
 

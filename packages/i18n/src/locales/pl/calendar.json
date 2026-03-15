@@ -1,0 +1,39 @@
+{
+  "today": "Dziś",
+  "day": "Dzień",
+  "week": "Tydzień",
+  "month": "Miesiąc",
+  "agenda": "Agenda",
+  "newEvent": "Nowe wydarzenie",
+  "editEvent": "Edytuj wydarzenie",
+  "deleteEvent": "Usuń wydarzenie",
+  "allDay": "Cały dzień",
+  "startTime": "Czas rozpoczęcia",
+  "endTime": "Czas zakończenia",
+  "location": "Lokalizacja",
+  "description": "Opis",
+  "attendees": "Uczestnicy",
+  "reminder": "Przypomnienie",
+  "reminders": {
+    "none": "Brak",
+    "atTime": "W momencie wydarzenia",
+    "5min": "5 minut przed",
+    "15min": "15 minut przed",
+    "30min": "30 minut przed",
+    "1hour": "1 godzinę przed",
+    "1day": "1 dzień przed"
+  },
+  "repeat": "Powtarzaj",
+  "repeatOptions": {
+    "none": "Nie powtarza się",
+    "daily": "Codziennie",
+    "weekly": "Co tydzień",
+    "monthly": "Co miesiąc",
+    "yearly": "Co rok",
+    "custom": "Niestandardowe…"
+  },
+  "noEvents": "Brak zaplanowanych wydarzeń",
+  "timeBlock": "Blok czasowy",
+  "focusBlock": "Blok skupienia",
+  "eventCount": "{count, plural, one {# wydarzenie} few {# wydarzenia} many {# wydarzeń} other {# wydarzeń}}"
+}

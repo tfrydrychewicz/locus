@@ -1,0 +1,30 @@
+{
+  "placeholder": "Search everything…",
+  "noResults": "No results found",
+  "noResultsDescription": "Try adjusting your search terms or filters.",
+  "resultCount": "{count, plural, one {# result} other {# results}}",
+  "recentSearches": "Recent searches",
+  "clearRecent": "Clear recent searches",
+  "filters": {
+    "type": "Type",
+    "date": "Date",
+    "tag": "Tag",
+    "status": "Status",
+    "project": "Project"
+  },
+  "types": {
+    "all": "All",
+    "notes": "Notes",
+    "tasks": "Tasks",
+    "events": "Events",
+    "entities": "Entities"
+  },
+  "sortBy": {
+    "relevance": "Relevance",
+    "dateModified": "Date modified",
+    "dateCreated": "Date created",
+    "title": "Title"
+  },
+  "searchIn": "Search in…",
+  "advancedSearch": "Advanced search"
+}

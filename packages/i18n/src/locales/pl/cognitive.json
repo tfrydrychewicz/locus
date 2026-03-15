@@ -1,0 +1,55 @@
+{
+  "energy": {
+    "title": "Poziom energii",
+    "states": {
+      "high": "Wysoka energia",
+      "medium": "Umiarkowana energia",
+      "low": "Niska energia",
+      "depleted": "Wyczerpanie"
+    },
+    "updatePrompt": "Jak się teraz czujesz energetycznie?",
+    "trackingLabel": "Śledzenie energii"
+  },
+  "modes": {
+    "title": "Aktualny tryb",
+    "hyperfocus": "Hiperfokus",
+    "hyperfocusDescription": "Głęboka, utrzymana uwaga — jedź na fali",
+    "flow": "Przepływ",
+    "flowDescription": "Produktywny i zrównoważony — świetny stan",
+    "drift": "Dryfowanie",
+    "driftDescription": "Uwaga się rozprasza — rozważ zmianę zadania",
+    "depleted": "Wyczerpanie",
+    "depletedDescription": "Zrób przerwę — Twój mózg potrzebuje odpoczynku",
+    "dysregulated": "Dysregulacja",
+    "dysregulatedDescription": "Czujesz się przytłoczony — uprośćmy to",
+    "startup": "Rozgrzewka",
+    "startupDescription": "Rozgrzewka — zacznij od czegoś małego"
+  },
+  "interventions": {
+    "title": "Sugestie",
+    "breakReminder": "Pracujesz już {minutes} minut. Rozważ przerwę.",
+    "taskSwitch": "To zadanie wygląda na zablokowane. Chcesz spróbować czegoś innego?",
+    "energyDrop": "Twoja energia wydaje się niższa. Oto lżejsze zadania.",
+    "hyperfocusAlert": "Jesteś w trybie hiperfokusu. Pamiętaj o nawodnieniu!",
+    "endOfDay": "Świetna robota dzisiaj. Pora się wyciszyć.",
+    "dismiss": "Odrzuć",
+    "snooze": "Odłóż na {minutes} min",
+    "accept": "Dobry pomysł"
+  },
+  "focus": {
+    "title": "Sesja skupienia",
+    "start": "Rozpocznij sesję skupienia",
+    "stop": "Zakończ sesję",
+    "pause": "Wstrzymaj",
+    "resume": "Wznów",
+    "duration": "Czas trwania",
+    "elapsed": "{minutes} min minęło",
+    "completed": "Sesja skupienia zakończona!"
+  },
+  "daily": {
+    "checkIn": "Codzienna kontrola",
+    "howFeeling": "Jak się dziś czujesz?",
+    "topPriorities": "Najważniejsze priorytety",
+    "reflection": "Refleksja na koniec dnia"
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "title": "Ustawienia",
+  "save": "Zapisz zmiany",
+  "saved": "Ustawienia zapisane",
+  "unsavedChanges": "Masz niezapisane zmiany",
+  "categories": {
+    "general": "Ogólne",
+    "appearance": "Wygląd",
+    "editor": "Edytor",
+    "ai": "AI i modele",
+    "cognitive": "Wsparcie poznawcze",
+    "notifications": "Powiadomienia",
+    "data": "Dane i pamięć",
+    "privacy": "Prywatność",
+    "advanced": "Zaawansowane",
+    "about": "O aplikacji"
+  },
+  "general": {
+    "language": "Język",
+    "languageDescription": "Wybierz preferowany język",
+    "startOnBoot": "Uruchamiaj przy starcie systemu",
+    "startMinimized": "Uruchamiaj zminimalizowany",
+    "defaultView": "Domyślny widok"
+  },
+  "appearance": {
+    "theme": "Motyw",
+    "themeOptions": {
+      "light": "Jasny",
+      "dark": "Ciemny",
+      "system": "Systemowy"
+    },
+    "fontSize": "Rozmiar czcionki",
+    "fontSizeOptions": {
+      "small": "Mały",
+      "medium": "Średni",
+      "large": "Duży"
+    },
+    "compactMode": "Tryb kompaktowy",
+    "sidebarPosition": "Pozycja panelu bocznego"
+  },
+  "editor": {
+    "spellCheck": "Sprawdzanie pisowni",
+    "autoSave": "Automatyczny zapis",
+    "autoSaveInterval": "Interwał automatycznego zapisu",
+    "defaultNoteFormat": "Domyślny format notatki"
+  },
+  "ai": {
+    "provider": "Dostawca AI",
+    "apiKey": "Klucz API",
+    "apiKeyPlaceholder": "Wprowadź swój klucz API",
+    "model": "Model",
+    "localModels": "Modele lokalne",
+    "downloadModel": "Pobierz model",
+    "enableAI": "Włącz funkcje AI",
+    "dataConsent": "Pozwól AI przetwarzać Twoje dane"
+  },
+  "cognitive": {
+    "enableEnergyTracking": "Włącz śledzenie energii",
+    "enableInterventions": "Włącz proaktywne interwencje",
+    "interventionLevel": "Częstotliwość interwencji",
+    "interventionLevels": {
+      "minimal": "Minimalna",
+      "moderate": "Umiarkowana",
+      "proactive": "Proaktywna"
+    },
+    "breakReminders": "Przypomnienia o przerwach",
+    "focusSessionDuration": "Czas sesji skupienia"
+  },
+  "notifications": {
+    "enableNotifications": "Włącz powiadomienia",
+    "sound": "Dźwięk",
+    "taskReminders": "Przypomnienia o zadaniach",
+    "dailyBrief": "Dzienny przegląd",
+    "energyAlerts": "Alerty energii"
+  },
+  "data": {
+    "storageLocation": "Lokalizacja przechowywania",
+    "exportData": "Eksportuj wszystkie dane",
+    "importData": "Importuj dane",
+    "clearCache": "Wyczyść pamięć podręczną",
+    "databaseSize": "Rozmiar bazy danych"
+  },
+  "privacy": {
+    "localProcessing": "Przetwarzaj dane lokalnie",
+    "analyticsOptIn": "Udostępniaj anonimowe dane analityczne",
+    "whatWeKnow": "Co Locus wie o Tobie",
+    "deleteAllData": "Usuń wszystkie dane"
+  }
+}

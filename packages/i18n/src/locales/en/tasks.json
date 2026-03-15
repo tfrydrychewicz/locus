@@ -1,0 +1,53 @@
+{
+  "newTask": "New task",
+  "taskCount": "{count, plural, one {# task} other {# tasks}}",
+  "activeCount": "{count, plural, one {# active task} other {# active tasks}}",
+  "completedCount": "{count, plural, one {# completed} other {# completed}}",
+  "dueToday": "Due today",
+  "overdue": "Overdue",
+  "noDueDate": "No due date",
+  "setDueDate": "Set due date",
+  "priority": "Priority",
+  "priorities": {
+    "critical": "Critical",
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low",
+    "none": "None"
+  },
+  "status": {
+    "inbox": "Inbox",
+    "next": "Next",
+    "waiting": "Waiting",
+    "scheduled": "Scheduled",
+    "someday": "Someday",
+    "done": "Done"
+  },
+  "gtd": {
+    "inbox": "Inbox",
+    "process": "Process",
+    "organize": "Organize",
+    "review": "Review",
+    "engage": "Engage"
+  },
+  "pinch": {
+    "label": "PINCH Score",
+    "personal": "Personal importance",
+    "interest": "Interest level",
+    "novelty": "Novelty factor",
+    "challenge": "Challenge level",
+    "hurry": "Urgency"
+  },
+  "emptyTitle": "No tasks yet",
+  "emptyDescription": "Add a task to get things moving.",
+  "completeTask": "Mark as complete",
+  "uncompleteTask": "Mark as incomplete",
+  "deleteTask": "Delete task",
+  "subtasks": "Subtasks",
+  "addSubtask": "Add subtask",
+  "estimatedDuration": "Estimated duration",
+  "project": "Project",
+  "context": "Context",
+  "energy": "Energy required",
+  "assignTo": "Assign to"
+}

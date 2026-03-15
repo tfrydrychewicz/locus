@@ -1,0 +1,46 @@
+{
+  "chat": {
+    "title": "Asystent AI",
+    "placeholder": "Zapytaj o cokolwiek…",
+    "send": "Wyślij",
+    "stop": "Zatrzymaj",
+    "regenerate": "Wygeneruj ponownie",
+    "copyResponse": "Kopiuj odpowiedź",
+    "newConversation": "Nowa rozmowa",
+    "thinking": "Myślę…"
+  },
+  "dailyBrief": {
+    "title": "Dzienny przegląd",
+    "greeting": "Dzień dobry, oto Twój przegląd.",
+    "tasksOverview": "Przegląd zadań",
+    "energyForecast": "Prognoza energii",
+    "suggestions": "Sugestie na dziś"
+  },
+  "entityReview": {
+    "title": "Przegląd encji",
+    "suggestion": "Sugerowane encje",
+    "accept": "Akceptuj",
+    "reject": "Odrzuć",
+    "modify": "Modyfikuj"
+  },
+  "providers": {
+    "anthropic": "Anthropic",
+    "openai": "OpenAI",
+    "ollama": "Ollama (lokalny)",
+    "local": "Model lokalny"
+  },
+  "status": {
+    "connected": "Połączono",
+    "disconnected": "Rozłączono",
+    "error": "Błąd",
+    "processing": "Przetwarzanie…"
+  },
+  "taskBreakdown": {
+    "title": "Rozbicie zadania",
+    "description": "Pozwól AI rozbić to zadanie na mniejsze kroki."
+  },
+  "toneCheck": {
+    "title": "Sprawdzenie tonu",
+    "description": "Przejrzyj ton swojego tekstu."
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "save": "Zapisz",
+  "cancel": "Anuluj",
+  "delete": "Usuń",
+  "edit": "Edytuj",
+  "create": "Utwórz",
+  "close": "Zamknij",
+  "confirm": "Potwierdź",
+  "back": "Wstecz",
+  "next": "Dalej",
+  "done": "Gotowe",
+  "loading": "Ładowanie…",
+  "retry": "Ponów",
+  "undo": "Cofnij",
+  "redo": "Ponów",
+  "search": "Szukaj",
+  "filter": "Filtruj",
+  "sort": "Sortuj",
+  "refresh": "Odśwież",
+  "export": "Eksportuj",
+  "import": "Importuj",
+  "copy": "Kopiuj",
+  "paste": "Wklej",
+  "selectAll": "Zaznacz wszystko",
+  "deselectAll": "Odznacz wszystko",
+  "yes": "Tak",
+  "no": "Nie",
+  "ok": "OK",
+  "apply": "Zastosuj",
+  "reset": "Resetuj",
+  "clear": "Wyczyść",
+  "add": "Dodaj",
+  "remove": "Usuń",
+  "more": "Więcej",
+  "less": "Mniej",
+  "showMore": "Pokaż więcej",
+  "showLess": "Pokaż mniej",
+  "status": {
+    "active": "Aktywny",
+    "inactive": "Nieaktywny",
+    "archived": "Zarchiwizowany",
+    "draft": "Szkic",
+    "published": "Opublikowany"
+  },
+  "error": {
+    "generic": "Coś poszło nie tak. Spróbuj ponownie.",
+    "network": "Błąd sieci. Sprawdź połączenie.",
+    "notFound": "Nie znaleziono.",
+    "unauthorized": "Nie masz uprawnień do tej operacji.",
+    "validation": "Sprawdź wprowadzone dane."
+  },
+  "empty": {
+    "title": "Nic tu jeszcze nie ma",
+    "description": "Zacznij od utworzenia pierwszego elementu."
+  },
+  "time": {
+    "justNow": "Właśnie teraz",
+    "today": "Dziś",
+    "yesterday": "Wczoraj",
+    "tomorrow": "Jutro",
+    "thisWeek": "Ten tydzień",
+    "lastWeek": "Zeszły tydzień",
+    "nextWeek": "Następny tydzień"
+  },
+  "confirm_delete": {
+    "title": "Potwierdź usunięcie",
+    "message": "Czy na pewno chcesz to usunąć? Tej operacji nie można cofnąć.",
+    "confirm": "Usuń",
+    "cancel": "Anuluj"
+  },
+  "unsavedChanges": {
+    "title": "Niezapisane zmiany",
+    "message": "Masz niezapisane zmiany. Czy chcesz zapisać przed wyjściem?",
+    "save": "Zapisz",
+    "discard": "Odrzuć",
+    "cancel": "Anuluj"
+  }
+}

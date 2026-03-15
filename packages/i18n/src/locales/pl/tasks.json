@@ -1,0 +1,53 @@
+{
+  "newTask": "Nowe zadanie",
+  "taskCount": "{count, plural, one {# zadanie} few {# zadania} many {# zadań} other {# zadań}}",
+  "activeCount": "{count, plural, one {# aktywne zadanie} few {# aktywne zadania} many {# aktywnych zadań} other {# aktywnych zadań}}",
+  "completedCount": "{count, plural, one {# ukończone} few {# ukończone} many {# ukończonych} other {# ukończonych}}",
+  "dueToday": "Termin dziś",
+  "overdue": "Zaległe",
+  "noDueDate": "Bez terminu",
+  "setDueDate": "Ustaw termin",
+  "priority": "Priorytet",
+  "priorities": {
+    "critical": "Krytyczny",
+    "high": "Wysoki",
+    "medium": "Średni",
+    "low": "Niski",
+    "none": "Brak"
+  },
+  "status": {
+    "inbox": "Skrzynka odbiorcza",
+    "next": "Następne",
+    "waiting": "Oczekujące",
+    "scheduled": "Zaplanowane",
+    "someday": "Kiedyś",
+    "done": "Ukończone"
+  },
+  "gtd": {
+    "inbox": "Skrzynka odbiorcza",
+    "process": "Przetwarzaj",
+    "organize": "Organizuj",
+    "review": "Przeglądaj",
+    "engage": "Działaj"
+  },
+  "pinch": {
+    "label": "Wynik PINCH",
+    "personal": "Osobiste znaczenie",
+    "interest": "Poziom zainteresowania",
+    "novelty": "Czynnik nowości",
+    "challenge": "Poziom wyzwania",
+    "hurry": "Pilność"
+  },
+  "emptyTitle": "Brak zadań",
+  "emptyDescription": "Dodaj zadanie, aby ruszyć z miejsca.",
+  "completeTask": "Oznacz jako ukończone",
+  "uncompleteTask": "Oznacz jako nieukończone",
+  "deleteTask": "Usuń zadanie",
+  "subtasks": "Podzadania",
+  "addSubtask": "Dodaj podzadanie",
+  "estimatedDuration": "Szacowany czas",
+  "project": "Projekt",
+  "context": "Kontekst",
+  "energy": "Wymagana energia",
+  "assignTo": "Przypisz do"
+}
