@@ -1,0 +1,30 @@
+---
+description: View pane layout (split/tabs) and modifier-click behavior for openable items. Ensures shift-click and cmd-click are always supported where content can be opened in the main area.
+alwaysApply: true
+---
+
+# View Pane & Modifier Clicks
+
+## View Pane (Main Content Area)
+
+- The main content area (view pane) can be **split into multiple panes** or shown as **tabs** (DESIGN.md: "Content (tab-based)").
+- Anything that can be "opened" in the view pane (e.g. a note, a task, an entity) must support **two modifier-click actions** in addition to normal click.
+
+## Modifier-Click Requirements
+
+**Every openable item (notes, tasks, entities, search results, etc.) must:**
+
+1. **Normal click** — Open in the **current** pane (replace or focus existing content).
+2. **Shift-click** — Open in a **new pane to the right** (split view). The new pane is created and the item opens there.
+3. **Cmd-click (Mac) / Ctrl-click (Windows)** — Open in a **new tab**. The tab is added and the item opens in that tab.
+
+Implement this by:
+
+- Handling `onClick` with `event.shiftKey` and `event.metaKey` (use `event.ctrlKey` on Windows if needed for Ctrl-click).
+- Calling the appropriate callback: `onOpenInNewPane?.(item)` or `onOpenInNewTab?.(item)` when the modifier is set; otherwise perform the default open-in-current-pane behavior.
+- Providing these callbacks from the view-pane/shell layer to list and tree components that render openable items.
+
+## Consistency
+
+- Do not add openable items (links, list rows, tree nodes, search result rows) without implementing modifier-click support.
+- Use a shared pattern or hook (e.g. `useOpenableItem({ onSelect, onOpenInNewPane, onOpenInNewTab })`) so behavior is consistent across the app.

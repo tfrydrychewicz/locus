@@ -188,16 +188,16 @@
 
 | Task                         | Details                                                                           | Tests                                | Done |
 | ---------------------------- | --------------------------------------------------------------------------------- | ------------------------------------ | ---- |
-| TipTap editor setup          | StarterKit + Placeholder + TextStyle + basic formatting                           | Component: renders, accepts input    | [ ]  |
-| `SlashCommand` extension     | `/` trigger → command palette (task, date, callout, mermaid, excalidraw, chart)   | Component: triggers, renders options | [ ]  |
-| `Callout` extension          | Info/warning/success/danger callout blocks with icon and editable content         | Component: all callout types         | [ ]  |
-| `CalloutView` node view      | Colored block with icon selector and editable body                                | Storybook: all variants              | [ ]  |
-| Auto-save (500ms debounce)   | Debounced save on content change via Tauri command                                | Integration: saves after debounce    | [ ]  |
-| Note list panel              | Sidebar list of notes with search                                                 | Component: filters on search         | [ ]  |
-| Split view layout            | List (240px) + Editor (flex)                                                      | Component: renders both panes        | [ ]  |
-| Keyboard shortcuts           | `Cmd+N` (new), `Cmd+F` (search)                                                   | E2E: shortcuts work                  | [ ]  |
-| Mermaid code block rendering | Detect `language=mermaid` in code blocks; debounced SVG preview; hide-code toggle | Component: renders diagram           | [ ]  |
-| Chart code block rendering   | Detect `language=chart` in code blocks; Recharts-based rendering                  | Component: renders chart             | [ ]  |
+| TipTap editor setup          | StarterKit + Placeholder + TextStyle + basic formatting                           | Component: renders, accepts input    | [x]  |
+| `SlashCommand` extension     | `/` trigger → command palette (task, date, callout, mermaid, excalidraw, chart)   | Component: triggers, renders options | [x]  |
+| `Callout` extension          | Info/warning/success/danger callout blocks with icon and editable content         | Component: all callout types         | [x]  |
+| `CalloutView` node view      | Colored block with icon selector and editable body                                | Storybook: all variants              | [x]  |
+| Auto-save (500ms debounce)   | Debounced save on content change via Tauri command                                | Integration: saves after debounce    | [x]  |
+| Note list panel              | Sidebar list of notes with search                                                 | Component: filters on search         | [x]  |
+| Split view layout            | List (240px) + Editor (flex)                                                      | Component: renders both panes        | [x]  |
+| Keyboard shortcuts           | `Cmd+N` (new), `Cmd+F` (search)                                                   | E2E: shortcuts work                  | [x]  |
+| Mermaid code block rendering | Detect `language=mermaid` in code blocks; debounced SVG preview; hide-code toggle | Component: renders diagram           | [x]  |
+| Chart code block rendering   | Detect `language=chart` in code blocks; Recharts-based rendering                  | Component: renders chart             | [x]  |
 
 
 ### 1.7 Sidebar & Navigation

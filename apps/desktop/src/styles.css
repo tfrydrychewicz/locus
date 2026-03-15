@@ -69,3 +69,31 @@ body {
   user-select: none;
   -webkit-user-select: none;
 }
+
+/* Note editor: allow text selection and basic prose */
+.note-editor {
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.note-editor .ProseMirror {
+  min-height: 200px;
+}
+
+.note-editor .ProseMirror p.is-editor-empty:first-child::before {
+  color: var(--color-text-muted);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+
+.note-editor .ProseMirror h1 { font-size: 1.5rem; font-weight: 700; margin: 1em 0 0.5em; }
+.note-editor .ProseMirror h2 { font-size: 1.25rem; font-weight: 600; margin: 1em 0 0.5em; }
+.note-editor .ProseMirror h3 { font-size: 1.125rem; font-weight: 600; margin: 0.75em 0 0.25em; }
+.note-editor .ProseMirror ul { list-style-type: disc; padding-left: 1.5rem; }
+.note-editor .ProseMirror ol { list-style-type: decimal; padding-left: 1.5rem; }
+.note-editor .ProseMirror code { font-family: var(--font-mono); font-size: 0.9em; background: var(--color-bg-elevated); padding: 0.15em 0.4em; border-radius: 4px; }
+.note-editor .ProseMirror pre { background: var(--color-bg-elevated); padding: 0.75rem 1rem; border-radius: 6px; overflow-x: auto; margin: 0.5em 0; }
+.note-editor .ProseMirror pre code { background: none; padding: 0; }
+.note-editor .ProseMirror blockquote { border-left: 3px solid var(--color-border); padding-left: 1rem; margin: 0.5em 0; color: var(--color-text-secondary); }

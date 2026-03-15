@@ -4,7 +4,8 @@ export interface NoteListItemProps {
   title: string
   excerpt?: string
   updatedAt: string
-  onClick?: () => void
+  /** Called on click. Use event.shiftKey / event.metaKey for new pane / new tab. */
+  onClick?: (e: React.MouseEvent) => void
   selected?: boolean
   archived?: boolean
   className?: string
@@ -56,7 +57,7 @@ export function NoteListItem({
     return (
       <button
         type="button"
-        onClick={onClick}
+        onClick={(e) => onClick(e)}
         className={baseClass}
         aria-pressed={selected}
         aria-label={title || 'Untitled note'}
