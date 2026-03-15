@@ -12,7 +12,7 @@ export interface AppSettings {
 const STORAGE_KEY = 'locus.settings'
 const DEFAULT_SETTINGS: AppSettings = { theme: 'system', language: 'en' }
 
-function loadSettings(): AppSettings {
+export function loadSettings(): AppSettings {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) return { ...DEFAULT_SETTINGS, ...(JSON.parse(raw) as Partial<AppSettings>) }
