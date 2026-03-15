@@ -83,13 +83,13 @@
 
 | Task | Details | Tests | Done |
 |------|---------|-------| :---: |
-| `HelpButton` component | Small `?` icon button accepting `topic` prop | Storybook: default, hover, active | [ ] |
-| `HelpPanel` component | Slide-out panel (400px) rendering MDX content | Storybook: open, closed, loading | [ ] |
-| `HelpProvider` context | React context wrapping app; manages open/close + active topic | Unit: provider state management | [ ] |
-| `useHelp` hook | Programmatically open help: `useHelp('notes.editor')` | Unit: opens correct topic | [ ] |
-| Help topic registry | Topic → file mapping; related topics | Unit: all topics resolve | [ ] |
-| Initial help content (EN) | `getting-started.mdx` — first article | Renders in HelpPanel | [ ] |
-| Initial help content (PL) | Polish translation of `getting-started.mdx` | Renders in HelpPanel with pl locale | [ ] |
+| `HelpButton` component | Small `?` icon button accepting `topic` prop | Storybook: default, hover, active | [x] |
+| `HelpPanel` component | Slide-out panel (400px) rendering MDX content | Storybook: open, closed, loading | [x] |
+| `HelpProvider` context | React context wrapping app; manages open/close + active topic | Unit: provider state management | [x] |
+| `useHelp` hook | Programmatically open help: `useHelp('notes.editor')` | Unit: opens correct topic | [x] |
+| Help topic registry | Topic → file mapping; related topics | Unit: all topics resolve | [x] |
+| Initial help content (EN) | `getting-started.mdx` — first article | Renders in HelpPanel | [x] |
+| Initial help content (PL) | Polish translation of `getting-started.mdx` | Renders in HelpPanel with pl locale | [x] |
 
 ### 0.7 CI/CD Pipeline
 

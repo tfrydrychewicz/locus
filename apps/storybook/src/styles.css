@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+@source "../../../packages/ui/src";
+@source "../../../packages/help/src";
+
 :root {
   --color-bg: #ffffff;
   --color-bg-sidebar: #f5f5f5;
