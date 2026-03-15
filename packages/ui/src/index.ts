@@ -5,6 +5,7 @@ export { Icon, type IconProps } from './atoms/Icon.js'
 export { Input, type InputProps } from './atoms/Input.js'
 export { Spinner, type SpinnerProps } from './atoms/Spinner.js'
 export { Tooltip, type TooltipProps } from './atoms/Tooltip.js'
+export { ENTITY_TYPE_ICON_OPTIONS, getEntityTypeIcon } from './entities/entity-icons.js'
 export {
   ComputedFieldDisplay,
   type ComputedFieldDisplayProps,

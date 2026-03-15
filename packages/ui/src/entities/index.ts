@@ -8,6 +8,10 @@ export {
   EntityTypeModal,
   type EntityTypeModalProps,
 } from './EntityTypeModal.js'
+export {
+  ENTITY_TYPE_ICON_OPTIONS,
+  getEntityTypeIcon,
+} from './entity-icons.js'
 export { NoteLinkPopup, type NoteLinkPopupProps } from './NoteLinkPopup.js'
 export { QueryFieldEditor, type QueryFieldEditorProps } from './QueryFieldEditor.js'
 export {

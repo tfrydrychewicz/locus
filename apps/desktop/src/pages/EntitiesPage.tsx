@@ -6,10 +6,11 @@ import {
   EntityList,
   type EntityTypeFormData,
   EntityTypeModal,
+  getEntityTypeIcon,
   type UiEntity,
   type UiEntityType,
 } from '@locus/ui'
-import { Plus, Settings2 } from 'lucide-react'
+import { Pencil, Plus, Settings2 } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Entity, EntityType } from '../tauri/commands.js'
 import {
@@ -226,9 +227,14 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
               ? entityTypes.find((et) => et.slug === initialTypeSlug)
               : null
             if (lockedType) {
+              const TypeIcon = getEntityTypeIcon(lockedType.slug, lockedType.icon)
               return (
                 <>
-                  {lockedType.icon && <span aria-hidden="true">{lockedType.icon}</span>}
+                  <TypeIcon
+                    size={15}
+                    aria-hidden
+                    style={{ color: lockedType.color ?? undefined }}
+                  />
                   {lockedType.name}
                 </>
               )
@@ -237,17 +243,36 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
           })()}
         </h1>
         <div className="flex items-center gap-1.5">
-          <button
-            type="button"
-            onClick={() => {
-              setEditingType(null)
-              setTypeModalOpen(true)
-            }}
-            className="flex items-center gap-1.5 rounded px-2 py-1 text-xs text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]"
-            title="Manage entity types"
-          >
-            <Settings2 size={14} aria-hidden />
-          </button>
+          {isLocked ? (
+            // Edit the current entity type
+            <button
+              type="button"
+              onClick={() => {
+                const lockedType = entityTypes.find((et) => et.slug === initialTypeSlug) ?? null
+                setEditingType(lockedType)
+                setTypeModalOpen(true)
+              }}
+              className="rounded p-1.5 text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]"
+              title={t('typeModal.editTitle', {
+                name: entityTypes.find((et) => et.slug === initialTypeSlug)?.name ?? '',
+              })}
+            >
+              <Pencil size={14} aria-hidden />
+            </button>
+          ) : (
+            // Create a new entity type
+            <button
+              type="button"
+              onClick={() => {
+                setEditingType(null)
+                setTypeModalOpen(true)
+              }}
+              className="rounded p-1.5 text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]"
+              title="Manage entity types"
+            >
+              <Settings2 size={14} aria-hidden />
+            </button>
+          )}
           <HelpButton topic="entities.overview" />
         </div>
       </header>

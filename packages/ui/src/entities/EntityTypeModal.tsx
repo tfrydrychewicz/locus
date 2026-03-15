@@ -1,8 +1,10 @@
 import { GripVertical, Plus, Trash2, X } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { Button } from '../atoms/Button.js'
+import { Icon } from '../atoms/Icon.js'
 import { Input } from '../atoms/Input.js'
 import { FormField } from '../molecules/FormField.js'
+import { ENTITY_TYPE_ICON_OPTIONS, getEntityTypeIcon } from './entity-icons.js'
 import type { EnumOption, FieldDef, FieldType, UiEntityType } from './types.js'
 import { PRESET_COLORS, parseFields } from './types.js'
 
@@ -205,16 +207,40 @@ export function EntityTypeModal({
 
             {/* Icon + Color in a row */}
             <div className="flex gap-3">
-              <FormField label={L.iconLabel} htmlFor="et-icon" className="w-24 shrink-0">
-                <Input
-                  id="et-icon"
-                  value={icon}
-                  onChange={(e) => setIcon(e.target.value)}
-                  placeholder="👤"
-                  disabled={isBuiltIn}
-                  className="text-center text-base"
-                />
-              </FormField>
+              {/* Icon picker — grid of Lucide icons */}
+              <div className="flex flex-col gap-1.5">
+                <span className="text-xs font-medium text-[var(--color-text-secondary)]">
+                  {L.iconLabel}
+                </span>
+                <div className="flex flex-wrap gap-1">
+                  {ENTITY_TYPE_ICON_OPTIONS.map(({ name, icon: Ic }) => (
+                    <button
+                      key={name}
+                      type="button"
+                      disabled={isBuiltIn}
+                      onClick={() => setIcon(name)}
+                      className={[
+                        'flex h-7 w-7 items-center justify-center rounded border transition-colors',
+                        icon === name
+                          ? 'border-[var(--color-accent)] bg-[var(--color-accent-muted)] text-[var(--color-accent)]'
+                          : 'border-[var(--color-border)] bg-[var(--color-bg-surface)] text-[var(--color-text-muted)] hover:border-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]',
+                        isBuiltIn && 'opacity-50 cursor-not-allowed',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
+                      aria-label={name}
+                      aria-pressed={icon === name}
+                    >
+                      <Icon icon={Ic} size={14} aria-hidden />
+                    </button>
+                  ))}
+                </div>
+                {/* Preview of current selection */}
+                <div className="flex items-center gap-1 text-xs text-[var(--color-text-muted)]">
+                  <Icon icon={getEntityTypeIcon(slug, icon)} size={12} aria-hidden />
+                  <span>{icon || 'tag'}</span>
+                </div>
+              </div>
 
               <FormField label={L.colorLabel} htmlFor="et-color" className="flex-1">
                 <div className="flex flex-wrap gap-1.5 pt-1">

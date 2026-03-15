@@ -1,9 +1,11 @@
 import type { ReactNode } from 'react'
+import { Icon } from '../atoms/Icon.js'
+import { getEntityTypeIcon } from './entity-icons.js'
 import type { UiEntityType } from './types.js'
 
 export interface EntityItemProps {
   name: string
-  entityType: Pick<UiEntityType, 'name' | 'icon' | 'color'>
+  entityType: Pick<UiEntityType, 'slug' | 'name' | 'icon' | 'color'>
   updatedAt: string
   selected?: boolean
   trashed?: boolean
@@ -37,6 +39,8 @@ export function EntityItem({
     .filter(Boolean)
     .join(' ')
 
+  const TypeIcon = getEntityTypeIcon(entityType.slug, entityType.icon)
+
   const content = (
     <>
       <div className="flex min-w-0 items-start justify-between gap-2">
@@ -56,7 +60,7 @@ export function EntityItem({
             color: entityType.color ?? 'var(--color-text-muted)',
           }}
         >
-          {entityType.icon && <span aria-hidden="true">{entityType.icon}</span>}
+          <Icon icon={TypeIcon} size={10} aria-hidden />
           {entityType.name}
         </span>
 

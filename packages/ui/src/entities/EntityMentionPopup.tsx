@@ -1,6 +1,8 @@
 import { ExternalLink, X } from 'lucide-react'
 import { Button } from '../atoms/Button.js'
+import { Icon } from '../atoms/Icon.js'
 import { Spinner } from '../atoms/Spinner.js'
+import { getEntityTypeIcon } from './entity-icons.js'
 import type { UiEntity, UiEntityType } from './types.js'
 import { parseFields, parseFieldValues } from './types.js'
 
@@ -77,11 +79,11 @@ export function EntityMentionPopup({
       <div className="flex items-start justify-between gap-2 border-b border-[var(--color-border)] px-3 py-2.5">
         <div className="flex min-w-0 flex-col gap-0.5">
           <div className="flex items-center gap-1.5">
-            {entityType.icon && (
-              <span className="text-sm" aria-hidden>
-                {entityType.icon}
-              </span>
-            )}
+            <Icon
+              icon={getEntityTypeIcon(entityType.slug, entityType.icon)}
+              size={14}
+              className="shrink-0 text-[var(--color-text-muted)]"
+            />
             <span className="truncate text-sm font-semibold text-[var(--color-text-primary)]">
               {entity.name || 'Untitled'}
             </span>
