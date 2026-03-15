@@ -177,10 +177,10 @@
 
 | Component      | Props                                        | Stories                          | Tests              | Done |
 | -------------- | -------------------------------------------- | -------------------------------- | ------------------ | ---- |
-| `SearchBar`    | value, onChange, placeholder, loading        | Empty, WithQuery, Loading        | Debounced onChange | [ ]  |
-| `FormField`    | label, error, required, children             | WithInput, WithSelect, WithError | Error display      | [ ]  |
-| `EmptyState`   | icon, title, description, action             | WithAction, WithoutAction        | Action click       | [ ]  |
-| `NoteListItem` | title, excerpt, updatedAt, onClick, selected | Default, Selected, Archived      | Click handler      | [ ]  |
+| `SearchBar`    | value, onChange, placeholder, loading        | Empty, WithQuery, Loading        | Debounced onChange | [x]  |
+| `FormField`    | label, error, required, children             | WithInput, WithSelect, WithError | Error display      | [x]  |
+| `EmptyState`   | icon, title, description, action             | WithAction, WithoutAction        | Action click       | [x]  |
+| `NoteListItem` | title, excerpt, updatedAt, onClick, selected | Default, Selected, Archived      | Click handler      | [x]  |
 
 
 ### 1.6 Note Editor
