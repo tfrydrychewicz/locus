@@ -1,3 +1,4 @@
+import { CircleHelp } from 'lucide-react'
 import { useCallback } from 'react'
 import type { HelpTopicId } from './help-registry.js'
 import { useHelp } from './useHelp.js'
@@ -15,10 +16,8 @@ export function HelpButton({ topic, className = '', size = 'sm' }: HelpButtonPro
     toggleHelp(topic)
   }, [topic, toggleHelp])
 
-  const sizeClasses =
-    size === 'sm'
-      ? 'h-[22px] w-[22px] text-[11px] leading-none'
-      : 'h-[28px] w-[28px] text-[13px] leading-none'
+  const iconSize = size === 'sm' ? 14 : 18
+  const buttonSize = size === 'sm' ? 'h-[22px] w-[22px]' : 'h-[28px] w-[28px]'
 
   return (
     <button
@@ -32,8 +31,8 @@ export function HelpButton({ topic, className = '', size = 'sm' }: HelpButtonPro
         'hover:bg-[var(--color-accent-muted)]',
         'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]',
         'transition-all duration-150',
-        'font-medium cursor-pointer select-none',
-        sizeClasses,
+        'cursor-pointer select-none',
+        buttonSize,
         className,
       ]
         .filter(Boolean)
@@ -41,7 +40,7 @@ export function HelpButton({ topic, className = '', size = 'sm' }: HelpButtonPro
       aria-label="Open help"
       title="Help"
     >
-      ?
+      <CircleHelp size={iconSize} strokeWidth={2} aria-hidden="true" />
     </button>
   )
 }

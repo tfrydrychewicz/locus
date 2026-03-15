@@ -20,7 +20,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@locus/tokens": "workspace:*"
+    "@locus/tokens": "workspace:*",
+    "lucide-react": "^0.577.0"
   },
   "peerDependencies": {
     "react": "^19.0.0",

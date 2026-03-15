@@ -52,6 +52,14 @@ Higher-level components compose lower-level ones. Never skip levels (e.g., a tem
 - Focus is visually indicated and keyboard-navigable.
 - Use semantic HTML elements (`button`, `input`, `nav`, `main`, `section`) over generic `div`.
 
+## Icons
+
+- Use **Lucide React** (`lucide-react`) for all icons. No other icon library.
+- Import icons individually for tree-shaking: `import { Search, Plus } from 'lucide-react'`
+- Never use raw SVGs for standard UI icons — always check if Lucide has the icon first.
+- Pass `size`, `strokeWidth`, and `className` as props for customization.
+- Use `aria-hidden="true"` on decorative icons. Use `aria-label` on icon-only buttons.
+
 ## Styling & Theming
 
 - Use Tailwind CSS utility classes. No inline styles. No CSS modules.

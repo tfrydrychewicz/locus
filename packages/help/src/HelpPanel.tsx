@@ -1,3 +1,4 @@
+import { ChevronRight, Info, X } from 'lucide-react'
 import { useMemo } from 'react'
 import { getHelpContent } from './help-content.js'
 import { getHelpTopic, getRelatedTopics, type HelpTopicId } from './help-registry.js'
@@ -42,14 +43,7 @@ export function HelpPanel({ locale = 'en' }: HelpPanelProps) {
           className="flex h-7 w-7 items-center justify-center rounded-md text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-bg-surface)] hover:text-[var(--color-text-primary)] cursor-pointer"
           aria-label="Close help"
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path
-              d="M1 1L13 13M1 13L13 1"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
+          <X size={14} strokeWidth={2} aria-hidden="true" />
         </button>
       </div>
 
@@ -67,20 +61,12 @@ export function HelpPanel({ locale = 'en' }: HelpPanelProps) {
               {article.sections.map((section) => (
                 <details key={section.heading} className="group rounded-md">
                   <summary className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-2 text-[14px] font-medium text-[var(--color-text-primary)] transition-colors hover:bg-[var(--color-bg-surface)]">
-                    <svg
-                      className="h-3 w-3 text-[var(--color-text-muted)] transition-transform group-open:rotate-90"
-                      viewBox="0 0 12 12"
-                      fill="none"
+                    <ChevronRight
+                      size={12}
+                      strokeWidth={2}
+                      className="text-[var(--color-text-muted)] transition-transform group-open:rotate-90"
                       aria-hidden="true"
-                    >
-                      <path
-                        d="M4 2L8 6L4 10"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    />
                     {section.heading}
                   </summary>
                   <div className="ml-5 mt-1 mb-2 border-l-2 border-[var(--color-border)] pl-3">
@@ -96,14 +82,12 @@ export function HelpPanel({ locale = 'en' }: HelpPanelProps) {
             {article.adhdTip && (
               <div className="rounded-lg border border-[var(--color-accent)] bg-[var(--color-accent-muted)] p-4">
                 <div className="flex items-start gap-2">
-                  <span className="mt-0.5 text-[var(--color-accent)]">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                      <path
-                        d="M8 1C4.13 1 1 4.13 1 8s3.13 7 7 7 7-3.13 7-7-3.13-7-7-7zm0 11a1 1 0 110-2 1 1 0 010 2zm1-3.5a.5.5 0 01-1 0v-4a.5.5 0 011 0v4z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </span>
+                  <Info
+                    size={16}
+                    strokeWidth={2}
+                    className="mt-0.5 shrink-0 text-[var(--color-accent)]"
+                    aria-hidden="true"
+                  />
                   <div>
                     <span className="text-[12px] font-semibold uppercase tracking-wide text-[var(--color-accent)]">
                       ADHD Tip

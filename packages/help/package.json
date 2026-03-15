@@ -20,7 +20,8 @@
     "clean": "rm -rf dist .turbo"
   },
   "dependencies": {
-    "@locus/i18n": "workspace:*"
+    "@locus/i18n": "workspace:*",
+    "lucide-react": "^0.577.0"
   },
   "peerDependencies": {
     "react": "^19.0.0"
