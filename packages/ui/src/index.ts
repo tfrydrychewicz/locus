@@ -1,2 +1,7 @@
-// Shared UI components — populated starting Phase 0.4 (atoms, molecules, organisms)
-export {}
+export { Badge, type BadgeProps } from './atoms/Badge.js'
+export { Button, type ButtonProps } from './atoms/Button.js'
+export { Chip, type ChipProps } from './atoms/Chip.js'
+export { Icon, type IconProps } from './atoms/Icon.js'
+export { Input, type InputProps } from './atoms/Input.js'
+export { Spinner, type SpinnerProps } from './atoms/Spinner.js'
+export { Tooltip, type TooltipProps } from './atoms/Tooltip.js'

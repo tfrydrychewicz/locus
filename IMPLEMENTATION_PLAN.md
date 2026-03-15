@@ -163,13 +163,13 @@
 
 | Component | Props                                              | Stories                                              | Tests                         | Done |
 | --------- | -------------------------------------------------- | ---------------------------------------------------- | ----------------------------- | ---- |
-| `Button`  | variant, size, disabled, loading, icon, onClick    | Primary, Secondary, Ghost, Danger, Disabled, Loading | Click handler, disabled state | [ ]  |
-| `Input`   | value, placeholder, onChange, error, icon          | Default, WithIcon, WithError, Disabled               | Value change, error display   | [ ]  |
-| `Badge`   | variant (default, success, warning, danger), label | All variants                                         | Renders label                 | [ ]  |
-| `Chip`    | label, color, icon, onRemove, onClick              | Entity chip, note chip, removable                    | Click, remove handlers        | [ ]  |
-| `Icon`    | name (Lucide), size, color                         | Common icons                                         | Renders SVG                   | [ ]  |
-| `Spinner` | size                                               | Small, Medium, Large                                 | Renders animation             | [ ]  |
-| `Tooltip` | content, position                                  | Top, Bottom, Left, Right                             | Shows on hover                | [ ]  |
+| `Button`  | variant, size, disabled, loading, icon, onClick    | Primary, Secondary, Ghost, Danger, Disabled, Loading | Click handler, disabled state | [x]  |
+| `Input`   | value, placeholder, onChange, error, icon          | Default, WithIcon, WithError, Disabled               | Value change, error display   | [x]  |
+| `Badge`   | variant (default, success, warning, danger), label | All variants                                         | Renders label                 | [x]  |
+| `Chip`    | label, color, icon, onRemove, onClick              | Entity chip, note chip, removable                    | Click, remove handlers        | [x]  |
+| `Icon`    | name (Lucide), size, color                         | Common icons                                         | Renders SVG                   | [x]  |
+| `Spinner` | size                                               | Small, Medium, Large                                 | Renders animation             | [x]  |
+| `Tooltip` | content, position                                  | Top, Bottom, Left, Right                             | Shows on hover                | [x]  |
 
 
 ### 1.5 Molecule Components

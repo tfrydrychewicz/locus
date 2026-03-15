@@ -1,0 +1,37 @@
+---
+description: Tailwind v4 CSS variable usage — avoid ambiguous text-[var()] for font-size
+globs: **/*.tsx
+alwaysApply: false
+---
+
+# Tailwind v4: CSS Variable Ambiguity
+
+In Tailwind v4, `text-[var(--something)]` is ambiguous — the framework cannot determine if a CSS variable is a **color** or a **font-size**, so it defaults to `color`. This causes silent rendering bugs when you intend to set font-size.
+
+## Rule
+
+Never use `text-[var(--text-*)]` for font-size. Use the theme utility instead.
+
+```tsx
+// ❌ BAD — Tailwind treats both as color, font-size never applies
+className="text-[var(--text-xs)] text-[var(--color-danger)]"
+
+// ✅ GOOD — use theme utility for font-size, arbitrary value for color
+className="text-xs text-[var(--color-danger)]"
+```
+
+## Why
+
+Theme values defined in `@theme` (e.g., `--text-xs: 11px`) automatically generate utilities (`text-xs`). Using `text-[var(--text-xs)]` bypasses theme lookup and creates an arbitrary value that Tailwind defaults to `color: var(--text-xs)` — which is invalid CSS.
+
+## Quick Reference
+
+| Intent | Correct | Wrong |
+|--------|---------|-------|
+| Font size 11px | `text-xs` | `text-[var(--text-xs)]` |
+| Font size 13px | `text-sm` | `text-[var(--text-sm)]` |
+| Font size 14px | `text-base` | `text-[var(--text-base)]` |
+| Font size 16px | `text-lg` | `text-[var(--text-lg)]` |
+| Text color | `text-[var(--color-text-primary)]` | (this is fine) |
+
+If you must use an arbitrary CSS variable for font-size, use the data type hint: `text-[length:var(--my-size)]`.
