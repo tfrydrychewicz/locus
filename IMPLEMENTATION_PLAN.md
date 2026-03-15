@@ -38,9 +38,9 @@
 
 | Task                                         | Details                                              | Tests                               | Done |
 | -------------------------------------------- | ---------------------------------------------------- | ----------------------------------- | :---: |
-| Define color tokens (light + dark)           | Semantic colors for both themes from DESIGN.md §9    | Unit: both themes export correctly  | [ ] |
-| Define spacing, typography, animation tokens | Complete token set                                   | Unit: tokens are type-safe          | [ ] |
-| Create Tailwind preset                       | `tailwind.preset.ts` with `dark:` variant support    | Build: Tailwind resolves all tokens | [ ] |
+| Define color tokens (light + dark)           | Semantic colors for both themes from DESIGN.md §9    | Unit: both themes export correctly  | [x] |
+| Define spacing, typography, animation tokens | Complete token set                                   | Unit: tokens are type-safe          | [x] |
+| Create Tailwind preset                       | `tailwind.preset.ts` with `dark:` variant support    | Build: Tailwind resolves all tokens | [x] |
 | Document tokens                              | Token catalog page in Storybook (both themes)        | Visual: token showcase renders in light + dark | [ ] |
 
 

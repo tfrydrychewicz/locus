@@ -20,7 +20,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "biome check --config-path=../.. src",
     "lint:fix": "biome check --write --config-path=../.. src",
-    "test": "vitest run",
+    "test": "vitest run --passWithNoTests",
     "clean": "rm -rf dist .turbo"
   },
   "devDependencies": {
