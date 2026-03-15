@@ -1,0 +1,39 @@
+---
+description: Run the full CI suite locally before every git push to avoid wasted CI runs
+alwaysApply: true
+---
+
+# Pre-Push Checklist
+
+Before running `git push` (or any `git push` variant), always run the full local CI pipeline first. If any step fails, fix it before pushing.
+
+## Required commands (in order)
+
+```bash
+pnpm run build       # compile all packages
+pnpm run typecheck   # TypeScript strict checks
+pnpm run lint        # Biome lint + format
+pnpm run test        # Vitest across all packages
+```
+
+Run them sequentially and stop on the first failure:
+
+```bash
+pnpm run build && pnpm run typecheck && pnpm run lint && pnpm run test
+```
+
+## Rules
+
+- **Never push with a red build.** If `build` fails locally it will fail in CI.
+- **Never push with type errors.** `typecheck` runs `tsc --noEmit` across every package.
+- **Never push with lint errors.** Biome errors will block the pre-commit hook *and* CI.
+- **Never push with failing tests.** Fix or update tests before pushing.
+- **One exception:** the local `@locus/help` and `@locus/ui` tests may fail with `ERR_REQUIRE_ESM` on Node 22 due to a jsdom/CJS incompatibility. This is a local-only issue — CI runs Node 20 where it passes. You may skip those two packages locally if *only* that error appears and all other packages pass.
+
+## i18n completeness (before significant i18n changes)
+
+```bash
+pnpm --filter @locus/i18n run test -- --reporter=verbose locale-keys
+```
+
+Run this whenever you add or change locale keys to confirm EN/PL parity.
