@@ -95,3 +95,11 @@ export const Minimal: Story = {
     bottomSection: [{ id: 'settings', icon: <Settings size={16} />, label: 'Settings' }],
   },
 }
+
+export const Collapsed: Story = {
+  args: {
+    sections: mainSections,
+    bottomSection,
+    defaultCollapsed: true,
+  },
+}

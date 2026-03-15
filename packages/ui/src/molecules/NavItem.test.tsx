@@ -37,7 +37,7 @@ describe('NavItem', () => {
 
   it('shows badge when badge > 0', () => {
     render(<NavItem icon={icon} label="Notes" badge={5} />)
-    expect(screen.getByLabelText('5 items')).toBeInTheDocument()
+    expect(screen.getByText('5 items')).toBeInTheDocument()
   })
 
   it('truncates badge at 99+', () => {
@@ -47,6 +47,17 @@ describe('NavItem', () => {
 
   it('does not show badge when badge is 0', () => {
     render(<NavItem icon={icon} label="Notes" badge={0} />)
-    expect(screen.queryByLabelText(/items/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/items/)).not.toBeInTheDocument()
+  })
+
+  it('hides label text when collapsed', () => {
+    render(<NavItem icon={icon} label="Notes" collapsed />)
+    // Label must not be visible as text node (it's in a tooltip)
+    expect(screen.queryByText('Notes')).not.toBeInTheDocument()
+  })
+
+  it('uses aria-label when collapsed', () => {
+    render(<NavItem icon={icon} label="Notes" collapsed />)
+    expect(screen.getByRole('button', { name: 'Notes' })).toBeInTheDocument()
   })
 })
