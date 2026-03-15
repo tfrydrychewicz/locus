@@ -1,0 +1,68 @@
+---
+description: React component patterns and rules for the Locus project
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# React Component Rules
+
+## Presentational / Container Pattern
+
+- Components in `packages/ui/` are **dumb** (presentational): props in, callbacks out, no side effects.
+- Components in `apps/desktop/src/containers/` are **smart**: they connect stores, invoke Tauri commands, and pass data to dumb components.
+- Never import Zustand stores, Tauri commands, or API clients inside `packages/ui/`.
+
+## Component Structure
+
+```tsx
+// ✅ GOOD: Dumb component
+interface TaskCardProps {
+  title: string
+  status: TaskStatus
+  energyLevel?: EnergyLevel
+  onStatusChange: (status: TaskStatus) => void
+  onPress: () => void
+}
+
+export function TaskCard({ title, status, energyLevel, onStatusChange, onPress }: TaskCardProps) {
+  return (/* JSX */)
+}
+```
+
+## Every UI Component MUST Have
+
+1. **Typed props interface** — exported, named `{Component}Props`
+2. **Storybook story** — co-located `{Component}.stories.tsx` with all visual states
+3. **Unit test** — co-located `{Component}.test.tsx` testing behavior with React Testing Library
+4. **No hardcoded colors/spacing** — use design tokens from `@locus/tokens` via Tailwind classes
+
+## Atomic Design Hierarchy
+
+- `atoms/`: Button, Input, Badge, Chip, Icon, Spinner, Tooltip, ProgressBar
+- `molecules/`: SearchBar, FormField, Card, TimerBlock, EmptyState
+- `organisms/`: TaskCard, NotePreview, EntityCard, InterventionCard, MeetingCard
+- `templates/`: SplitView, ModalLayout, SidebarLayout, CommandCenter
+
+Higher-level components compose lower-level ones. Never skip levels (e.g., a template should not import an atom directly without a molecule or organism in between).
+
+## Accessibility
+
+- All interactive elements have an accessible name (label, aria-label, or aria-labelledby).
+- All buttons have `type="button"` unless they submit a form.
+- Focus is visually indicated and keyboard-navigable.
+- Use semantic HTML elements (`button`, `input`, `nav`, `main`, `section`) over generic `div`.
+
+## Styling & Theming
+
+- Use Tailwind CSS utility classes. No inline styles. No CSS modules.
+- Responsive design via Tailwind breakpoints.
+- Both light and dark themes must work. Use semantic classes (`bg-surface`, `text-primary`), never raw colors.
+- Always provide `dark:` variants when using theme-dependent colors.
+- Storybook stories must render correctly in both themes.
+- Animations use `@locus/tokens` animation values. Respect `prefers-reduced-motion`.
+
+## Internationalization
+
+- No hardcoded user-facing strings. Use `t('namespace:key')` from `@locus/i18n`.
+- Feature-level organisms and templates must include a `HelpButton` with the relevant topic.
+- Storybook stories must render correctly in both English and Polish locales.

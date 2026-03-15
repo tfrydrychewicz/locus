@@ -1,0 +1,61 @@
+---
+description: Storybook standards for UI component documentation
+globs: "**/*.stories.tsx"
+alwaysApply: false
+---
+
+# Storybook Standards
+
+## Every UI Component Needs Stories
+
+Every component in `packages/ui/src/` must have a co-located `.stories.tsx` file. No exceptions.
+
+## Story Structure
+
+```tsx
+import type { Meta, StoryObj } from '@storybook/react'
+import { ComponentName } from './ComponentName'
+
+const meta: Meta<typeof ComponentName> = {
+  component: ComponentName,
+  title: 'Atoms/ComponentName',  // Match Atomic Design: Atoms/, Molecules/, Organisms/, Templates/
+  tags: ['autodocs'],
+  argTypes: {
+    // Define controls for all meaningful props
+  },
+}
+export default meta
+type Story = StoryObj<typeof ComponentName>
+
+// Export named stories for each visual state:
+export const Default: Story = { args: { /* default props */ } }
+export const Loading: Story = { args: { loading: true } }
+export const Error: Story = { args: { error: 'Something went wrong' } }
+export const Disabled: Story = { args: { disabled: true } }
+export const Empty: Story = { args: { items: [] } }
+```
+
+## Required Stories
+
+Every component must cover:
+1. **Default** — the happy path / most common state
+2. **All visual variants** — each `variant` prop value
+3. **Edge states** — loading, error, empty, disabled
+4. **Interactive states** — hover, focus, active (where applicable)
+
+## Naming Convention
+
+- File: `ComponentName.stories.tsx` (PascalCase, co-located)
+- Title: `{AtomicLevel}/{ComponentName}` (e.g., `Atoms/Button`, `Organisms/TaskCard`)
+- Story exports: PascalCase descriptive names (e.g., `PrimarySmall`, `WithError`, `EmptyState`)
+
+## Theming & Localization
+
+- All stories must render correctly in both **light** and **dark** themes. Use the Storybook theme toggle to verify.
+- All stories must render correctly in both **English** and **Polish** locales. Use the Storybook locale switcher to verify.
+- If a component displays user-facing text, all text must come from `t()` — verify by switching to Polish.
+
+## Accessibility
+
+- Enable `@storybook/addon-a11y` in all stories.
+- Fix all accessibility violations before merging.

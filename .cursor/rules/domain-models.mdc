@@ -1,0 +1,63 @@
+---
+description: Rules for domain models in @locus/core
+globs: "packages/core/**/*.ts"
+alwaysApply: false
+---
+
+# Domain Model Rules
+
+## Pure Domain
+
+- `packages/core/` has ZERO npm dependencies. Only TypeScript standard library.
+- Domain models are interfaces, not classes. Use factory functions for creation.
+- No framework imports (React, Zustand, Tauri, etc.) anywhere in this package.
+
+## Ports Are Interfaces
+
+```typescript
+// ✅ GOOD: Port as interface in packages/core/src/ports/outbound/
+export interface NoteRepository {
+  findById(id: ULID): Promise<Note | null>
+  save(note: Note): Promise<void>
+}
+
+// ❌ BAD: Concrete implementation in core
+import Database from 'better-sqlite3'
+export class SqliteNoteRepository { /* ... */ }
+```
+
+## Use Cases
+
+- One file per use case (e.g., `create-note.ts`, `search-notes.ts`).
+- Each use case is a function (or class) that accepts ports via constructor/parameter injection.
+- Use cases return `Result<T, E>` for all operations.
+
+```typescript
+// ✅ GOOD: Use case with injected ports
+export function createNote(
+  repo: NoteRepository,
+  eventStore: EventStore,
+) {
+  return async (params: CreateNoteParams): Promise<Result<Note, ValidationError>> => {
+    const validation = CreateNoteSchema.safeParse(params)
+    if (!validation.success) return err(new ValidationError(validation.error))
+
+    const note = buildNote(validation.data)
+    await repo.save(note)
+    await eventStore.append({ type: 'note.created', entityId: note.id, payload: note })
+    return ok(note)
+  }
+}
+```
+
+## Validation
+
+- All input validation uses Zod schemas defined in `packages/core/src/validation/`.
+- Schemas are the single source of truth for both TypeScript types and runtime validation.
+- Domain models may have invariants enforced in factory functions.
+
+## Events
+
+- All state changes emit domain events via `EventStore.append()`.
+- Events are typed with the `EventType` union.
+- Events are append-only — never modified or deleted.

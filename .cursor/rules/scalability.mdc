@@ -1,0 +1,47 @@
+---
+description: Scalability rules for million-note scale. Enforces pagination, indexing, and query patterns.
+alwaysApply: true
+---
+
+# Scalability Rules (Million-Note Scale)
+
+## Pagination
+
+- All list queries MUST use cursor-based (keyset) pagination. Never use OFFSET.
+- Return `Page<T>` with `{ items, cursor, totalEstimate }`.
+- Cursor values are opaque `(sort_column, id)` tuples, base64-encoded.
+- Use `sqlite_stat1` estimates or `count_cache` table for counts. Never `COUNT(*)` on large tables.
+
+```sql
+-- ✅ GOOD: Keyset pagination
+WHERE updated_at < ?cursor AND id < ?cursor_id
+ORDER BY updated_at DESC, id DESC LIMIT 50
+
+-- ❌ BAD: OFFSET pagination
+ORDER BY updated_at DESC LIMIT 50 OFFSET 50000
+```
+
+## Queries
+
+- Every query MUST be covered by an index. Run `EXPLAIN QUERY PLAN` to verify — no full table scans.
+- Use partial indexes with `WHERE` clauses for filtered queries (e.g., `WHERE archived_at IS NULL`).
+- Batch writes in transactions (max 500 rows per transaction).
+
+## Lists & UI
+
+- All list components MUST use virtualization (`react-window` or `FlashList`).
+- Never load all items into memory. Fetch page-by-page as user scrolls.
+- Show skeleton loading placeholders while fetching.
+- Debounce search inputs (300ms minimum).
+
+## Vectors
+
+- Vector tables live in a separate `vectors.db` file (ATTACH DATABASE).
+- Use IVF indexing when chunk count exceeds 100K.
+- Embedding pipeline uses a persistent queue (`embedding_queue` table) with batch processing (32 per call).
+
+## Background Processing
+
+- All AI pipelines (NER, embedding, action extraction) are async and queue-based.
+- Queues are bounded (max 1000 items). Excess items re-queued on next save.
+- Queue state persists in SQLite — survives crash and restart.

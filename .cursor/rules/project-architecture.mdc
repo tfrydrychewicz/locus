@@ -1,0 +1,37 @@
+---
+description: Core architecture rules for the Locus project. Enforces hexagonal architecture, local-first privacy, and ADHD-first design axioms.
+alwaysApply: true
+---
+
+# Locus Architecture Rules
+
+## Hexagonal Architecture
+
+- `packages/core/` has ZERO external dependencies. All I/O is abstracted behind port interfaces in `packages/core/src/ports/`.
+- Domain models in `packages/core/src/domain/` are pure data structures with no framework or library imports.
+- Use cases in `packages/core/src/use-cases/` depend only on port interfaces, never on concrete implementations.
+- Concrete implementations (SQLite repositories, AI providers, etc.) live in `apps/` or adapter packages, never in `@locus/core`.
+
+## Error Handling
+
+- Use `Result<T, E>` from `@locus/shared` for all fallible operations. Never throw exceptions for expected failures.
+- Unexpected errors (bugs) may throw. Expected errors (validation, not found, network) return `Result`.
+
+## Data Flow
+
+- All IPC payloads must be validated with Zod schemas before processing.
+- Events flow through the typed `EventEmitter` from `@locus/shared`. No untyped pub/sub.
+
+## Privacy-First
+
+- Cognitive state data, behavioral patterns, and wearable data NEVER leave the device.
+- AI API calls are opt-in and must be gated behind user-configured API keys.
+- No telemetry, no analytics, no external tracking. Log files stay local.
+
+## ADHD Design Axioms (check every feature)
+
+1. Does it externalize an executive function?
+2. Does capture require zero categorization decisions?
+3. Does it minimize the number of decisions the user must make?
+4. Is the system non-punitive? (no guilt language, no streaks that punish gaps)
+5. Does it degrade gracefully if the user ignores it for days?

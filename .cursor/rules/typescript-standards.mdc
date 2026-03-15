@@ -1,0 +1,66 @@
+---
+description: TypeScript coding standards for the Locus project
+globs: "**/*.ts"
+alwaysApply: false
+---
+
+# TypeScript Standards
+
+## Strict Mode
+
+- `strict: true` in all `tsconfig.json` files. No exceptions.
+- Never use `any`. Use `unknown` + type narrowing, generics, or explicit union types.
+- Never use `@ts-ignore` or `@ts-expect-error` without a comment explaining why and a tracking issue.
+
+## Naming
+
+- Files: `kebab-case.ts` (e.g., `note-repository.ts`, `cognitive-state.ts`)
+- Interfaces/Types: `PascalCase` (e.g., `NoteRepository`, `CognitiveState`)
+- Functions/Variables: `camelCase`
+- Constants: `SCREAMING_SNAKE_CASE` only for true compile-time constants
+- Enums: Prefer union types (`type Status = 'open' | 'done'`) over TypeScript enums
+
+## Domain Models
+
+```typescript
+// ✅ GOOD: Interface + factory function
+interface Note {
+  id: ULID
+  title: string
+  body: string
+  createdAt: DateTime
+}
+
+function createNote(params: CreateNoteParams): Note {
+  return { id: generateId(), ...params, createdAt: now() }
+}
+
+// ❌ BAD: Class with mixed concerns
+class Note {
+  constructor(private db: Database) {}
+  async save() { /* ... */ }
+}
+```
+
+## Imports
+
+- Use explicit named imports. No wildcard `import *` except for re-exports from barrel files.
+- Barrel files (`index.ts`) only at package boundaries. No barrel files inside feature modules.
+
+## Error Handling
+
+```typescript
+// ✅ GOOD: Result type for expected failures
+async function findNote(id: ULID): Promise<Result<Note, NotFoundError>> {
+  const note = await repo.findById(id)
+  if (!note) return { ok: false, error: new NotFoundError(id) }
+  return { ok: true, value: note }
+}
+
+// ❌ BAD: Throwing for expected cases
+async function findNote(id: ULID): Promise<Note> {
+  const note = await repo.findById(id)
+  if (!note) throw new Error('Not found')
+  return note
+}
+```

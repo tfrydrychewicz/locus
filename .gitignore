@@ -1,0 +1,32 @@
+# Previous design iterations (reference only, not part of this project)
+DESIGN_1.md
+DESIGN_2.md
+
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+out/
+target/
+*.app/
+
+# Tauri
+src-tauri/target/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log

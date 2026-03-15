@@ -1,0 +1,30 @@
+---
+description: Follow the project design specification in DESIGN.md as the source of truth for architecture, features, and UX
+alwaysApply: true
+---
+
+# Design Specification
+
+`DESIGN.md` in the project root contains the original design vision, architecture decisions, and UX specifications for this app.
+
+## When to Consult
+
+- Before implementing a new feature or screen, check DESIGN.md for relevant specs.
+- When making architectural decisions (new module, state management pattern, IPC channel), verify alignment with the design.
+- Do NOT re-read the entire file for small bug fixes or trivial changes.
+
+## How to Follow
+
+- Treat DESIGN.md as the default intent. If the user doesn't specify how something should work, DESIGN.md is the source of truth.
+- If the user's request contradicts DESIGN.md:
+  1. Flag the contradiction clearly at the top of the response:
+     `⚠️ DESIGN CONFLICT: [brief description]`
+  2. Proceed with the user's request — do not block on confirmation in agentic mode.
+  3. At the end of the response, suggest the specific DESIGN.md update that would reconcile the deviation.
+- If the user says "revert to design," undo the deviation and follow DESIGN.md instead.
+- If DESIGN.md is ambiguous or silent on a topic, make a reasonable choice and note that the design didn't specify.
+
+## Keeping It Current
+
+- When the user explicitly changes a design decision, suggest a specific update to DESIGN.md so it stays accurate.
+- Do NOT modify DESIGN.md without the user's approval.

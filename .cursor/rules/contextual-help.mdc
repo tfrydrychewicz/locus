@@ -1,0 +1,48 @@
+---
+description: Contextual help and documentation rules — every feature must have built-in help
+alwaysApply: true
+---
+
+# Contextual Help Rules
+
+## Every Feature Needs Help
+
+Every feature-level view or panel must include a `HelpButton` component in its header or toolbar that opens the relevant help topic.
+
+```tsx
+// ✅ GOOD — feature header includes help
+import { HelpButton } from '@locus/help'
+
+function TasksPageHeader() {
+  return (
+    <header>
+      <h1>{t('tasks:title')}</h1>
+      <HelpButton topic="tasks.gtd" />
+    </header>
+  )
+}
+
+// ❌ BAD — feature has no help entry point
+function TasksPageHeader() {
+  return <header><h1>Tasks</h1></header>
+}
+```
+
+## Help Content Structure
+
+Each help topic must include:
+1. **Quick answer** (2-3 sentences) — shown immediately in the HelpPanel
+2. **Expandable sections** — deeper details revealed on demand (progressive disclosure)
+3. **Related topics** — links to connected help articles
+4. **ADHD-specific tip** (where relevant) — practical advice for ADHD users
+
+## Help Content Must Be Localized
+
+Help articles (MDX files in `packages/help/content/`) must exist in both English (`en/`) and Polish (`pl/`). The file structure must mirror exactly.
+
+## When Adding a New Feature
+
+1. Register a help topic in `help-registry.ts`.
+2. Write the MDX help article in `en/` and `pl/`.
+3. Add a `HelpButton` to the feature's header or toolbar.
+4. Verify the help panel renders correctly in Storybook.

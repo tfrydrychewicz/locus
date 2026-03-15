@@ -1,0 +1,60 @@
+---
+description: Testing standards for the Locus project
+globs: "**/*.test.{ts,tsx}"
+alwaysApply: false
+---
+
+# Testing Standards
+
+## Test Structure
+
+- Co-locate tests next to source files: `Button.tsx` → `Button.test.tsx`
+- Use `describe` blocks grouped by function/component name.
+- Use `it` with behavior-focused descriptions: `it('marks task as done when checkbox clicked')`.
+
+## What to Test
+
+- **Domain models**: Validate creation, state transitions, business rules. Pure functions = easy tests.
+- **Use cases**: Test with mock repositories (in-memory implementations of ports). Verify correct port calls and return values.
+- **UI components**: Test user-visible behavior, not implementation details. Query by role, label, or text — never by CSS class or test ID unless necessary.
+- **Integration**: Test Tauri commands with real SQLite (in-memory mode). Test AI pipelines with fixture data and mocked AI responses.
+
+## What NOT to Test
+
+- Internal implementation details (private methods, internal state shape).
+- Framework behavior (React rendering, Zustand internals).
+- Third-party library behavior.
+
+## Patterns
+
+```tsx
+// ✅ GOOD: Test behavior
+it('calls onStatusChange with "done" when checkbox clicked', async () => {
+  const onStatusChange = vi.fn()
+  render(<TaskCard title="Test" status="active" onStatusChange={onStatusChange} onPress={vi.fn()} />)
+
+  await userEvent.click(screen.getByRole('checkbox'))
+
+  expect(onStatusChange).toHaveBeenCalledWith('done')
+})
+
+// ❌ BAD: Test implementation
+it('sets internal state to done', () => {
+  const { result } = renderHook(() => useTaskState())
+  act(() => result.current.setDone())
+  expect(result.current.state).toBe('done')
+})
+```
+
+## AI Pipeline Tests
+
+- Use fixture data (real note content) with mocked AI provider responses.
+- Snapshot test prompt templates to catch unintended changes.
+- Test fallback chains: simulate primary provider failure, verify secondary activates.
+
+## Coverage
+
+- `@locus/core`: 90%+
+- `@locus/ui`: 80%+
+- `@locus/ai`: 70%+
+- No component merges without test + story.

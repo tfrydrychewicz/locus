@@ -1,0 +1,52 @@
+---
+description: Internationalization rules — English and Polish are mandatory and must always be complete
+alwaysApply: true
+---
+
+# Internationalization (i18n) Rules
+
+## Mandatory Locales
+
+English (`en`) and Polish (`pl`) are **mandatory**. Both must be 100% complete at all times. CI fails on any missing PL key.
+
+## No Hardcoded Strings
+
+Every user-facing string must go through `t('namespace:key')` from `@locus/i18n`. This includes:
+
+- Button labels, input placeholders, tooltips
+- Error messages, success messages, empty states
+- Navigation labels, page titles, section headers
+- Notification text, intervention messages
+- Help content short descriptions
+
+```tsx
+// ✅ GOOD
+<Button>{t('common:save')}</Button>
+<EmptyState title={t('notes:emptyTitle')} description={t('notes:emptyDescription')} />
+
+// ❌ BAD
+<Button>Save</Button>
+<EmptyState title="No notes yet" description="Create your first note" />
+```
+
+## Adding New Strings
+
+1. Add the key to the appropriate `en/{namespace}.json` file first.
+2. Immediately add the Polish translation to `pl/{namespace}.json`.
+3. Use ICU MessageFormat for plurals and interpolation:
+
+```json
+// en/tasks.json
+{ "activeCount": "{count, plural, one {# task} other {# tasks}}" }
+
+// pl/tasks.json
+{ "activeCount": "{count, plural, one {# zadanie} few {# zadania} many {# zadań} other {# zadań}}" }
+```
+
+## Date & Number Formatting
+
+Use `Intl.DateTimeFormat` and `Intl.NumberFormat` with the active locale. Never hardcode date formats like `MM/DD/YYYY`.
+
+## AI Output
+
+When the user's locale is not English, AI prompts must include `Respond in {locale name}` to match the user's language.
