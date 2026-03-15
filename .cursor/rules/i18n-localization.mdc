@@ -9,31 +9,55 @@ alwaysApply: true
 
 English (`en`) and Polish (`pl`) are **mandatory**. Both must be 100% complete at all times. CI fails on any missing PL key.
 
-## No Hardcoded Strings
+## No Hardcoded Strings — Zero Exceptions
 
-Every user-facing string must go through `t('namespace:key')` from `@locus/i18n`. This includes:
+Every user-facing string **must** go through `t('namespace:key')`. This is not optional.
 
-- Button labels, input placeholders, tooltips
-- Error messages, success messages, empty states
-- Navigation labels, page titles, section headers
-- Notification text, intervention messages
-- Help content short descriptions
+**Before writing any JSX or returning any string to the user, ask:** *"Would a user see this?"* If yes, it must be translated.
+
+Strings that must always be translated:
+- Button labels, link text, tab labels (including dynamic defaults like "New Tab")
+- Input `placeholder`, `aria-label`, `title`, `alt` attributes
+- Empty state titles and descriptions
+- Error messages, success messages, loading indicators
+- Navigation labels, page/section headers, breadcrumbs
+- Confirmation dialog text, tooltip content
+- Fallback strings (e.g. `note.title || t('notes:untitled')` — not `|| 'Untitled'`)
 
 ```tsx
 // ✅ GOOD
 <Button>{t('common:save')}</Button>
+<Input placeholder={t('notes:searchPlaceholder')} />
 <EmptyState title={t('notes:emptyTitle')} description={t('notes:emptyDescription')} />
+const tab = makeTab(note, t('common:newTab'))   // dynamic default
+note.title || t('notes:untitled')               // fallback string
 
-// ❌ BAD
+// ❌ BAD — every one of these is a bug
 <Button>Save</Button>
+<Input placeholder="Search notes..." />
 <EmptyState title="No notes yet" description="Create your first note" />
+const tab = makeTab(note, 'New Tab')
+note.title || 'Untitled'
 ```
+
+## Enforcement Checklist (run before every commit)
+
+When you write or edit a `.tsx` / `.ts` file, scan for these patterns and replace every hit:
+
+| Pattern | Replace with |
+|---------|-------------|
+| `"..."` or `'...'` as JSX children | `{t('ns:key')}` |
+| `placeholder="..."` | `placeholder={t('ns:key')}` |
+| `aria-label="..."` | `aria-label={t('ns:key')}` (unless purely decorative) |
+| `title="..."` on interactive elements | `title={t('ns:key')}` |
+| `\|\| 'fallback'` for display text | `\|\| t('ns:key')` |
 
 ## Adding New Strings
 
-1. Add the key to the appropriate `en/{namespace}.json` file first.
-2. Immediately add the Polish translation to `pl/{namespace}.json`.
-3. Use ICU MessageFormat for plurals and interpolation:
+1. Add the key to the appropriate `packages/i18n/src/locales/en/{namespace}.json` first.
+2. **Immediately** add the Polish translation to `pl/{namespace}.json` in the same response.
+3. Use ICU MessageFormat for plurals and interpolation.
+4. Rebuild `@locus/i18n` (`pnpm --filter @locus/i18n build`) so TypeScript types update.
 
 ```json
 // en/tasks.json
@@ -45,7 +69,7 @@ Every user-facing string must go through `t('namespace:key')` from `@locus/i18n`
 
 ## Date & Number Formatting
 
-Use `Intl.DateTimeFormat` and `Intl.NumberFormat` with the active locale. Never hardcode date formats like `MM/DD/YYYY`.
+Use `Intl.DateTimeFormat` and `Intl.NumberFormat` with the active locale. Never hardcode date formats like `MM/DD/YYYY` or timestamp strings.
 
 ## AI Output
 
