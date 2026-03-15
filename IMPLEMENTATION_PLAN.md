@@ -205,9 +205,9 @@
 
 | Task                      | Details                                         | Tests                                | Done |
 | ------------------------- | ----------------------------------------------- | ------------------------------------ | ---- |
-| Sidebar component         | Navigation items, active state, icons           | Storybook: all states (light + dark) | [ ]  |
-| Basic routing             | Today, Notes, Settings pages (shell only)       | Navigation works                     | [ ]  |
-| Command Palette (`Cmd+K`) | Fuzzy search over commands; note search via IPC | Component: filters, keyboard nav     | [ ]  |
+| Sidebar component         | Navigation items, active state, icons           | Storybook: all states (light + dark) | [x]  |
+| Basic routing             | Today, Notes, Settings pages (shell only)       | Navigation works                     | [x]  |
+| Command Palette (`Cmd+K`) | Fuzzy search over commands; note search via IPC | Component: filters, keyboard nav     | [x]  |
 
 
 ### 1.8 Settings Shell

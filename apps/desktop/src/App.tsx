@@ -1,5 +1,24 @@
-import { useCallback, useState } from 'react'
+import { useTranslation } from '@locus/i18n'
+import { type NavItemConfig, Sidebar } from '@locus/ui'
+import {
+  Calendar,
+  FileText,
+  Folder,
+  MessageSquare,
+  Scale,
+  Search,
+  Settings,
+  Target,
+  Trash2,
+  User,
+  Users,
+  Zap,
+} from 'lucide-react'
+import { useCallback, useEffect, useState } from 'react'
+import { CommandPalette, type PageId } from './components/CommandPalette.js'
 import { NotesPage } from './pages/NotesPage.js'
+import { SettingsPage } from './pages/SettingsPage.js'
+import { TodayPage } from './pages/TodayPage.js'
 import type { Note } from './tauri/commands.js'
 import type { PaneState, TabState } from './view-pane/types.js'
 
@@ -21,8 +40,11 @@ function makeTab(note?: Note): TabState {
 }
 
 export function App() {
+  const { t } = useTranslation('common')
+  const [activePage, setActivePage] = useState<PageId>('today')
   const [tabs, setTabs] = useState<TabState[]>(() => [makeTab()])
   const [activeTabId, setActiveTabId] = useState<string | null>(() => tabs[0]?.id ?? null)
+  const [paletteOpen, setPaletteOpen] = useState(false)
 
   const activeTab = tabs.find((t) => t.id === activeTabId) ?? tabs[0] ?? null
 
@@ -33,10 +55,26 @@ export function App() {
     [activeTabId],
   )
 
+  const openNoteInTab = useCallback(
+    (note: Note) => {
+      // Switch to notes page and open note in current tab
+      setActivePage('notes')
+      setTabs((prev) =>
+        prev.map((t) => {
+          if (t.id !== activeTabId) return t
+          const pane = makePane({ type: 'note', noteId: note.id }, note.title || 'Untitled')
+          return { ...t, label: note.title || 'Untitled', panes: [pane], activePaneId: pane.id }
+        }),
+      )
+    },
+    [activeTabId],
+  )
+
   const openInNewTab = useCallback((note: Note) => {
     const tab = makeTab(note)
     setTabs((prev) => [...prev, tab])
     setActiveTabId(tab.id)
+    setActivePage('notes')
   }, [])
 
   const closeTab = useCallback(
@@ -59,6 +97,73 @@ export function App() {
     [activeTabId],
   )
 
+  // Cmd+K → open command palette
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.metaKey && e.key === 'k') {
+        e.preventDefault()
+        setPaletteOpen((o) => !o)
+      }
+      if (e.key === 'Escape') {
+        setPaletteOpen(false)
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
+
+  // Build sidebar items
+  const mainSections: NavItemConfig[][] = [
+    [
+      {
+        id: 'today',
+        icon: <Zap size={16} />,
+        label: t('nav.today'),
+        active: activePage === 'today',
+      },
+      {
+        id: 'notes',
+        icon: <FileText size={16} />,
+        label: t('nav.notes'),
+        active: activePage === 'notes',
+      },
+    ],
+    [
+      { id: 'people', icon: <User size={16} />, label: t('nav.people'), disabled: true },
+      { id: 'projects', icon: <Folder size={16} />, label: t('nav.projects'), disabled: true },
+      { id: 'team', icon: <Users size={16} />, label: t('nav.team'), disabled: true },
+      { id: 'decisions', icon: <Scale size={16} />, label: t('nav.decisions'), disabled: true },
+      { id: 'okrs', icon: <Target size={16} />, label: t('nav.okrs'), disabled: true },
+    ],
+    [
+      { id: 'calendar', icon: <Calendar size={16} />, label: t('nav.calendar'), disabled: true },
+      {
+        id: 'search',
+        icon: <Search size={16} />,
+        label: t('nav.search'),
+        active: activePage === 'search',
+      },
+      { id: 'trash', icon: <Trash2 size={16} />, label: t('nav.trash'), disabled: true },
+    ],
+  ]
+
+  const bottomSection: NavItemConfig[] = [
+    { id: 'askAi', icon: <MessageSquare size={16} />, label: t('nav.askAi'), disabled: true },
+    {
+      id: 'settings',
+      icon: <Settings size={16} />,
+      label: t('nav.settings'),
+      active: activePage === 'settings',
+    },
+  ]
+
+  const handleNavClick = useCallback((id: string) => {
+    const navigable: PageId[] = ['today', 'notes', 'settings', 'search']
+    if (navigable.includes(id as PageId)) {
+      setActivePage(id as PageId)
+    }
+  }, [])
+
   return (
     <div className="flex h-full flex-col">
       {/* ── Top bar ── */}
@@ -72,10 +177,10 @@ export function App() {
         </span>
 
         {/* Separator */}
-        <div className="h-4 w-px shrink-0 bg-[var(--color-border)]" />
+        <div className="h-4 w-px shrink-0 bg-[var(--color-border)]" aria-hidden="true" />
 
-        {/* Tab list */}
-        <div className="flex min-w-0 flex-1 items-center gap-0 overflow-x-auto">
+        {/* Tabs — only meaningful on notes page */}
+        <div className="flex min-w-0 flex-1 items-center overflow-x-auto">
           {tabs.map((tab) => {
             const isActive = tab.id === activeTabId
             return (
@@ -90,7 +195,10 @@ export function App() {
                       ? 'bg-[var(--color-bg-elevated)] font-medium text-[var(--color-text-primary)]'
                       : 'text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]',
                   ].join(' ')}
-                  onClick={() => setActiveTabId(tab.id)}
+                  onClick={() => {
+                    setActiveTabId(tab.id)
+                    setActivePage('notes')
+                  }}
                 >
                   {tab.label}
                 </button>
@@ -122,18 +230,62 @@ export function App() {
             const tab = makeTab()
             setTabs((prev) => [...prev, tab])
             setActiveTabId(tab.id)
+            setActivePage('notes')
           }}
         >
           +
         </button>
+
+        {/* Cmd+K hint */}
+        <button
+          type="button"
+          aria-label="Open command palette"
+          title="Command palette (⌘K)"
+          className="mr-3 flex shrink-0 items-center gap-1 rounded border border-[var(--color-border)] px-2 py-0.5 text-[11px] text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)]"
+          onClick={() => setPaletteOpen(true)}
+        >
+          <Search size={11} aria-hidden />
+          <span>⌘K</span>
+        </button>
       </header>
 
-      {/* ── Main content ── */}
-      <main className="flex min-h-0 flex-1 flex-col">
-        {activeTab && (
-          <NotesPage tab={activeTab} onTabChange={updateActiveTab} onOpenInNewTab={openInNewTab} />
-        )}
-      </main>
+      {/* ── Body: Sidebar + Page ── */}
+      <div className="flex min-h-0 flex-1">
+        <Sidebar
+          sections={mainSections}
+          bottomSection={bottomSection}
+          onItemClick={handleNavClick}
+        />
+
+        <main className="flex min-h-0 flex-1 flex-col overflow-hidden">
+          {activePage === 'today' && <TodayPage />}
+          {activePage === 'notes' && activeTab && (
+            <NotesPage
+              tab={activeTab}
+              onTabChange={updateActiveTab}
+              onOpenInNewTab={openInNewTab}
+            />
+          )}
+          {activePage === 'settings' && <SettingsPage />}
+          {activePage === 'search' && (
+            <div className="flex h-full items-center justify-center text-sm text-[var(--color-text-muted)]">
+              {t('search.placeholder', { defaultValue: 'Search coming soon…' })}
+            </div>
+          )}
+        </main>
+      </div>
+
+      {/* ── Command Palette ── */}
+      {paletteOpen && (
+        <CommandPalette
+          onNavigate={(page) => {
+            setActivePage(page)
+            setPaletteOpen(false)
+          }}
+          onOpenNote={openNoteInTab}
+          onClose={() => setPaletteOpen(false)}
+        />
+      )}
     </div>
   )
 }

@@ -74,5 +74,35 @@
     "save": "Save",
     "discard": "Discard",
     "cancel": "Cancel"
+  },
+  "nav": {
+    "today": "Today",
+    "notes": "Notes",
+    "tasks": "Tasks",
+    "calendar": "Calendar",
+    "search": "Search",
+    "trash": "Trash",
+    "askAi": "Ask AI",
+    "settings": "Settings",
+    "people": "People",
+    "projects": "Projects",
+    "team": "Team",
+    "decisions": "Decisions",
+    "okrs": "OKRs"
+  },
+  "commandPalette": {
+    "placeholder": "Search commands and notes…",
+    "noResults": "No results found",
+    "sections": {
+      "commands": "Commands",
+      "notes": "Notes"
+    },
+    "commands": {
+      "goToToday": "Go to Today",
+      "goToNotes": "Go to Notes",
+      "goToSettings": "Go to Settings",
+      "newNote": "New Note",
+      "goToSearch": "Go to Search"
+    }
   }
 }

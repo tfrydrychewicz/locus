@@ -74,5 +74,35 @@
     "save": "Zapisz",
     "discard": "Odrzuć",
     "cancel": "Anuluj"
+  },
+  "nav": {
+    "today": "Dziś",
+    "notes": "Notatki",
+    "tasks": "Zadania",
+    "calendar": "Kalendarz",
+    "search": "Szukaj",
+    "trash": "Kosz",
+    "askAi": "Zapytaj AI",
+    "settings": "Ustawienia",
+    "people": "Osoby",
+    "projects": "Projekty",
+    "team": "Zespół",
+    "decisions": "Decyzje",
+    "okrs": "OKR-y"
+  },
+  "commandPalette": {
+    "placeholder": "Szukaj poleceń i notatek…",
+    "noResults": "Brak wyników",
+    "sections": {
+      "commands": "Polecenia",
+      "notes": "Notatki"
+    },
+    "commands": {
+      "goToToday": "Przejdź do Dziś",
+      "goToNotes": "Przejdź do Notatek",
+      "goToSettings": "Przejdź do Ustawień",
+      "newNote": "Nowa notatka",
+      "goToSearch": "Przejdź do Szukaj"
+    }
   }
 }
