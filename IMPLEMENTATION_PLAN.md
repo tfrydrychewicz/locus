@@ -262,13 +262,13 @@
 
 | Task                                             | Details                                                            | Tests                                       | Done |
 | ------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------- | ---- |
-| `Entity`, `EntityType` domain models             | Interfaces + validation + field type system (incl. computed_query) | Unit: creation, field validation            | [ ]  |
-| `FieldDefinition` type system                    | All 9 field types including `computed_query` with LQL expression   | Unit: field type validation                 | [ ]  |
-| `EntityRepository`, `EntityTypeRepository` ports | CRUD + search + mention queries + computed field evaluation        | — (ports)                                   | [ ]  |
-| Entity use cases                                 | CRUD, search, trash/restore, hard delete                           | Unit: each use case                         | [ ]  |
-| `EntityMention`, `NoteRelation` models           | Mention types, relation types                                      | Unit: creation                              | [ ]  |
-| LQL parser (`@locus/core/lql`)                   | Parse LQL expressions to AST; validate syntax and entity type refs | Unit: valid/invalid queries parse           | [ ]  |
-| LQL evaluator                                    | Evaluate AST against entity repository; return matching entities   | Integration: queries return correct results | [ ]  |
+| `Entity`, `EntityType` domain models             | Interfaces + validation + field type system (incl. computed_query) | Unit: creation, field validation            | [x]  |
+| `FieldDefinition` type system                    | All 9 field types including `computed_query` with LQL expression   | Unit: field type validation                 | [x]  |
+| `EntityRepository`, `EntityTypeRepository` ports | CRUD + search + mention queries + computed field evaluation        | — (ports)                                   | [x]  |
+| Entity use cases                                 | CRUD, search, trash/restore, hard delete                           | Unit: each use case                         | [x]  |
+| `EntityMention`, `NoteRelation` models           | Mention types, relation types                                      | Unit: creation                              | [x]  |
+| LQL parser (`@locus/core/lql`)                   | Parse LQL expressions to AST; validate syntax and entity type refs | Unit: valid/invalid queries parse           | [x]  |
+| LQL evaluator                                    | Evaluate AST against entity repository; return matching entities   | Integration: queries return correct results | [x]  |
 
 
 ### 2.2 Data Layer — Entities
