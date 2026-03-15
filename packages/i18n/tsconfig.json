@@ -1,0 +1,10 @@
+{
+  "extends": "../config/tsconfig.react.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "resolveJsonModule": true
+  },
+  "include": ["src"]
+}

@@ -1,0 +1,26 @@
+{
+  "extends": "./packages/config/tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@locus/core": ["packages/core/src"],
+      "@locus/ui": ["packages/ui/src"],
+      "@locus/tokens": ["packages/tokens/src"],
+      "@locus/shared": ["packages/shared/src"],
+      "@locus/i18n": ["packages/i18n/src"],
+      "@locus/help": ["packages/help/src"],
+      "@locus/config": ["packages/config"]
+    }
+  },
+  "references": [
+    { "path": "packages/shared" },
+    { "path": "packages/tokens" },
+    { "path": "packages/core" },
+    { "path": "packages/ui" },
+    { "path": "packages/i18n" },
+    { "path": "packages/help" },
+    { "path": "packages/config" }
+  ],
+  "include": [],
+  "exclude": ["node_modules", "dist"]
+}

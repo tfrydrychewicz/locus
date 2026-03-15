@@ -25,12 +25,12 @@
 
 | Task                      | Details                                                                                 | Tests                             | Done |
 | ------------------------- | --------------------------------------------------------------------------------------- | --------------------------------- | :---: |
-| Initialize pnpm workspace | `pnpm-workspace.yaml`, root `package.json`, `.npmrc`                                    | CI: `pnpm install` succeeds       | [ ] |
-| Configure Turborepo       | `turbo.json` with `build`, `test`, `lint`, `typecheck` pipelines                        | CI: `turbo run build` succeeds    | [ ] |
-| Create package scaffolds  | `packages/core`, `packages/ui`, `packages/tokens`, `packages/shared`, `packages/i18n`, `packages/help`, `packages/config` | Each package builds independently | [ ] |
-| TypeScript config         | `tsconfig.base.json` with strict mode; per-package configs extending base               | `turbo run typecheck` passes      | [ ] |
-| Biome config              | `biome.json` in `packages/config`; shared across all packages                           | `turbo run lint` passes           | [ ] |
-| Git hooks                 | Husky + lint-staged: typecheck + lint on pre-commit                                     | Commit with errors fails          | [ ] |
+| Initialize pnpm workspace | `pnpm-workspace.yaml`, root `package.json`, `.npmrc`                                    | CI: `pnpm install` succeeds       | [x] |
+| Configure Turborepo       | `turbo.json` with `build`, `test`, `lint`, `typecheck` pipelines                        | CI: `turbo run build` succeeds    | [x] |
+| Create package scaffolds  | `packages/core`, `packages/ui`, `packages/tokens`, `packages/shared`, `packages/i18n`, `packages/help`, `packages/config` | Each package builds independently | [x] |
+| TypeScript config         | `tsconfig.base.json` with strict mode; per-package configs extending base               | `turbo run typecheck` passes      | [x] |
+| Biome config              | `biome.json` in `packages/config`; shared across all packages                           | `turbo run lint` passes           | [x] |
+| Git hooks                 | Husky + lint-staged: typecheck + lint on pre-commit                                     | Commit with errors fails          | [x] |
 
 
 ### 0.2 Design Token Package (`@locus/tokens`)
