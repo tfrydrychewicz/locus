@@ -81,6 +81,7 @@
   "nav": {
     "today": "Today",
     "notes": "Notes",
+    "entities": "Entities",
     "tasks": "Tasks",
     "calendar": "Calendar",
     "search": "Search",
@@ -103,6 +104,7 @@
     "commands": {
       "goToToday": "Go to Today",
       "goToNotes": "Go to Notes",
+      "goToEntities": "Go to Entities",
       "goToSettings": "Go to Settings",
       "newNote": "New Note",
       "goToSearch": "Go to Search"

@@ -314,13 +314,13 @@
 
 | Component              | Details                                                                        | Stories                      | Tests                    | Done |
 | ---------------------- | ------------------------------------------------------------------------------ | ---------------------------- | ------------------------ | ---- |
-| `EntityList`           | Entity list panel with type filter, search, sort                               | Filtered, Empty, Loading     | Filter + sort behavior   | [ ]  |
-| `EntityDetail`         | Entity form with dynamic fields from schema (incl. computed fields)            | Person, Project, Custom Type | Field rendering, save    | [ ]  |
-| `ComputedFieldDisplay` | Read-only entity chip list rendered from LQL query results                     | Loading, WithResults, Empty  | Renders entity chips     | [ ]  |
-| `QueryFieldEditor`     | LQL editor with syntax highlighting + autocomplete for entity types            | Empty, WithQuery, WithError  | Validates syntax         | [ ]  |
-| `EntityTypeModal`      | Create/edit entity types with field schema builder (incl. computed_query type) | Create, Edit                 | Field add/remove/reorder | [ ]  |
-| `EntityMentionPopup`   | Info popup on @mention click                                                   | Active, Trashed              | Shows entity info        | [ ]  |
-| `NoteLinkPopup`        | Info popup on [[link]] click                                                   | Active, Archived             | Shows note info          | [ ]  |
+| `EntityList`           | Entity list panel with type filter, search, sort                               | Filtered, Empty, Loading     | Filter + sort behavior   | [x]  |
+| `EntityDetail`         | Entity form with dynamic fields from schema (incl. computed fields)            | Person, Project, Custom Type | Field rendering, save    | [x]  |
+| `ComputedFieldDisplay` | Read-only entity chip list rendered from LQL query results                     | Loading, WithResults, Empty  | Renders entity chips     | [x]  |
+| `QueryFieldEditor`     | LQL editor with syntax highlighting + autocomplete for entity types            | Empty, WithQuery, WithError  | Validates syntax         | [x]  |
+| `EntityTypeModal`      | Create/edit entity types with field schema builder (incl. computed_query type) | Create, Edit                 | Field add/remove/reorder | [x]  |
+| `EntityMentionPopup`   | Info popup on @mention click                                                   | Active, Trashed              | Shows entity info        | [x]  |
+| `NoteLinkPopup`        | Info popup on [[link]] click                                                   | Active, Archived             | Shows note info          | [x]  |
 
 
 ### 2.6 Backlinks & Related Notes

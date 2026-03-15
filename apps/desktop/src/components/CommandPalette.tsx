@@ -1,10 +1,10 @@
 import { useTranslation } from '@locus/i18n'
-import { FileText, Plus, Search, Settings, Zap } from 'lucide-react'
+import { Database, FileText, Plus, Search, Settings, Zap } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Note } from '../tauri/commands.js'
 import { notesCreate, notesSearch } from '../tauri/commands.js'
 
-export type PageId = 'today' | 'notes' | 'settings' | 'search'
+export type PageId = 'today' | 'notes' | 'settings' | 'search' | 'entities'
 
 interface CommandItem {
   id: string
@@ -77,6 +77,16 @@ export function CommandPalette({ onNavigate, onOpenNote, onClose }: CommandPalet
       section: 'commands',
       action: () => {
         onNavigate('notes')
+        onClose()
+      },
+    },
+    {
+      id: 'go-entities',
+      label: t('commandPalette.commands.goToEntities'),
+      icon: <Database size={15} />,
+      section: 'commands',
+      action: () => {
+        onNavigate('entities')
         onClose()
       },
     },

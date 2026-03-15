@@ -4,20 +4,17 @@ import { type NavItemConfig, Sidebar } from '@locus/ui'
 import {
   Calendar,
   FileText,
-  Folder,
   MessageSquare,
   PanelLeft,
-  Scale,
   Search,
   Settings,
-  Target,
   Trash2,
-  User,
   Users,
   Zap,
 } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
 import { CommandPalette, type PageId } from './components/CommandPalette.js'
+import { EntitiesPage } from './pages/EntitiesPage.js'
 import { NotesPage } from './pages/NotesPage.js'
 import { SettingsPage } from './pages/SettingsPage.js'
 import { TodayPage } from './pages/TodayPage.js'
@@ -137,11 +134,12 @@ export function App() {
       },
     ],
     [
-      { id: 'people', icon: <User size={16} />, label: t('nav.people'), disabled: true },
-      { id: 'projects', icon: <Folder size={16} />, label: t('nav.projects'), disabled: true },
-      { id: 'team', icon: <Users size={16} />, label: t('nav.team'), disabled: true },
-      { id: 'decisions', icon: <Scale size={16} />, label: t('nav.decisions'), disabled: true },
-      { id: 'okrs', icon: <Target size={16} />, label: t('nav.okrs'), disabled: true },
+      {
+        id: 'entities',
+        icon: <Users size={16} />,
+        label: t('nav.entities'),
+        active: activePage === 'entities',
+      },
     ],
     [
       { id: 'calendar', icon: <Calendar size={16} />, label: t('nav.calendar'), disabled: true },
@@ -166,7 +164,7 @@ export function App() {
   ]
 
   const handleNavClick = useCallback((id: string) => {
-    const navigable: PageId[] = ['today', 'notes', 'settings', 'search']
+    const navigable: PageId[] = ['today', 'notes', 'settings', 'search', 'entities']
     if (navigable.includes(id as PageId)) {
       setActivePage(id as PageId)
     }
@@ -291,6 +289,7 @@ export function App() {
               onOpenInNewTab={openInNewTab}
             />
           )}
+          {activePage === 'entities' && <EntitiesPage />}
           {activePage === 'settings' && <SettingsPage />}
           {activePage === 'search' && (
             <div className="flex h-full flex-col">

@@ -2,6 +2,7 @@ import aiEn from './locales/en/ai.json'
 import calendarEn from './locales/en/calendar.json'
 import cognitiveEn from './locales/en/cognitive.json'
 import commonEn from './locales/en/common.json'
+import entitiesEn from './locales/en/entities.json'
 import helpEn from './locales/en/help.json'
 import notesEn from './locales/en/notes.json'
 import searchEn from './locales/en/search.json'
@@ -11,6 +12,7 @@ import aiPl from './locales/pl/ai.json'
 import calendarPl from './locales/pl/calendar.json'
 import cognitivePl from './locales/pl/cognitive.json'
 import commonPl from './locales/pl/common.json'
+import entitiesPl from './locales/pl/entities.json'
 import helpPl from './locales/pl/help.json'
 import notesPl from './locales/pl/notes.json'
 import searchPl from './locales/pl/search.json'
@@ -29,6 +31,7 @@ export const resources: Record<SupportedLocale, LocusResources> = {
     settings: settingsEn,
     cognitive: cognitiveEn,
     help: helpEn,
+    entities: entitiesEn,
   },
   pl: {
     common: commonPl,
@@ -40,5 +43,6 @@ export const resources: Record<SupportedLocale, LocusResources> = {
     settings: settingsPl,
     cognitive: cognitivePl,
     help: helpPl,
+    entities: entitiesPl,
   },
 }

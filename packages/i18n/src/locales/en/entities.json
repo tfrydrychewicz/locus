@@ -1,0 +1,65 @@
+{
+  "title": "Entities",
+  "searchPlaceholder": "Search entities…",
+  "allTypes": "All types",
+  "emptyTitle": "No entities yet",
+  "emptyDescription": "Create your first entity to start building your knowledge graph.",
+  "emptySearchTitle": "No results",
+  "emptySearchDescription": "No entities match your search.",
+  "newEntity": "New entity",
+  "untitled": "Untitled",
+  "trashedBadge": "Trashed",
+  "fields": {
+    "name": "Name",
+    "type": "Type",
+    "createdAt": "Created",
+    "updatedAt": "Updated"
+  },
+  "fieldTypes": {
+    "text": "Text",
+    "number": "Number",
+    "date": "Date",
+    "boolean": "Boolean",
+    "url": "URL",
+    "email": "Email",
+    "enum": "Select",
+    "relation": "Relation",
+    "computed_query": "Computed query"
+  },
+  "typeModal": {
+    "createTitle": "New entity type",
+    "editTitle": "Edit type: {name}",
+    "nameLabel": "Display name",
+    "namePlaceholder": "e.g. Contact",
+    "slugLabel": "Slug (unique identifier)",
+    "slugPlaceholder": "e.g. contact",
+    "iconLabel": "Icon (emoji)",
+    "colorLabel": "Color",
+    "fieldsLabel": "Fields",
+    "addField": "Add field",
+    "fieldIdLabel": "ID",
+    "fieldLabelLabel": "Label",
+    "fieldTypeLabel": "Type",
+    "removeField": "Remove",
+    "builtInWarning": "Built-in entity types cannot be modified here.",
+    "fieldIdHint": "Lowercase letters and underscores only"
+  },
+  "queryEditor": {
+    "placeholder": "e.g. entity_type = 'person' and name contains 'alice'",
+    "validSuffix": "Valid",
+    "syntaxError": "Syntax error"
+  },
+  "computedField": {
+    "loading": "Running query…",
+    "empty": "No matching entities",
+    "error": "Query error: {message}"
+  },
+  "mention": {
+    "openEntity": "Open entity",
+    "trashedNotice": "This entity has been trashed."
+  },
+  "noteLink": {
+    "openNote": "Open note",
+    "archivedNotice": "This note has been archived."
+  }
+}

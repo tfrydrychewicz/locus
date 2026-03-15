@@ -243,6 +243,115 @@ const content: HelpContentMap = {
   },
 }
 
+const entityContent: HelpContentMap = {
+  en: {
+    'entities/overview': {
+      title: 'Entities & Knowledge Base',
+      quickAnswer:
+        'Entities are structured, persistent records — people, projects, decisions, and more — that link to your notes and each other, building a context web for your ADHD brain.',
+      sections: [
+        {
+          heading: 'What are entities?',
+          content:
+            'Entities are pieces of knowledge with a defined structure. Each belongs to a type (e.g. Person, Project) and has a set of fields tailored to that type. Unlike notes — free-form and unstructured — entities have predictable attributes that make filtering, searching, and summarising easy.',
+        },
+        {
+          heading: 'How to use entities',
+          content:
+            'Type @ in a note to mention an entity — the link is created automatically. On the Entities page, browse by type, search, and edit field values. Computed fields automatically collect related entities using LQL queries.',
+        },
+        {
+          heading: 'Entity types and fields',
+          content:
+            'Built-in types (Person, Project, Team, Decision, OKR) are ready to use. You can also create custom types with any fields you need — text, number, date, select lists, and even computed fields that gather entities matching an LQL query.',
+        },
+      ],
+      adhdTip:
+        'Instead of trying to categorise everything upfront — start by tagging people and projects with @mentions while you write. Structure will emerge naturally.',
+    },
+    'entities/types': {
+      title: 'Entity Types',
+      quickAnswer:
+        'Entity types define the structure and fields for a category of knowledge. Built-in types cover most needs; create custom types for specialised requirements.',
+      sections: [
+        {
+          heading: 'Built-in types',
+          content:
+            'Locus ships with five built-in types: Person, Project, Team, Decision, and OKR. They come with sensible fields and cannot be deleted, but you can extend the system with custom types.',
+        },
+        {
+          heading: 'Creating a custom type',
+          content:
+            'Open the Entities page and use the manage types button. Give the type a name, an emoji icon, and a colour, then add fields: text, number, date, select, relation, or computed (LQL).',
+        },
+        {
+          heading: 'Computed fields (LQL)',
+          content:
+            'Computed fields dynamically gather entities matching an LQL query. For example, a "Members" field on a Project type might use entity_type = \'person\' and team = {this}, automatically listing all assigned people. {this} refers to the current entity.',
+        },
+      ],
+      adhdTip:
+        "Don't create too many fields at once — start with 2-3 most important ones. Adding fields is easy at any time, and fewer required fields = less friction when creating entities.",
+    },
+  },
+  pl: {
+    'entities/overview': {
+      title: 'Encje i baza wiedzy',
+      quickAnswer:
+        'Encje to trwałe rekordy wiedzy – osoby, projekty, decyzje i inne – które można łączyć z notatkami i ze sobą nawzajem, budując siatkę kontekstu dla mózgu z ADHD.',
+      sections: [
+        {
+          heading: 'Czym są encje?',
+          content:
+            'Encje to elementy wiedzy z określoną strukturą: każda należy do typu (np. Osoba, Projekt) i ma zestaw pól dopasowany do danego typu. W odróżnieniu od notatek – swobodnych i nieustrukturyzowanych – encje mają przewidywalne atrybuty, co ułatwia filtrowanie, wyszukiwanie i tworzenie zestawień.',
+        },
+        {
+          heading: 'Jak korzystać z encji',
+          content:
+            'Wpisz @ w notatce, aby wspomnieć encję – powiązanie jest tworzone automatycznie. Na stronie Encje przeglądaj je według typu, wyszukuj i edytuj pola. Pola obliczeniowe automatycznie zbierają powiązane encje za pomocą zapytań LQL.',
+        },
+        {
+          heading: 'Typy encji i pola',
+          content:
+            'Wbudowane typy (Osoba, Projekt, Zespół, Decyzja, OKR) można od razu używać. Możesz też tworzyć własne typy z dowolnymi polami – tekstowymi, liczbowymi, datami, listami wyboru, a nawet polami obliczeniowymi zbierającymi encje spełniające zapytanie LQL.',
+        },
+      ],
+      adhdTip:
+        'Zamiast próbować wszystko skategoryzować od razu – zacznij od oznaczania ludzi i projektów przez @wzmianki podczas pisania. Struktura wyłoni się naturalnie.',
+    },
+    'entities/types': {
+      title: 'Typy encji',
+      quickAnswer:
+        'Typy encji definiują strukturę i pola dla kategorii wiedzy. Wbudowane typy zaspokajają większość potrzeb; możesz tworzyć własne dla specyficznych wymagań.',
+      sections: [
+        {
+          heading: 'Wbudowane typy',
+          content:
+            'Locus zawiera pięć wbudowanych typów: Osoba, Projekt, Zespół, Decyzja i OKR. Mają one odpowiednie pola i nie można ich usunąć, ale można rozszerzać o niestandardowe typy.',
+        },
+        {
+          heading: 'Tworzenie własnego typu',
+          content:
+            'Otwórz stronę Encje i użyj przycisku zarządzania typami. Nadaj typowi nazwę, emoji-ikonę i kolor, a następnie dodaj pola: tekstowe, liczbowe, daty, listy wyboru, relacje lub pola obliczeniowe (LQL).',
+        },
+        {
+          heading: 'Pola obliczeniowe (LQL)',
+          content:
+            'Pola obliczeniowe dynamicznie zbierają encje pasujące do zapytania LQL. Na przykład pole "Członkowie" w Projekcie może mieć zapytanie entity_type = \'person\' and team = {this}, co automatycznie wyświetla wszystkich przypisanych. {this} odnosi się do aktualnej encji.',
+        },
+      ],
+      adhdTip:
+        'Nie twórz zbyt wielu pól od razu – zacznij od 2-3 najważniejszych. Dodawanie pól jest łatwe w każdej chwili, a mniej pól do wypełnienia = mniejsze opory przed tworzeniem encji.',
+    },
+  },
+}
+
+// Merge entity content into the main content map
+for (const locale of Object.keys(entityContent)) {
+  if (!content[locale]) content[locale] = {}
+  Object.assign(content[locale], entityContent[locale])
+}
+
 export function getHelpContent(topicId: HelpTopicId, locale: string): HelpArticle | null {
   // Content is keyed by the topic's file path (e.g. 'notes/editor'), not the topic ID
   const file = getHelpTopic(topicId).file

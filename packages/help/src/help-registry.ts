@@ -93,6 +93,20 @@ const helpTopics = {
     namespace: 'help',
     file: 'shortcuts',
   },
+  'entities.overview': {
+    title: 'Entities & Knowledge Base',
+    titleKey: 'help:topics.entities',
+    namespace: 'entities',
+    file: 'entities/overview',
+    relatedTopics: ['entities.types', 'notes.mentions'],
+  },
+  'entities.types': {
+    title: 'Entity Types',
+    titleKey: 'help:topics.entities',
+    namespace: 'entities',
+    file: 'entities/types',
+    relatedTopics: ['entities.overview'],
+  },
 } as const satisfies Record<string, HelpTopic>
 
 export type HelpTopicId = keyof typeof helpTopics

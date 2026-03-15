@@ -81,6 +81,7 @@
   "nav": {
     "today": "Dziś",
     "notes": "Notatki",
+    "entities": "Encje",
     "tasks": "Zadania",
     "calendar": "Kalendarz",
     "search": "Szukaj",
@@ -103,6 +104,7 @@
     "commands": {
       "goToToday": "Przejdź do Dziś",
       "goToNotes": "Przejdź do Notatek",
+      "goToEntities": "Przejdź do Encji",
       "goToSettings": "Przejdź do Ustawień",
       "newNote": "Nowa notatka",
       "goToSearch": "Przejdź do Szukaj"

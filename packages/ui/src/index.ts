@@ -5,6 +5,35 @@ export { Icon, type IconProps } from './atoms/Icon.js'
 export { Input, type InputProps } from './atoms/Input.js'
 export { Spinner, type SpinnerProps } from './atoms/Spinner.js'
 export { Tooltip, type TooltipProps } from './atoms/Tooltip.js'
+export {
+  ComputedFieldDisplay,
+  type ComputedFieldDisplayProps,
+  EntityDetail,
+  type EntityDetailProps,
+  EntityItem,
+  type EntityItemProps,
+  EntityList,
+  type EntityListProps,
+  EntityMentionPopup,
+  type EntityMentionPopupProps,
+  type EntityTypeFormData,
+  EntityTypeModal,
+  type EntityTypeModalProps,
+  type EnumOption,
+  type FieldDef,
+  type FieldType,
+  type FieldValues,
+  NoteLinkPopup,
+  type NoteLinkPopupProps,
+  PRESET_COLORS,
+  parseFields,
+  parseFieldValues,
+  QueryFieldEditor,
+  type QueryFieldEditorProps,
+  type UiEntity,
+  type UiEntityType,
+  type UiNote,
+} from './entities/index.js'
 export { Callout, type CalloutProps, type CalloutVariant } from './molecules/Callout.js'
 export { EmptyState, type EmptyStateProps } from './molecules/EmptyState.js'
 export { FormField, type FormFieldProps } from './molecules/FormField.js'

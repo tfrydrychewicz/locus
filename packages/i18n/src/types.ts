@@ -2,6 +2,7 @@ import type aiEn from './locales/en/ai.json'
 import type calendarEn from './locales/en/calendar.json'
 import type cognitiveEn from './locales/en/cognitive.json'
 import type commonEn from './locales/en/common.json'
+import type entitiesEn from './locales/en/entities.json'
 import type helpEn from './locales/en/help.json'
 import type notesEn from './locales/en/notes.json'
 import type searchEn from './locales/en/search.json'
@@ -18,6 +19,7 @@ export const NAMESPACES = [
   'settings',
   'cognitive',
   'help',
+  'entities',
 ] as const
 
 export type Namespace = (typeof NAMESPACES)[number]
@@ -38,6 +40,7 @@ export interface LocusResources {
   settings: typeof settingsEn
   cognitive: typeof cognitiveEn
   help: typeof helpEn
+  entities: typeof entitiesEn
 }
 
 declare module 'i18next' {

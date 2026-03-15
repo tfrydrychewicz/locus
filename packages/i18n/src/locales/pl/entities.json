@@ -1,0 +1,65 @@
+{
+  "title": "Encje",
+  "searchPlaceholder": "Szukaj encji…",
+  "allTypes": "Wszystkie typy",
+  "emptyTitle": "Brak encji",
+  "emptyDescription": "Utwórz pierwszą encję, aby zbudować swój graf wiedzy.",
+  "emptySearchTitle": "Brak wyników",
+  "emptySearchDescription": "Żadne encje nie pasują do wyszukiwania.",
+  "newEntity": "Nowa encja",
+  "untitled": "Bez nazwy",
+  "trashedBadge": "W koszu",
+  "fields": {
+    "name": "Nazwa",
+    "type": "Typ",
+    "createdAt": "Utworzono",
+    "updatedAt": "Zaktualizowano"
+  },
+  "fieldTypes": {
+    "text": "Tekst",
+    "number": "Liczba",
+    "date": "Data",
+    "boolean": "Tak/nie",
+    "url": "URL",
+    "email": "E-mail",
+    "enum": "Lista wyboru",
+    "relation": "Relacja",
+    "computed_query": "Zapytanie obliczeniowe"
+  },
+  "typeModal": {
+    "createTitle": "Nowy typ encji",
+    "editTitle": "Edytuj typ: {name}",
+    "nameLabel": "Wyświetlana nazwa",
+    "namePlaceholder": "np. Kontakt",
+    "slugLabel": "Slug (unikalny identyfikator)",
+    "slugPlaceholder": "np. kontakt",
+    "iconLabel": "Ikona (emoji)",
+    "colorLabel": "Kolor",
+    "fieldsLabel": "Pola",
+    "addField": "Dodaj pole",
+    "fieldIdLabel": "ID",
+    "fieldLabelLabel": "Etykieta",
+    "fieldTypeLabel": "Typ",
+    "removeField": "Usuń",
+    "builtInWarning": "Wbudowanych typów encji nie można tutaj modyfikować.",
+    "fieldIdHint": "Tylko małe litery i podkreślenia"
+  },
+  "queryEditor": {
+    "placeholder": "np. entity_type = 'person' and name contains 'alice'",
+    "validSuffix": "Poprawne",
+    "syntaxError": "Błąd składni"
+  },
+  "computedField": {
+    "loading": "Wykonuję zapytanie…",
+    "empty": "Brak pasujących encji",
+    "error": "Błąd zapytania: {message}"
+  },
+  "mention": {
+    "openEntity": "Otwórz encję",
+    "trashedNotice": "Ta encja została przeniesiona do kosza."
+  },
+  "noteLink": {
+    "openNote": "Otwórz notatkę",
+    "archivedNotice": "Ta notatka została zarchiwizowana."
+  }
+}
