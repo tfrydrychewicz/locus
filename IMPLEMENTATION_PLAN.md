@@ -120,13 +120,13 @@
 
 | Task                         | Details                                             | Tests                             | Done |
 | ---------------------------- | --------------------------------------------------- | --------------------------------- | :---: |
-| Scaffold Tauri v2 + React 19 | Vite + React + Tauri; Rust backend compiles         | Build: app launches               | [ ] |
-| Window management            | Main window, titlebar, resize/minimize/maximize     | Manual: window behaves correctly  | [ ] |
-| Tauri command infrastructure | Typed command bindings; Zod validation in Rust → TS | Unit: command validation          | [ ] |
-| SQLite setup in Rust         | rusqlite + WAL + 64MB cache + mmap + 8KB pages; migration runner | Integration: DB creates, migrates | [ ] |
-| Scale-ready DB config        | All PRAGMA settings from DESIGN.md §13.2; partial indexes from §8 | Integration: PRAGMA values verified | [ ] |
-| Cursor-based pagination      | `Page<T>` response type; keyset pagination helper in Rust | Unit: cursor encode/decode; Integration: paginated queries | [ ] |
-| Count cache table            | `count_cache` table + trigger infrastructure | Integration: counts maintained | [ ] |
+| Scaffold Tauri v2 + React 19 | Vite + React + Tauri; Rust backend compiles         | Build: app launches               | [x] |
+| Window management            | Main window, titlebar, resize/minimize/maximize     | Manual: window behaves correctly  | [x] |
+| Tauri command infrastructure | Typed command bindings; Zod validation in Rust → TS | Unit: command validation          | [x] |
+| SQLite setup in Rust         | rusqlite + WAL + 64MB cache + mmap + 8KB pages; migration runner | Integration: DB creates, migrates | [x] |
+| Scale-ready DB config        | All PRAGMA settings from DESIGN.md §13.2; partial indexes from §8 | Integration: PRAGMA values verified | [x] |
+| Cursor-based pagination      | `Page<T>` response type; keyset pagination helper in Rust | Unit: cursor encode/decode; Integration: paginated queries | [x] |
+| Count cache table            | `count_cache` table + trigger infrastructure | Integration: counts maintained | [x] |
 
 
 ### 1.2 Core Domain — Notes (`@locus/core`)
