@@ -1,4 +1,4 @@
-import type { HelpTopicId } from './help-registry.js'
+import { getHelpTopic, type HelpTopicId } from './help-registry.js'
 
 export interface HelpArticle {
   title: string
@@ -244,8 +244,10 @@ const content: HelpContentMap = {
 }
 
 export function getHelpContent(topicId: HelpTopicId, locale: string): HelpArticle | null {
+  // Content is keyed by the topic's file path (e.g. 'notes/editor'), not the topic ID
+  const file = getHelpTopic(topicId).file
   const localeContent = content[locale] ?? content.en
-  return localeContent?.[topicId] ?? content.en?.[topicId] ?? null
+  return localeContent?.[file] ?? content.en?.[file] ?? null
 }
 
 export function registerHelpContent(locale: string, topicId: string, article: HelpArticle): void {

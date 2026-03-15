@@ -29,7 +29,7 @@ export function HelpPanel({ locale = 'en' }: HelpPanelProps) {
 
   return (
     <aside
-      className="fixed inset-y-0 right-0 z-50 flex w-[400px] flex-col overflow-hidden border-l border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-xl"
+      className="flex h-full w-[360px] shrink-0 flex-col overflow-hidden border-l border-[var(--color-border)] bg-[var(--color-bg-elevated)]"
       aria-label="Help panel"
     >
       {/* Header */}
