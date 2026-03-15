@@ -5,6 +5,7 @@ import {
   FileText,
   Folder,
   MessageSquare,
+  PanelLeft,
   Scale,
   Search,
   Settings,
@@ -45,6 +46,7 @@ export function App() {
   const [tabs, setTabs] = useState<TabState[]>(() => [makeTab()])
   const [activeTabId, setActiveTabId] = useState<string | null>(() => tabs[0]?.id ?? null)
   const [paletteOpen, setPaletteOpen] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
 
   const activeTab = tabs.find((t) => t.id === activeTabId) ?? tabs[0] ?? null
 
@@ -176,6 +178,22 @@ export function App() {
           Locus
         </span>
 
+        {/* Sidebar toggle */}
+        <button
+          type="button"
+          aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          onClick={() => setSidebarCollapsed((c) => !c)}
+          className={[
+            'mr-1 flex shrink-0 items-center justify-center rounded p-1.5 transition-colors',
+            sidebarCollapsed
+              ? 'text-[var(--color-accent)]'
+              : 'text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]',
+          ].join(' ')}
+        >
+          <PanelLeft size={15} aria-hidden />
+        </button>
+
         {/* Separator */}
         <div className="h-4 w-px shrink-0 bg-[var(--color-border)]" aria-hidden="true" />
 
@@ -255,6 +273,7 @@ export function App() {
           sections={mainSections}
           bottomSection={bottomSection}
           onItemClick={handleNavClick}
+          collapsed={sidebarCollapsed}
         />
 
         <main className="flex min-h-0 flex-1 flex-col overflow-hidden">

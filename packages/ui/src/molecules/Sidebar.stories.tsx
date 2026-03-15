@@ -100,6 +100,6 @@ export const Collapsed: Story = {
   args: {
     sections: mainSections,
     bottomSection,
-    defaultCollapsed: true,
+    collapsed: true,
   },
 }

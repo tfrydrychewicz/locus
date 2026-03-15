@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { NavItem, type NavItemProps } from './NavItem.js'
 
 export interface NavItemConfig extends Omit<NavItemProps, 'onClick' | 'collapsed'> {
@@ -11,8 +10,8 @@ export interface SidebarProps {
   /** Items pinned to the bottom (Settings, Ask AI, etc.) */
   bottomSection?: NavItemConfig[]
   onItemClick?: (id: string) => void
-  /** Start collapsed (icon-only). Defaults to false. */
-  defaultCollapsed?: boolean
+  /** Controlled collapsed state — show icons only when true */
+  collapsed?: boolean
   className?: string
 }
 
@@ -20,11 +19,9 @@ export function Sidebar({
   sections,
   bottomSection,
   onItemClick,
-  defaultCollapsed = false,
+  collapsed = false,
   className = '',
 }: SidebarProps) {
-  const [collapsed, setCollapsed] = useState(defaultCollapsed)
-
   const itemProps = (item: NavItemConfig) => ({
     icon: item.icon,
     label: item.label,
@@ -46,37 +43,6 @@ export function Sidebar({
         .filter(Boolean)
         .join(' ')}
     >
-      {/* Toggle button */}
-      <div className={['mb-1 flex', collapsed ? 'justify-center px-0' : 'px-2'].join(' ')}>
-        <button
-          type="button"
-          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
-          onClick={() => setCollapsed((c) => !c)}
-          className="flex h-7 w-7 items-center justify-center rounded-md text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]"
-        >
-          {/* Chevron icon — points left when expanded, right when collapsed */}
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            aria-hidden="true"
-            className={['transition-transform duration-200', collapsed ? 'rotate-180' : ''].join(
-              ' ',
-            )}
-          >
-            <path
-              d="M9 3L5 7L9 11"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </button>
-      </div>
-
       {/* Main sections */}
       <div className={['flex flex-1 flex-col gap-0', collapsed ? 'px-1' : 'px-2'].join(' ')}>
         {sections.map((group, gi) => (
