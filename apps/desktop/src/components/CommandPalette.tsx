@@ -1,6 +1,6 @@
 import { useTranslation } from '@locus/i18n'
 import { FileText, Plus, Search, Settings, Zap } from 'lucide-react'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Note } from '../tauri/commands.js'
 import { notesCreate, notesSearch } from '../tauri/commands.js'
 
@@ -130,17 +130,17 @@ export function CommandPalette({ onNavigate, onOpenNote, onClose }: CommandPalet
     },
   }))
 
-  const allItems = useMemo<PaletteItem[]>(
-    () => [...filteredCommands, ...noteItems],
-    // filteredCommands and noteItems are derived from state, stable enough per render
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filteredCommands.length, noteItems.length, query],
-  )
+  const allItems: PaletteItem[] = [...filteredCommands, ...noteItems]
+  const totalItems = allItems.length
 
-  // Clamp selectedIndex whenever list changes
+  // Keep a ref so handleKeyDown always reads the latest list without needing it as a dep
+  const allItemsRef = useRef(allItems)
+  allItemsRef.current = allItems
+
+  // Clamp selectedIndex whenever list length changes
   useEffect(() => {
-    setSelectedIndex((i) => Math.min(i, Math.max(allItems.length - 1, 0)))
-  }, [allItems.length])
+    setSelectedIndex((i) => Math.min(i, Math.max(totalItems - 1, 0)))
+  }, [totalItems])
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent) => {
@@ -148,18 +148,19 @@ export function CommandPalette({ onNavigate, onOpenNote, onClose }: CommandPalet
         onClose()
         return
       }
+      const items = allItemsRef.current
       if (e.key === 'ArrowDown') {
         e.preventDefault()
-        setSelectedIndex((i) => Math.min(i + 1, allItems.length - 1))
+        setSelectedIndex((i) => Math.min(i + 1, items.length - 1))
       } else if (e.key === 'ArrowUp') {
         e.preventDefault()
         setSelectedIndex((i) => Math.max(i - 1, 0))
       } else if (e.key === 'Enter') {
         e.preventDefault()
-        allItems[selectedIndex]?.action()
+        items[selectedIndex]?.action()
       }
     },
-    [allItems, selectedIndex, onClose],
+    [onClose, selectedIndex],
   )
 
   const commandSection = filteredCommands
