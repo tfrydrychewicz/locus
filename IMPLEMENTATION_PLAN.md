@@ -95,10 +95,10 @@
 
 | Task | Details | Done |
 |------|---------| :---: |
-| GitHub Actions workflow | On PR: install → build → typecheck → lint → test → i18n-check | [ ] |
-| i18n completeness check | CI step: verify all EN keys exist in PL; fail on missing | [ ] |
-| Turborepo caching | Remote cache for faster CI | [ ] |
-| Branch protection | Require CI pass + 1 review for merge to main | [ ] |
+| GitHub Actions workflow | On PR: install → build → typecheck → lint → test → i18n-check | [x] |
+| i18n completeness check | CI step: verify all EN keys exist in PL; fail on missing | [x] |
+| Turborepo caching | Remote cache for faster CI (via `TURBO_TOKEN` / `TURBO_TEAM` secrets) | [x] |
+| Branch protection | Require CI pass for merge to main (no review required for solo dev) | [x] |
 
 ### Phase 0 Definition of Done
 
