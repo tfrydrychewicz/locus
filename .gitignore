@@ -11,6 +11,7 @@ out/
 target/
 *.app/
 .turbo/
+*.tsbuildinfo
 
 # Tauri
 src-tauri/target/
