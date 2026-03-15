@@ -74,6 +74,30 @@ const content: HelpContentMap = {
       adhdTip:
         "Don't wait until you have something polished to write. Start with a bullet point or a single sentence — Locus is designed for messy first drafts. You can always reorganise later.",
     },
+    'notes/mentions': {
+      title: '@Mentions & Note Links',
+      quickAnswer:
+        'Type @ to mention an entity (person, project, tag) or [[ to link another note. A dropdown appears as you type — pick an item to replace your text with a chip.',
+      sections: [
+        {
+          heading: '@Entity mentions',
+          content:
+            'Type @ anywhere in a note to open the entity picker. Start typing to search by name — results filter as you type. Use the arrow keys to move, Enter to select, or click an item. The typed text (e.g. @foo) is replaced by a chip showing the entity label. Click a chip to open the entity popup.',
+        },
+        {
+          heading: '[[Note links]]',
+          content:
+            'Type [[ to link another note. The same picker appears: search by note title, then select. The link appears as a chip. Archived notes are shown with dimmed styling. Click a chip to open the note popup.',
+        },
+        {
+          heading: 'Zero categorization',
+          content:
+            'You do not need to choose a category before mentioning. Just type @ or [[ and pick from the list. Locus creates the link automatically — no extra steps.',
+        },
+      ],
+      adhdTip:
+        'Do not worry about linking everything perfectly. Mention people and projects as they come up while you write. The connections build themselves.',
+    },
     'notes/search': {
       title: 'Searching Notes',
       quickAnswer:
@@ -186,6 +210,30 @@ const content: HelpContentMap = {
       ],
       adhdTip:
         'Nie czekaj, aż będziesz mieć coś dopracowanego do napisania. Zacznij od punktu lub jednego zdania — Locus jest zaprojektowany dla nieuporządkowanych pierwszych szkiców. Zawsze możesz się zreorganizować później.',
+    },
+    'notes/mentions': {
+      title: '@Wzmianki i linki do notatek',
+      quickAnswer:
+        'Wpisz @, aby wspomnieć encję (osobę, projekt, tag) lub [[, aby połączyć inną notatkę. Podczas pisania pojawi się lista — wybierz element, aby zastąpić tekst chipem.',
+      sections: [
+        {
+          heading: '@Wzmianki encji',
+          content:
+            'Wpisz @ w dowolnym miejscu notatki, aby otworzyć wybór encji. Zacznij pisać, aby wyszukać po nazwie — wyniki filtrują się podczas pisania. Użyj strzałek do nawigacji, Enter do wyboru lub kliknij element. Wpisany tekst (np. @foo) zostanie zastąpiony chipem z etykietą encji. Kliknij chip, aby otworzyć popup encji.',
+        },
+        {
+          heading: '[[Linki do notatek]]',
+          content:
+            'Wpisz [[, aby połączyć inną notatkę. Pojawi się ta sama lista: wyszukaj po tytule, następnie wybierz. Link pojawia się jako chip. Zarchiwizowane notatki są wyświetlane przyciemnione. Kliknij chip, aby otworzyć popup notatki.',
+        },
+        {
+          heading: 'Bez kategoryzacji',
+          content:
+            'Nie musisz wybierać kategorii przed wspomnieniem. Wystarczy wpisać @ lub [[ i wybrać z listy. Locus tworzy powiązanie automatycznie — bez dodatkowych kroków.',
+        },
+      ],
+      adhdTip:
+        'Nie martw się o idealne linkowanie. Wspominaj ludzi i projekty w miarę pisania. Połączenia budują się same.',
     },
     'notes/search': {
       title: 'Wyszukiwanie notatek',

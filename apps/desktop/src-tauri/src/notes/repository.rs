@@ -1,6 +1,7 @@
 use rusqlite::{params, Connection, OptionalExtension};
 use serde::{Deserialize, Serialize};
 
+use crate::db::fts::query_for_prefix_match;
 use crate::db::pagination::{decode_cursor, encode_cursor, Page, PaginationParams};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -218,6 +219,10 @@ pub fn search_fts(
     limit: u32,
 ) -> rusqlite::Result<Vec<NoteSearchResult>> {
     let effective_limit = limit.min(50);
+    let fts_query = query_for_prefix_match(query);
+    if fts_query.is_empty() {
+        return Ok(vec![]);
+    }
     let mut stmt = conn.prepare(
         "SELECT n.id, n.title, n.body, n.body_plain, n.template_id, n.embedding_dirty,
                 n.created_at, n.updated_at, n.archived_at,
@@ -231,7 +236,7 @@ pub fn search_fts(
     )?;
 
     let results = stmt
-        .query_map(params![query, effective_limit], |row| {
+        .query_map(params![fts_query, effective_limit], |row| {
             let note = Note {
                 id: row.get("id")?,
                 title: row.get("title")?,

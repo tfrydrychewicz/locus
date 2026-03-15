@@ -301,12 +301,12 @@
 
 | Task                           | Details                                                 | Tests                                  | Done |
 | ------------------------------ | ------------------------------------------------------- | -------------------------------------- | ---- |
-| `@mention` extension           | `@` trigger → entity search dropdown → MentionChip node | Component: triggers, searches, inserts | [ ]  |
-| `[[noteLink]]` extension       | `[[` trigger → note search → NoteLinkChip node          | Component: triggers, searches, inserts | [ ]  |
-| `MentionChip` node view        | Blue chip; red if trashed; click → entity popup         | Storybook: all states                  | [ ]  |
-| `NoteLinkChip` node view       | Green chip; grey if archived; click → note popup        | Storybook: all states                  | [ ]  |
-| Entity mention rebuild on save | Sync manual @mention nodes to `entity_mentions`         | Integration: mentions tracked          | [ ]  |
-| Note relation rebuild on save  | Sync [[links]] to `note_relations`                      | Integration: relations tracked         | [ ]  |
+| `@mention` extension           | `@` trigger → entity search dropdown → MentionChip node | Component: triggers, searches, inserts | [x]  |
+| `[[noteLink]]` extension       | `[[` trigger → note search → NoteLinkChip node          | Component: triggers, searches, inserts | [x]  |
+| `MentionChip` node view        | Blue chip; red if trashed; click → entity popup         | Storybook: all states                  | [x]  |
+| `NoteLinkChip` node view       | Green chip; grey if archived; click → note popup          | Storybook: all states                  | [x]  |
+| Entity mention rebuild on save | Sync manual @mention nodes to `entity_mentions`         | Integration: mentions tracked          | [x]  |
+| Note relation rebuild on save  | Sync [[links]] to `note_relations`                      | Integration: relations tracked         | [x]  |
 
 
 ### 2.5 Entity UI

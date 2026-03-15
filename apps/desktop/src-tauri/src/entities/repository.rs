@@ -1,6 +1,7 @@
 use rusqlite::{params, Connection, OptionalExtension};
 use serde::{Deserialize, Serialize};
 
+use crate::db::fts::query_for_prefix_match;
 use crate::db::pagination::{decode_cursor, encode_cursor, Page, PaginationParams};
 
 // ── Structs ───────────────────────────────────────────────────────────────────
@@ -395,6 +396,10 @@ pub fn search_entities_fts(
     limit: u32,
 ) -> rusqlite::Result<Vec<Entity>> {
     let effective_limit = limit.min(50);
+    let fts_query = query_for_prefix_match(query);
+    if fts_query.is_empty() {
+        return Ok(vec![]);
+    }
 
     let sql = if entity_type_slug.is_some() {
         "SELECT e.id, e.entity_type_id, e.entity_type_slug, e.name, e.fields,
@@ -419,11 +424,11 @@ pub fn search_entities_fts(
 
     if let Some(slug) = entity_type_slug {
         let mut stmt = conn.prepare(sql)?;
-        stmt.query_map(params![query, slug, effective_limit], row_to_entity)?
+        stmt.query_map(params![fts_query, slug, effective_limit], row_to_entity)?
             .collect::<rusqlite::Result<Vec<_>>>()
     } else {
         let mut stmt = conn.prepare(sql)?;
-        stmt.query_map(params![query, effective_limit], row_to_entity)?
+        stmt.query_map(params![fts_query, effective_limit], row_to_entity)?
             .collect::<rusqlite::Result<Vec<_>>>()
     }
 }
@@ -750,9 +755,15 @@ mod tests {
             insert_entity(conn, &make_entity("fts_001", type_id, "person", "Alice Johnson"))?;
             insert_entity(conn, &make_entity("fts_002", type_id, "person", "Bob Smith"))?;
             insert_entity(conn, &make_entity("fts_003", type_id, "person", "Alice Cooper"))?;
+            insert_entity(conn, &make_entity("fts_004", type_id, "person", "Tomasz Frydrychewicz"))?;
 
             let results = search_entities_fts(conn, "Alice", None, 50)?;
             assert_eq!(results.len(), 2);
+
+            // Partial word / prefix matching: "to" should match "Tomasz"
+            let results = search_entities_fts(conn, "to", None, 50)?;
+            assert_eq!(results.len(), 1);
+            assert_eq!(results[0].name, "Tomasz Frydrychewicz");
             Ok(())
         })
         .unwrap();

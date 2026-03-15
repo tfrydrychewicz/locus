@@ -3,8 +3,9 @@ import { Input } from '@locus/ui'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { NoteListPanel, type NoteListPanelHandle } from '../components/NoteListPanel.js'
 import { NoteEditor } from '../editor/NoteEditor.js'
+import { syncMentionsAndRelations } from '../editor/syncMentionsAndRelations.js'
 import type { Note } from '../tauri/commands.js'
-import { notesGet, notesUpdate } from '../tauri/commands.js'
+import { entityTypesList, notesGet, notesUpdate } from '../tauri/commands.js'
 import type { PaneState, TabState, ViewContent } from '../view-pane/types.js'
 import { ViewPane } from '../view-pane/ViewPane.js'
 
@@ -25,7 +26,12 @@ export function NotesPage({ tab, onTabChange, onOpenInNewTab }: NotesPageProps) 
   const { t } = useTranslation('notes')
   const listPanelRef = useRef<NoteListPanelHandle>(null)
   const [activePaneId, setActivePaneId] = useState<string | null>(() => tab.activePaneId)
+  const [entityTypes, setEntityTypes] = useState<Awaited<ReturnType<typeof entityTypesList>>>([])
   const saveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  useEffect(() => {
+    entityTypesList().then(setEntityTypes)
+  }, [])
 
   // Sync activePaneId when the tab itself changes (different tab selected)
   useEffect(() => {
@@ -45,6 +51,7 @@ export function NotesPage({ tab, onTabChange, onOpenInNewTab }: NotesPageProps) 
       saveTimeoutRef.current = setTimeout(async () => {
         saveTimeoutRef.current = null
         await notesUpdate({ id: noteId, title, body, bodyPlain })
+        await syncMentionsAndRelations(noteId, body)
       }, SAVE_DEBOUNCE_MS)
     },
     [flushSave],
@@ -152,7 +159,15 @@ export function NotesPage({ tab, onTabChange, onOpenInNewTab }: NotesPageProps) 
               showClose={multiPane}
               onClose={() => handleClosePane(pane.id)}
             >
-              {(content) => <PaneContent key={pane.id} content={content} onSave={scheduleSave} />}
+              {(content) => (
+                <PaneContent
+                  key={pane.id}
+                  content={content}
+                  onSave={scheduleSave}
+                  entityTypes={entityTypes}
+                  onOpenNote={openInCurrentPane}
+                />
+              )}
             </ViewPane>
           </div>
         ))}
@@ -166,9 +181,11 @@ export function NotesPage({ tab, onTabChange, onOpenInNewTab }: NotesPageProps) 
 interface PaneContentProps {
   content: ViewContent
   onSave: (noteId: string, title: string, body: string, bodyPlain: string) => void
+  entityTypes: Awaited<ReturnType<typeof entityTypesList>>
+  onOpenNote: (note: Note) => void
 }
 
-function PaneContent({ content, onSave }: PaneContentProps) {
+function PaneContent({ content, onSave, entityTypes, onOpenNote }: PaneContentProps) {
   const { t } = useTranslation('notes')
   const { t: tCommon } = useTranslation('common')
   const [note, setNote] = useState<Note | null>(null)
@@ -246,6 +263,20 @@ function PaneContent({ content, onSave }: PaneContentProps) {
           onUpdate={handleEditorUpdate}
           placeholder={t('bodyPlaceholder')}
           className="h-full rounded-none border-0"
+          entityTypes={entityTypes}
+          onOpenNote={(n) =>
+            onOpenNote({
+              id: n.id,
+              title: n.title,
+              body: n.body,
+              bodyPlain: n.bodyPlain ?? '',
+              templateId: null,
+              embeddingDirty: false,
+              createdAt: n.createdAt,
+              updatedAt: n.updatedAt,
+              archivedAt: n.archivedAt,
+            } as Note)
+          }
         />
       </div>
     </div>

@@ -36,10 +36,11 @@ describe('help-content', () => {
     expect(article?.title).toBe('Getting Started with Locus')
   })
 
-  it('returns null for a topic with no content yet', () => {
-    // notes.mentions is a registered topic ID but has no content written yet
+  it('returns @Mentions content for notes.mentions', () => {
     const article = getHelpContent('notes.mentions', 'en')
-    expect(article).toBeNull()
+    expect(article).not.toBeNull()
+    expect(article?.title).toBe('@Mentions & Note Links')
+    expect(article?.quickAnswer).toContain('@')
   })
 
   it('registerHelpContent adds new content', () => {

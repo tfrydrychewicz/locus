@@ -1,3 +1,4 @@
+import type { UiEntity, UiEntityType, UiNote } from '@locus/ui'
 import Placeholder from '@tiptap/extension-placeholder'
 import TaskItem from '@tiptap/extension-task-item'
 import TaskList from '@tiptap/extension-task-list'
@@ -7,6 +8,8 @@ import { useEffect } from 'react'
 import { EditorToolbar } from './EditorToolbar.js'
 import { CalloutExtension } from './extensions/CalloutExtension.js'
 import { CodeBlockWithPreviewExtension } from './extensions/CodeBlockWithPreview.js'
+import { createEntityMentionExtension } from './extensions/EntityMentionExtension.js'
+import { createNoteLinkExtension } from './extensions/NoteLinkExtension.js'
 
 export interface NoteEditorProps {
   /** HTML content (TipTap/ProseMirror JSON or HTML string) */
@@ -15,6 +18,12 @@ export interface NoteEditorProps {
   placeholder?: string
   editable?: boolean
   className?: string
+  /** Entity types for @mention chip display (icon, color). Load from entityTypesList. */
+  entityTypes?: UiEntityType[]
+  /** Called when user clicks "Open" on an entity in the @mention popup. */
+  onOpenEntity?: (entity: UiEntity) => void
+  /** Called when user clicks "Open" on a note in the [[link]] popup. */
+  onOpenNote?: (note: UiNote) => void
 }
 
 function stripHtmlToPlain(html: string): string {
@@ -29,7 +38,16 @@ export function NoteEditor({
   placeholder = 'Write something…',
   editable = true,
   className = '',
+  entityTypes = [],
+  onOpenEntity,
+  onOpenNote,
 }: NoteEditorProps) {
+  const entityMentionExt = createEntityMentionExtension({
+    entityTypes,
+    onOpenEntity,
+  })
+  const noteLinkExt = createNoteLinkExtension({ onOpenNote })
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -41,6 +59,8 @@ export function NoteEditor({
       TaskItem.configure({ nested: true }),
       CalloutExtension,
       CodeBlockWithPreviewExtension,
+      entityMentionExt,
+      noteLinkExt,
     ],
     content: content || '',
     editable,
@@ -65,6 +85,22 @@ export function NoteEditor({
       editor.commands.setContent(content || '', { emitUpdate: false })
     }
   }, [editor, content])
+
+  useEffect(() => {
+    const storage = editor?.storage as
+      | {
+          entityMention?: { entityTypes: typeof entityTypes; onOpenEntity?: typeof onOpenEntity }
+          noteLink?: { onOpenNote?: typeof onOpenNote }
+        }
+      | undefined
+    if (storage?.entityMention) {
+      storage.entityMention.entityTypes = entityTypes
+      storage.entityMention.onOpenEntity = onOpenEntity
+    }
+    if (storage?.noteLink) {
+      storage.noteLink.onOpenNote = onOpenNote
+    }
+  }, [editor, entityTypes, onOpenEntity, onOpenNote])
 
   useEffect(() => {
     editor?.setEditable(editable)
