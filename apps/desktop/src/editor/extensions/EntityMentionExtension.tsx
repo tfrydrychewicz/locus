@@ -238,7 +238,9 @@ export function createEntityMentionExtension(options: EntityMentionExtensionOpti
             }
             const r = suggestionState.range ?? range
             const { view, state } = editor
-            const node = state.schema.nodes.entityMention!.create(attrs)
+            const nodeType = state.schema.nodes.entityMention
+            if (!nodeType) return
+            const node = nodeType.create(attrs)
             const tr = state.tr.replaceWith(r.from, r.to, node)
             view.dispatch(tr)
             editor.commands.focus()

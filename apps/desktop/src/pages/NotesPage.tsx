@@ -1,11 +1,14 @@
 import { useTranslation } from '@locus/i18n'
 import { Input } from '@locus/ui'
+import { Trash2 } from 'lucide-react'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { BacklinksFooter } from '../components/BacklinksFooter.js'
 import { NoteListPanel, type NoteListPanelHandle } from '../components/NoteListPanel.js'
 import { NoteEditor } from '../editor/NoteEditor.js'
 import { syncMentionsAndRelations } from '../editor/syncMentionsAndRelations.js'
 import type { Note } from '../tauri/commands.js'
-import { entityTypesList, notesGet, notesUpdate } from '../tauri/commands.js'
+import { entityTypesList, notesDelete, notesGet, notesUpdate } from '../tauri/commands.js'
+import { confirmAction } from '../tauri/confirm.js'
 import type { PaneState, TabState, ViewContent } from '../view-pane/types.js'
 import { ViewPane } from '../view-pane/ViewPane.js'
 
@@ -150,7 +153,11 @@ export function NotesPage({ tab, onTabChange, onOpenInNewTab }: NotesPageProps) 
               'flex min-w-0 flex-1 flex-col',
               i > 0 ? 'border-l border-[var(--color-border)]' : '',
             ].join(' ')}
-            onMouseDown={() => setActivePaneId(pane.id)}
+            onMouseDown={(e) => {
+              // Don't capture when clicking buttons (trash, etc.) so their onClick fires
+              if (e.target instanceof HTMLElement && e.target.closest('button')) return
+              setActivePaneId(pane.id)
+            }}
           >
             <ViewPane
               content={pane.content}
@@ -166,6 +173,11 @@ export function NotesPage({ tab, onTabChange, onOpenInNewTab }: NotesPageProps) 
                   onSave={scheduleSave}
                   entityTypes={entityTypes}
                   onOpenNote={openInCurrentPane}
+                  onArchiveNote={async (noteId) => {
+                    await notesDelete(noteId, false)
+                    handleClosePane(pane.id)
+                    listPanelRef.current?.refreshNotes?.()
+                  }}
                 />
               )}
             </ViewPane>
@@ -183,9 +195,16 @@ interface PaneContentProps {
   onSave: (noteId: string, title: string, body: string, bodyPlain: string) => void
   entityTypes: Awaited<ReturnType<typeof entityTypesList>>
   onOpenNote: (note: Note) => void
+  onArchiveNote?: (noteId: string) => void | Promise<void>
 }
 
-function PaneContent({ content, onSave, entityTypes, onOpenNote }: PaneContentProps) {
+function PaneContent({
+  content,
+  onSave,
+  entityTypes,
+  onOpenNote,
+  onArchiveNote,
+}: PaneContentProps) {
   const { t } = useTranslation('notes')
   const { t: tCommon } = useTranslation('common')
   const [note, setNote] = useState<Note | null>(null)
@@ -231,6 +250,23 @@ function PaneContent({ content, onSave, entityTypes, onOpenNote }: PaneContentPr
     [note, title, onSave],
   )
 
+  const handleArchive = useCallback(async () => {
+    if (!note || !onArchiveNote) return
+    const ok = await confirmAction(t('deleteConfirm'), {
+      title: tCommon('confirm_delete.title'),
+      okLabel: tCommon('confirm_delete.confirm'),
+      cancelLabel: tCommon('confirm_delete.cancel'),
+    })
+    if (ok) {
+      try {
+        await onArchiveNote(note.id)
+      } catch (err) {
+        console.error('Archive note failed:', err)
+        window.alert(err instanceof Error ? err.message : String(err))
+      }
+    }
+  }, [note, onArchiveNote, t, tCommon])
+
   if (content.type === 'empty') {
     return (
       <div className="flex h-full items-center justify-center bg-[var(--color-bg)] text-sm text-[var(--color-text-muted)]">
@@ -249,35 +285,54 @@ function PaneContent({ content, onSave, entityTypes, onOpenNote }: PaneContentPr
 
   return (
     <div className="flex h-full flex-col overflow-hidden bg-[var(--color-bg)]">
-      <div className="shrink-0 border-b border-[var(--color-border)] px-4 py-2">
+      <div className="flex shrink-0 items-center justify-between gap-2 border-b border-[var(--color-border)] px-4 py-2">
         <Input
           value={title}
           onChange={handleTitleChange}
           placeholder={t('titlePlaceholder')}
-          className="border-0 bg-transparent text-lg font-semibold shadow-none focus:ring-0"
+          className="min-w-0 flex-1 border-0 bg-transparent text-lg font-semibold shadow-none focus:ring-0"
         />
+        {onArchiveNote && (
+          <button
+            type="button"
+            onMouseDown={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation()
+              e.preventDefault()
+              void handleArchive()
+            }}
+            className="ml-2 shrink-0 rounded p-1.5 text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]"
+            title={t('archive')}
+            aria-label={t('archive')}
+          >
+            <Trash2 size={16} aria-hidden />
+          </button>
+        )}
       </div>
-      <div className="min-h-0 flex-1 overflow-hidden p-0">
-        <NoteEditor
-          content={body}
-          onUpdate={handleEditorUpdate}
-          placeholder={t('bodyPlaceholder')}
-          className="h-full rounded-none border-0"
-          entityTypes={entityTypes}
-          onOpenNote={(n) =>
-            onOpenNote({
-              id: n.id,
-              title: n.title,
-              body: n.body,
-              bodyPlain: n.bodyPlain ?? '',
-              templateId: null,
-              embeddingDirty: false,
-              createdAt: n.createdAt,
-              updatedAt: n.updatedAt,
-              archivedAt: n.archivedAt,
-            } as Note)
-          }
-        />
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden p-0">
+        <div className="min-h-0 flex-1 overflow-hidden">
+          <NoteEditor
+            content={body}
+            onUpdate={handleEditorUpdate}
+            placeholder={t('bodyPlaceholder')}
+            className="h-full rounded-none border-0"
+            entityTypes={entityTypes}
+            onOpenNote={(n) =>
+              onOpenNote({
+                id: n.id,
+                title: n.title,
+                body: n.body,
+                bodyPlain: n.bodyPlain ?? '',
+                templateId: null,
+                embeddingDirty: false,
+                createdAt: n.createdAt,
+                updatedAt: n.updatedAt,
+                archivedAt: n.archivedAt,
+              } as Note)
+            }
+          />
+        </div>
+        <BacklinksFooter noteId={note.id} onOpenNote={onOpenNote} />
       </div>
     </div>
   )

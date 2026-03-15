@@ -136,6 +136,11 @@ pub fn notes_delete(
 }
 
 #[tauri::command]
+pub fn notes_restore(db: State<'_, Database>, id: String) -> Result<(), CommandError> {
+    db.with_conn(|conn| repository::restore(conn, &id)).map_err(CommandError::from)
+}
+
+#[tauri::command]
 pub fn notes_search(
     db: State<'_, Database>,
     params: SearchNotesParams,

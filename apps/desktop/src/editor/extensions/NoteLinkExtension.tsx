@@ -219,7 +219,9 @@ export function createNoteLinkExtension(options: NoteLinkExtensionOptions) {
             const archived = (props.archived as boolean | undefined) ?? false
             const r = suggestionState.range ?? range
             const { view, state } = ed
-            const node = state.schema.nodes.noteLink!.create({ id, label, archived })
+            const nodeType = state.schema.nodes.noteLink
+            if (!nodeType) return
+            const node = nodeType.create({ id, label, archived })
             const tr = state.tr.replaceWith(r.from, r.to, node)
             view.dispatch(tr)
             ed.commands.focus()

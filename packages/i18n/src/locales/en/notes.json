@@ -27,6 +27,7 @@
   "exportNote": "Export note",
   "linkedNotes": "Linked notes",
   "backlinks": "Backlinks",
+  "backlinksCount": "{count, plural, one {# backlink} other {# backlinks}}",
   "noBacklinks": "No backlinks to this note.",
   "toolbar": {
     "label": "Formatting toolbar",

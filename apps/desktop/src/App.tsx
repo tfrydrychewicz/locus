@@ -22,6 +22,7 @@ import { EntitiesPage } from './pages/EntitiesPage.js'
 import { NotesPage } from './pages/NotesPage.js'
 import { SettingsPage } from './pages/SettingsPage.js'
 import { TodayPage } from './pages/TodayPage.js'
+import { TrashPage } from './pages/TrashPage.js'
 import type { Note } from './tauri/commands.js'
 import type { PaneState, TabState } from './view-pane/types.js'
 
@@ -187,7 +188,7 @@ export function App() {
         label: t('nav.search'),
         active: activePage === 'search',
       },
-      { id: 'trash', icon: <Trash2 size={16} />, label: t('nav.trash'), disabled: true },
+      { id: 'trash', icon: <Trash2 size={16} />, label: t('nav.trash') },
     ],
   ]
 
@@ -207,7 +208,7 @@ export function App() {
       setActiveEntityTypeSlug(ENTITY_NAV_SLUG[id] ?? null)
       return
     }
-    const navigable: PageId[] = ['today', 'notes', 'settings', 'search']
+    const navigable: PageId[] = ['today', 'notes', 'settings', 'search', 'trash']
     if (navigable.includes(id as PageId)) {
       setActivePage(id as PageId)
       setActiveEntityTypeSlug(null)
@@ -341,6 +342,7 @@ export function App() {
             />
           )}
           {activePage === 'settings' && <SettingsPage />}
+          {activePage === 'trash' && <TrashPage />}
           {activePage === 'search' && (
             <div className="flex h-full flex-col">
               <header className="flex h-10 shrink-0 items-center justify-between border-b border-[var(--color-border)] px-5">

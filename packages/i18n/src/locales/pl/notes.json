@@ -27,6 +27,7 @@
   "exportNote": "Eksportuj notatkę",
   "linkedNotes": "Powiązane notatki",
   "backlinks": "Odnośniki zwrotne",
+  "backlinksCount": "{count, plural, one {# odnośnik zwrotny} few {# odnośniki zwrotne} many {# odnośników zwrotnych} other {# odnośników zwrotnych}}",
   "noBacklinks": "Brak odnośników zwrotnych do tej notatki.",
   "toolbar": {
     "label": "Pasek narzędzi formatowania",

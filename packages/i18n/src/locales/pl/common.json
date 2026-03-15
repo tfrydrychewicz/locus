@@ -78,6 +78,15 @@
   "newTab": "Nowa karta",
   "closePane": "Zamknij panel",
   "searchComingSoon": "Wyszukiwanie wkrótce…",
+  "trash": {
+    "title": "Kosz",
+    "archivedNotes": "Zarchiwizowane notatki",
+    "trashedEntities": "Encje w koszu",
+    "restore": "Przywróć",
+    "deletePermanently": "Usuń trwale",
+    "emptyTitle": "Kosz jest pusty",
+    "emptyDescription": "Zarchiwizowane notatki i encje w koszu pojawią się tutaj."
+  },
   "nav": {
     "today": "Dziś",
     "notes": "Notatki",

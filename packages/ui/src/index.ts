@@ -40,6 +40,11 @@ export {
   type UiEntityType,
   type UiNote,
 } from './entities/index.js'
+export {
+  type BacklinkItem,
+  BacklinksList,
+  type BacklinksListProps,
+} from './molecules/BacklinksList.js'
 export { Callout, type CalloutProps, type CalloutVariant } from './molecules/Callout.js'
 export { EmptyState, type EmptyStateProps } from './molecules/EmptyState.js'
 export { FormField, type FormFieldProps } from './molecules/FormField.js'
@@ -65,3 +70,4 @@ export {
   Sidebar,
   type SidebarProps,
 } from './molecules/Sidebar.js'
+export { TrashItem, type TrashItemProps } from './molecules/TrashItem.js'

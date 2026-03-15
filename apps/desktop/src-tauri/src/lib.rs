@@ -23,6 +23,7 @@ pub fn run() {
     let database = Database::open(&db_path).expect("Failed to open database");
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
         .manage(database)
         .invoke_handler(tauri::generate_handler![
             commands::ping,
@@ -32,6 +33,7 @@ pub fn run() {
             notes::commands::notes_list,
             notes::commands::notes_update,
             notes::commands::notes_delete,
+            notes::commands::notes_restore,
             notes::commands::notes_search,
             entities::commands::entity_types_list,
             entities::commands::entity_types_get,

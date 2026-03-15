@@ -328,9 +328,9 @@
 
 | Task                       | Details                                                       | Tests                                            | Done |
 | -------------------------- | ------------------------------------------------------------- | ------------------------------------------------ | ---- |
-| Backlinks footer in editor | Count + expandable list of notes linking to current           | Component: shows backlinks                       | [ ]  |
-| Trash system               | Soft-delete for notes (archived_at) and entities (trashed_at) | Integration: soft-delete + restore + hard-delete | [ ]  |
-| `TrashView`                | Full-screen view with restore + permanent delete              | Component: restore/delete actions                | [ ]  |
+| Backlinks footer in editor | Count + expandable list of notes linking to current           | Component: shows backlinks                       | [x]  |
+| Trash system               | Soft-delete for notes (archived_at) and entities (trashed_at) | Integration: soft-delete + restore + hard-delete | [x]  |
+| `TrashView`                | Full-screen view with restore + permanent delete              | Component: restore/delete actions                | [x]  |
 
 
 ### Phase 2 Definition of Done

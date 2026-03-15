@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import type { Note } from '../tauri/commands.js'
 import { notesCreate, notesSearch } from '../tauri/commands.js'
 
-export type PageId = 'today' | 'notes' | 'settings' | 'search' | 'entities'
+export type PageId = 'today' | 'notes' | 'settings' | 'search' | 'entities' | 'trash'
 
 interface CommandItem {
   id: string

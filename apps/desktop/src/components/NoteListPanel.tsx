@@ -19,6 +19,7 @@ export interface NoteListPanelProps {
 export interface NoteListPanelHandle {
   createNote: () => Promise<void>
   focusSearch: () => void
+  refreshNotes: () => void
 }
 
 export const NoteListPanel = forwardRef<NoteListPanelHandle, NoteListPanelProps>(
@@ -80,8 +81,9 @@ export const NoteListPanel = forwardRef<NoteListPanelHandle, NoteListPanelProps>
         focusSearch: () => {
           panelRef.current?.querySelector<HTMLInputElement>('input[type="search"]')?.focus()
         },
+        refreshNotes: () => loadNotes(searchQuery),
       }),
-      [handleNewNote],
+      [handleNewNote, loadNotes, searchQuery],
     )
 
     useEffect(() => {

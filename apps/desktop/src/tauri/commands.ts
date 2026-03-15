@@ -94,6 +94,10 @@ export async function notesDelete(id: string, hard?: boolean): Promise<void> {
   return invoke<void>('notes_delete', { id, hard })
 }
 
+export async function notesRestore(id: string): Promise<void> {
+  return invoke<void>('notes_restore', { id })
+}
+
 export async function notesSearch(params: {
   query: string
   limit?: number

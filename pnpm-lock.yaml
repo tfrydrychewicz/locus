@@ -41,6 +41,9 @@ importers:
       '@tauri-apps/api':
         specifier: ^2.10.1
         version: 2.10.1
+      '@tauri-apps/plugin-dialog':
+        specifier: ^2.0.0
+        version: 2.6.0
       '@tiptap/core':
         specifier: ^3.20.0
         version: 3.20.1(@tiptap/pm@3.20.1)
@@ -242,6 +245,9 @@ importers:
       i18next:
         specifier: ^25.8.18
         version: 25.8.18(typescript@5.9.3)
+      i18next-icu:
+        specifier: ^2.4.3
+        version: 2.4.3(intl-messageformat@11.1.2)
       intl-messageformat:
         specifier: ^11.1.2
         version: 11.1.2
@@ -1449,6 +1455,9 @@ packages:
     resolution: {integrity: sha512-jQNGF/5quwORdZSSLtTluyKQ+o6SMa/AUICfhf4egCGFdMHqWssApVgYSbg+jmrZoc8e1DscNvjTnXtlHLS11g==}
     engines: {node: '>= 10'}
     hasBin: true
+
+  '@tauri-apps/plugin-dialog@2.6.0':
+    resolution: {integrity: sha512-q4Uq3eY87TdcYzXACiYSPhmpBA76shgmQswGkSVio4C82Sz2W4iehe9TnKYwbq7weHiL88Yw19XZm7v28+Micg==}
 
   '@testing-library/dom@10.4.0':
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
@@ -2678,6 +2687,11 @@ packages:
     resolution: {integrity: sha512-5gs5ytaNjBrh5Ow3zrvdUUY+0VxIuWVL4i9irt6friV+BqdCfmV11CQTWMiBYWHbXhco+J1kHfTOUkePhCDvMA==}
     engines: {node: '>=18'}
     hasBin: true
+
+  i18next-icu@2.4.3:
+    resolution: {integrity: sha512-Clb5XCp416Z+BkJUTATCjmDcw2AFzSUDVLxLVK/KhtXP6TJQHrht+6MqoJU1hCpyoCBKe59wMO9pvCvYroNcKg==}
+    peerDependencies:
+      intl-messageformat: '>=10.3.3 <12.0.0'
 
   i18next-parser@9.4.0:
     resolution: {integrity: sha512-SLQJGDj/baBIB9ALmJVXSOXWh3Zn9+wH7J2IuQ4rvx8yuQYpUWitmt8cHFjj6FExjgr8dHfd1SGeQgkowXDO1Q==}
@@ -5006,6 +5020,10 @@ snapshots:
       '@tauri-apps/cli-win32-ia32-msvc': 2.10.1
       '@tauri-apps/cli-win32-x64-msvc': 2.10.1
 
+  '@tauri-apps/plugin-dialog@2.6.0':
+    dependencies:
+      '@tauri-apps/api': 2.10.1
+
   '@testing-library/dom@10.4.0':
     dependencies:
       '@babel/code-frame': 7.29.0
@@ -6410,6 +6428,10 @@ snapshots:
   human-signals@5.0.0: {}
 
   husky@9.1.7: {}
+
+  i18next-icu@2.4.3(intl-messageformat@11.1.2):
+    dependencies:
+      intl-messageformat: 11.1.2
 
   i18next-parser@9.4.0:
     dependencies:

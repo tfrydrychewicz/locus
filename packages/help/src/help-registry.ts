@@ -87,6 +87,13 @@ const helpTopics = {
     file: 'settings/overview',
     relatedTopics: ['settings.general', 'settings.ai'],
   },
+  'trash.overview': {
+    title: 'Trash',
+    titleKey: 'help:topics.trash',
+    namespace: 'help',
+    file: 'trash/overview',
+    relatedTopics: ['notes.editor', 'entities.overview'],
+  },
   shortcuts: {
     title: 'Keyboard Shortcuts',
     titleKey: 'help:topics.shortcuts',

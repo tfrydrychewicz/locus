@@ -208,6 +208,15 @@ pub fn soft_delete(conn: &Connection, id: &str) -> rusqlite::Result<()> {
     Ok(())
 }
 
+pub fn restore(conn: &Connection, id: &str) -> rusqlite::Result<()> {
+    conn.execute(
+        "UPDATE notes SET archived_at = NULL, updated_at = datetime('now')
+         WHERE id = ?1 AND archived_at IS NOT NULL",
+        params![id],
+    )?;
+    Ok(())
+}
+
 pub fn hard_delete(conn: &Connection, id: &str) -> rusqlite::Result<()> {
     conn.execute("DELETE FROM notes WHERE id = ?1", params![id])?;
     Ok(())

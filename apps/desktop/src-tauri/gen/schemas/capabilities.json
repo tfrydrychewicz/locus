@@ -1,1 +1,1 @@
-{}
+{"main-capability":{"identifier":"main-capability","description":"Capability for the main window - enables dialog confirm for trash/archive","local":true,"windows":["main","*"],"permissions":["dialog:allow-confirm"]}}

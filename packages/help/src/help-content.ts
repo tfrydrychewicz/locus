@@ -94,6 +94,11 @@ const content: HelpContentMap = {
           content:
             'You do not need to choose a category before mentioning. Just type @ or [[ and pick from the list. Locus creates the link automatically — no extra steps.',
         },
+        {
+          heading: 'Backlinks',
+          content:
+            'Notes that link to the current note appear in a collapsible footer below the editor. Click the footer to expand and see the list; click a note to open it.',
+        },
       ],
       adhdTip:
         'Do not worry about linking everything perfectly. Mention people and projects as they come up while you write. The connections build themselves.',
@@ -121,6 +126,25 @@ const content: HelpContentMap = {
       ],
       adhdTip:
         'If you cannot remember where you put something, just type any word you associate with it. Locus searches the full body of every note, not just the title.',
+    },
+    'trash/overview': {
+      title: 'Trash',
+      quickAnswer:
+        'Trash holds archived notes and trashed entities. Restore items to bring them back, or delete permanently to remove them forever.',
+      sections: [
+        {
+          heading: 'Archived notes',
+          content:
+            'Notes moved to trash (archived) appear in the Archived notes section. Click Restore to bring a note back to your notes list. Click Delete permanently to remove it from the database — this cannot be undone.',
+        },
+        {
+          heading: 'Trashed entities',
+          content:
+            'Entities (people, projects, etc.) moved to trash appear in the Trashed entities section. Restore returns them to the Entities page. Delete permanently removes them forever.',
+        },
+      ],
+      adhdTip:
+        "Don't worry about a messy trash. Restore what you need when you need it. Permanent delete is only for when you're sure.",
     },
     'getting-started': {
       title: 'Getting Started with Locus',
@@ -231,6 +255,11 @@ const content: HelpContentMap = {
           content:
             'Nie musisz wybierać kategorii przed wspomnieniem. Wystarczy wpisać @ lub [[ i wybrać z listy. Locus tworzy powiązanie automatycznie — bez dodatkowych kroków.',
         },
+        {
+          heading: 'Odnośniki zwrotne',
+          content:
+            'Notatki, które linkują do bieżącej notatki, pojawiają się w zwijanej stopce pod edytorem. Kliknij stopkę, aby rozwinąć listę; kliknij notatkę, aby ją otworzyć.',
+        },
       ],
       adhdTip:
         'Nie martw się o idealne linkowanie. Wspominaj ludzi i projekty w miarę pisania. Połączenia budują się same.',
@@ -258,6 +287,25 @@ const content: HelpContentMap = {
       ],
       adhdTip:
         'Jeśli nie pamiętasz, gdzie coś umieściłeś, wpisz dowolne słowo, które kojarzysz z tym. Locus przeszukuje pełną treść każdej notatki, nie tylko tytuł.',
+    },
+    'trash/overview': {
+      title: 'Kosz',
+      quickAnswer:
+        'Kosz przechowuje zarchiwizowane notatki i encje w koszu. Przywróć elementy, aby je odzyskać, lub usuń trwale, aby usunąć je na zawsze.',
+      sections: [
+        {
+          heading: 'Zarchiwizowane notatki',
+          content:
+            'Notatki przeniesione do koszu pojawiają się w sekcji Zarchiwizowane notatki. Kliknij Przywróć, aby przywrócić notatkę do listy. Kliknij Usuń trwale, aby usunąć ją z bazy danych — tej operacji nie można cofnąć.',
+        },
+        {
+          heading: 'Encje w koszu',
+          content:
+            'Encje (osoby, projekty itp.) przeniesione do koszu pojawiają się w sekcji Encje w koszu. Przywróć zwraca je na stronę Encje. Usuń trwale usuwa je na zawsze.',
+        },
+      ],
+      adhdTip:
+        'Nie martw się o bałagan w koszu. Przywróć to, czego potrzebujesz, gdy tego potrzebujesz. Trwałe usunięcie jest tylko wtedy, gdy jesteś pewien.',
     },
     'getting-started': {
       title: 'Pierwsze kroki z Locus',

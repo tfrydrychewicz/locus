@@ -78,6 +78,15 @@
   "newTab": "New Tab",
   "closePane": "Close pane",
   "searchComingSoon": "Search coming soon…",
+  "trash": {
+    "title": "Trash",
+    "archivedNotes": "Archived notes",
+    "trashedEntities": "Trashed entities",
+    "restore": "Restore",
+    "deletePermanently": "Delete permanently",
+    "emptyTitle": "Trash is empty",
+    "emptyDescription": "Archived notes and trashed entities will appear here."
+  },
   "nav": {
     "today": "Today",
     "notes": "Notes",
