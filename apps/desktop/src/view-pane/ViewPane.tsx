@@ -1,3 +1,4 @@
+import { useTranslation } from '@locus/i18n'
 import type { ViewContent } from './types.js'
 
 export interface ViewPaneProps {
@@ -20,6 +21,7 @@ export function ViewPane({
   children,
   className = '',
 }: ViewPaneProps) {
+  const { t } = useTranslation('common')
   return (
     <div
       className={[
@@ -36,8 +38,8 @@ export function ViewPane({
           <span className="truncate text-xs text-[var(--color-text-muted)]">{label}</span>
           <button
             type="button"
-            aria-label="Close pane"
-            title="Close pane"
+            aria-label={t('closePane')}
+            title={t('closePane')}
             className="ml-2 shrink-0 rounded px-1.5 py-0.5 text-xs text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]"
             onClick={(e) => {
               e.stopPropagation()

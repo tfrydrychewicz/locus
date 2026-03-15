@@ -229,11 +229,11 @@
 
 | Task                      | Details                                                              | Tests                          | Done |
 | ------------------------- | -------------------------------------------------------------------- | ------------------------------ | ---- |
-| `notes.json` locale files | EN + PL for all note feature strings                                 | CI: 100% PL coverage           | [ ]  |
-| `common.json` expansion   | Buttons, labels, errors for Phase 1 features                         | CI: 100% PL coverage           | [ ]  |
-| Help content: Note Editor | `notes/editor.mdx` with quick answer + expandable sections (EN + PL) | HelpPanel renders content      | [ ]  |
-| Help content: Search      | `notes/search.mdx` (EN + PL)                                         | HelpPanel renders content      | [ ]  |
-| HelpButton integration    | `?` button in note editor header and search view                     | Component: opens correct topic | [ ]  |
+| `notes.json` locale files | EN + PL for all note feature strings                                 | CI: 100% PL coverage           | [x]  |
+| `common.json` expansion   | Buttons, labels, errors for Phase 1 features                         | CI: 100% PL coverage           | [x]  |
+| Help content: Note Editor | `notes/editor.mdx` with quick answer + expandable sections (EN + PL) | HelpPanel renders content      | [x]  |
+| Help content: Search      | `notes/search.mdx` (EN + PL)                                         | HelpPanel renders content      | [x]  |
+| HelpButton integration    | `?` button in note editor header and search view                     | Component: opens correct topic | [x]  |
 
 
 ### Phase 1 Definition of Done

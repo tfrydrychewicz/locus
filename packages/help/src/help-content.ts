@@ -45,6 +45,59 @@ const content: HelpContentMap = {
       adhdTip:
         "Don't try to configure everything at once. Start with the theme that feels comfortable and the language you prefer — everything else has sensible defaults.",
     },
+    'notes/editor': {
+      title: 'Note Editor',
+      quickAnswer:
+        'The note editor is a rich-text workspace for capturing ideas, meeting notes, decisions, and anything else. Just start typing — your work is saved automatically every 500 ms.',
+      sections: [
+        {
+          heading: 'Formatting toolbar',
+          content:
+            'Use the toolbar at the top of the editor to format text. Headings (H1–H3), bold, italic, strikethrough, and inline code are all one click away. The Lists dropdown lets you create bullet, numbered, or task lists. The Blocks dropdown adds quotes, code blocks, and colour-coded callouts (Info, Warning, Success, Danger).',
+        },
+        {
+          heading: 'Auto-save',
+          content:
+            'Locus saves your note 500 ms after you stop typing. You never need to press Save. A note is never lost mid-session — even if you switch to a different note or close the pane.',
+        },
+        {
+          heading: 'Split panes',
+          content:
+            'Shift-click any note in the list to open it alongside your current note in a split pane. You can have as many panes as you need. Cmd-click opens a note in a completely new tab.',
+        },
+        {
+          heading: 'Keyboard shortcuts',
+          content:
+            'Cmd+N creates a new note. Cmd+F focuses the search bar. Standard text shortcuts work inside the editor: Cmd+B for bold, Cmd+I for italic, Cmd+Z / Cmd+Shift+Z for undo / redo.',
+        },
+      ],
+      adhdTip:
+        "Don't wait until you have something polished to write. Start with a bullet point or a single sentence — Locus is designed for messy first drafts. You can always reorganise later.",
+    },
+    'notes/search': {
+      title: 'Searching Notes',
+      quickAnswer:
+        'Type in the search bar above the note list for instant full-text search. Press Cmd+K to open the command palette for a global search across notes and commands.',
+      sections: [
+        {
+          heading: 'Full-text search',
+          content:
+            'The search bar uses SQLite FTS5 to search across note titles and body text. Results appear as you type (debounced to 300 ms). Matching notes are ranked by relevance.',
+        },
+        {
+          heading: 'Command palette (Cmd+K)',
+          content:
+            'Press Cmd+K from anywhere in the app to open the command palette. It searches both commands and notes simultaneously. Use the arrow keys to navigate results and Enter to open.',
+        },
+        {
+          heading: 'Tips for better results',
+          content:
+            'Search is case-insensitive and matches partial words. If you cannot find something, try a shorter keyword. FTS5 does not support fuzzy matching — spelling must be correct.',
+        },
+      ],
+      adhdTip:
+        'If you cannot remember where you put something, just type any word you associate with it. Locus searches the full body of every note, not just the title.',
+    },
     'getting-started': {
       title: 'Getting Started with Locus',
       quickAnswer:
@@ -104,6 +157,59 @@ const content: HelpContentMap = {
       ],
       adhdTip:
         'Nie próbuj konfigurować wszystkiego naraz. Zacznij od motywu, który jest dla Ciebie wygodny, i preferowanego języka — reszta ma sensowne wartości domyślne.',
+    },
+    'notes/editor': {
+      title: 'Edytor notatek',
+      quickAnswer:
+        'Edytor notatek to obszar roboczy z bogatym tekstem do zapisywania pomysłów, notatek ze spotkań, decyzji i wszystkiego innego. Po prostu zacznij pisać — Twoja praca jest zapisywana automatycznie co 500 ms.',
+      sections: [
+        {
+          heading: 'Pasek narzędzi formatowania',
+          content:
+            'Użyj paska narzędzi na górze edytora, aby formatować tekst. Nagłówki (H1–H3), pogrubienie, kursywa, przekreślenie i kod inline są dostępne jednym kliknięciem. Lista rozwijana Listy umożliwia tworzenie list punktowanych, numerowanych lub zadań. Lista rozwijana Bloki dodaje cytaty, bloki kodu i kolorowe wywołania (Informacja, Ostrzeżenie, Sukces, Niebezpieczeństwo).',
+        },
+        {
+          heading: 'Automatyczny zapis',
+          content:
+            'Locus zapisuje notatkę 500 ms po zatrzymaniu pisania. Nigdy nie musisz naciskać Zapisz. Notatka nigdy nie jest gubiona w trakcie sesji — nawet jeśli przełączysz się na inną notatkę lub zamkniesz panel.',
+        },
+        {
+          heading: 'Podzielone panele',
+          content:
+            'Shift-kliknij dowolną notatkę na liście, aby otworzyć ją obok bieżącej notatki w podzielonym panelu. Możesz mieć tyle paneli, ile potrzebujesz. Cmd-kliknięcie otwiera notatkę w zupełnie nowej karcie.',
+        },
+        {
+          heading: 'Skróty klawiszowe',
+          content:
+            'Cmd+N tworzy nową notatkę. Cmd+F koncentruje pasek wyszukiwania. Standardowe skróty tekstowe działają w edytorze: Cmd+B pogrubienie, Cmd+I kursywa, Cmd+Z / Cmd+Shift+Z cofnij / ponów.',
+        },
+      ],
+      adhdTip:
+        'Nie czekaj, aż będziesz mieć coś dopracowanego do napisania. Zacznij od punktu lub jednego zdania — Locus jest zaprojektowany dla nieuporządkowanych pierwszych szkiców. Zawsze możesz się zreorganizować później.',
+    },
+    'notes/search': {
+      title: 'Wyszukiwanie notatek',
+      quickAnswer:
+        'Wpisz w pasku wyszukiwania nad listą notatek, aby natychmiast przeszukać pełny tekst. Naciśnij Cmd+K, aby otworzyć paletę poleceń do globalnego wyszukiwania notatek i poleceń.',
+      sections: [
+        {
+          heading: 'Wyszukiwanie pełnotekstowe',
+          content:
+            'Pasek wyszukiwania używa SQLite FTS5 do przeszukiwania tytułów i treści notatek. Wyniki pojawiają się podczas pisania (z opóźnieniem 300 ms). Pasujące notatki są klasyfikowane według trafności.',
+        },
+        {
+          heading: 'Paleta poleceń (Cmd+K)',
+          content:
+            'Naciśnij Cmd+K z dowolnego miejsca w aplikacji, aby otworzyć paletę poleceń. Wyszukuje jednocześnie polecenia i notatki. Użyj klawiszy strzałek do nawigacji po wynikach i Enter, aby otworzyć.',
+        },
+        {
+          heading: 'Wskazówki dla lepszych wyników',
+          content:
+            'Wyszukiwanie jest niewrażliwe na wielkość liter i dopasowuje częściowe słowa. Jeśli nie możesz czegoś znaleźć, spróbuj krótszego słowa kluczowego. FTS5 nie obsługuje rozmytego dopasowania — pisownia musi być poprawna.',
+        },
+      ],
+      adhdTip:
+        'Jeśli nie pamiętasz, gdzie coś umieściłeś, wpisz dowolne słowo, które kojarzysz z tym. Locus przeszukuje pełną treść każdej notatki, nie tylko tytuł.',
     },
     'getting-started': {
       title: 'Pierwsze kroki z Locus',

@@ -76,6 +76,8 @@
     "cancel": "Anuluj"
   },
   "newTab": "Nowa karta",
+  "closePane": "Zamknij panel",
+  "searchComingSoon": "Wyszukiwanie wkrótce…",
   "nav": {
     "today": "Dziś",
     "notes": "Notatki",

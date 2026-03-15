@@ -25,5 +25,24 @@
   "exportNote": "Export note",
   "linkedNotes": "Linked notes",
   "backlinks": "Backlinks",
-  "noBacklinks": "No backlinks to this note."
+  "noBacklinks": "No backlinks to this note.",
+  "toolbar": {
+    "label": "Formatting toolbar",
+    "heading": "Heading",
+    "heading1": "Heading 1",
+    "heading2": "Heading 2",
+    "heading3": "Heading 3",
+    "lists": "Lists",
+    "bulletList": "Bullet list",
+    "numberedList": "Numbered list",
+    "taskList": "Task list",
+    "blocks": "Blocks",
+    "quote": "Quote",
+    "codeBlock": "Code block",
+    "calloutInfo": "Callout – Info",
+    "calloutWarning": "Callout – Warning",
+    "calloutSuccess": "Callout – Success",
+    "calloutDanger": "Callout – Danger",
+    "insertDate": "Date"
+  }
 }

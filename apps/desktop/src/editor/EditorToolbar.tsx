@@ -1,3 +1,5 @@
+import { HelpButton } from '@locus/help'
+import { useTranslation } from '@locus/i18n'
 import { Button } from '@locus/ui'
 import type { Editor } from '@tiptap/react'
 import {
@@ -24,6 +26,7 @@ export interface EditorToolbarProps {
 }
 
 export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
+  const { t } = useTranslation('notes')
   const [headingOpen, setHeadingOpen] = useState(false)
   const [listOpen, setListOpen] = useState(false)
   const [blockOpen, setBlockOpen] = useState(false)
@@ -41,13 +44,20 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
     setBlockOpen(false)
   }, [])
 
+  const calloutLabels: Record<'info' | 'warning' | 'success' | 'danger', string> = {
+    info: t('toolbar.calloutInfo'),
+    warning: t('toolbar.calloutWarning'),
+    success: t('toolbar.calloutSuccess'),
+    danger: t('toolbar.calloutDanger'),
+  }
+
   if (!editor) return null
 
   return (
     <div
       className={`flex flex-wrap items-center gap-0.5 border-b border-[var(--color-border)] bg-[var(--color-bg-surface)] px-2 py-1 ${className}`.trim()}
       role="toolbar"
-      aria-label="Formatting"
+      aria-label={t('toolbar.label')}
     >
       {/* Text formatting */}
       <Button
@@ -103,7 +113,7 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
           aria-expanded={headingOpen}
           aria-haspopup="menu"
         >
-          <span className="text-xs font-medium">Heading</span>
+          <span className="text-xs font-medium">{t('toolbar.heading')}</span>
           <ChevronDown size={12} aria-hidden />
         </Button>
         {headingOpen && (
@@ -121,7 +131,7 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
                     setHeadingOpen(false)
                   }}
                 >
-                  Heading {level}
+                  {t(`toolbar.heading${level}`)}
                 </button>
               ))}
             </div>
@@ -144,6 +154,7 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
           }}
           aria-expanded={listOpen}
           aria-haspopup="menu"
+          aria-label={t('toolbar.lists')}
         >
           <List size={14} aria-hidden />
           <ChevronDown size={12} aria-hidden />
@@ -161,7 +172,7 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
                   setListOpen(false)
                 }}
               >
-                Bullet list
+                {t('toolbar.bulletList')}
               </button>
               <button
                 type="button"
@@ -173,7 +184,7 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
                 }}
               >
                 <ListOrdered size={14} className="mr-1 inline" aria-hidden />
-                Numbered list
+                {t('toolbar.numberedList')}
               </button>
               <button
                 type="button"
@@ -184,7 +195,7 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
                   setListOpen(false)
                 }}
               >
-                Task list
+                {t('toolbar.taskList')}
               </button>
             </div>
           </>
@@ -206,6 +217,7 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
           }}
           aria-expanded={blockOpen}
           aria-haspopup="menu"
+          aria-label={t('toolbar.blocks')}
         >
           <Quote size={14} aria-hidden />
           <ChevronDown size={12} aria-hidden />
@@ -223,7 +235,7 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
                   setBlockOpen(false)
                 }}
               >
-                Quote
+                {t('toolbar.quote')}
               </button>
               <button
                 type="button"
@@ -234,14 +246,14 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
                   setBlockOpen(false)
                 }}
               >
-                Code block
+                {t('toolbar.codeBlock')}
               </button>
               {(['info', 'warning', 'success', 'danger'] as const).map((type) => (
                 <button
                   key={type}
                   type="button"
                   role="menuitem"
-                  className={`${menuItemClass} capitalize`}
+                  className={menuItemClass}
                   onClick={() => {
                     run((e) =>
                       e
@@ -257,7 +269,7 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
                     setBlockOpen(false)
                   }}
                 >
-                  Callout ({type})
+                  {calloutLabels[type]}
                 </button>
               ))}
             </div>
@@ -276,8 +288,14 @@ export function EditorToolbar({ editor, className = '' }: EditorToolbarProps) {
           run((e) => e.chain().focus().insertContent(new Date().toISOString().slice(0, 10)).run())
         }
       >
-        <span className="text-xs">Date</span>
+        <span className="text-xs">{t('toolbar.insertDate')}</span>
       </Button>
+
+      {/* Spacer pushes HelpButton to the right */}
+      <div className="flex-1" aria-hidden="true" />
+
+      {/* Help */}
+      <HelpButton topic="notes.editor" />
     </div>
   )
 }

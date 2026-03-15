@@ -25,5 +25,24 @@
   "exportNote": "Eksportuj notatkę",
   "linkedNotes": "Powiązane notatki",
   "backlinks": "Odnośniki zwrotne",
-  "noBacklinks": "Brak odnośników zwrotnych do tej notatki."
+  "noBacklinks": "Brak odnośników zwrotnych do tej notatki.",
+  "toolbar": {
+    "label": "Pasek narzędzi formatowania",
+    "heading": "Nagłówek",
+    "heading1": "Nagłówek 1",
+    "heading2": "Nagłówek 2",
+    "heading3": "Nagłówek 3",
+    "lists": "Listy",
+    "bulletList": "Lista punktowana",
+    "numberedList": "Lista numerowana",
+    "taskList": "Lista zadań",
+    "blocks": "Bloki",
+    "quote": "Cytat",
+    "codeBlock": "Blok kodu",
+    "calloutInfo": "Wywołanie – Informacja",
+    "calloutWarning": "Wywołanie – Ostrzeżenie",
+    "calloutSuccess": "Wywołanie – Sukces",
+    "calloutDanger": "Wywołanie – Niebezpieczeństwo",
+    "insertDate": "Data"
+  }
 }

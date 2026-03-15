@@ -1,3 +1,4 @@
+import { HelpButton } from '@locus/help'
 import { useTranslation } from '@locus/i18n'
 import { type NavItemConfig, Sidebar } from '@locus/ui'
 import {
@@ -291,8 +292,16 @@ export function App() {
           )}
           {activePage === 'settings' && <SettingsPage />}
           {activePage === 'search' && (
-            <div className="flex h-full items-center justify-center text-sm text-[var(--color-text-muted)]">
-              {t('search.placeholder', { defaultValue: 'Search coming soon…' })}
+            <div className="flex h-full flex-col">
+              <header className="flex h-10 shrink-0 items-center justify-between border-b border-[var(--color-border)] px-5">
+                <span className="text-sm font-medium text-[var(--color-text-primary)]">
+                  {t('nav.search')}
+                </span>
+                <HelpButton topic="notes.search" />
+              </header>
+              <div className="flex flex-1 items-center justify-center text-sm text-[var(--color-text-muted)]">
+                {t('searchComingSoon')}
+              </div>
             </div>
           )}
         </main>

@@ -76,6 +76,8 @@
     "cancel": "Cancel"
   },
   "newTab": "New Tab",
+  "closePane": "Close pane",
+  "searchComingSoon": "Search coming soon…",
   "nav": {
     "today": "Today",
     "notes": "Notes",
