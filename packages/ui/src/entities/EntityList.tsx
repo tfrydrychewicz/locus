@@ -17,6 +17,11 @@ export interface EntityListProps {
   onSearch: (query: string) => void
   onSelectEntity: (entity: UiEntity, e: React.MouseEvent) => void
   onCreateEntity: () => void
+  /**
+   * When false the type-filter tab bar is hidden.
+   * Pass false when the view is already locked to a single type (e.g. navigated from sidebar).
+   */
+  showTypeTabs?: boolean
   /** i18n strings — supply from consumer to keep component unaware of i18n lib */
   labels?: {
     allTypes?: string
@@ -53,6 +58,7 @@ export function EntityList({
   onSearch,
   onSelectEntity,
   onCreateEntity,
+  showTypeTabs = true,
   labels: labelsProp,
   className = '',
 }: EntityListProps) {
@@ -102,7 +108,7 @@ export function EntityList({
       </div>
 
       {/* Type filter tabs */}
-      {entityTypes.length > 0 && (
+      {showTypeTabs && entityTypes.length > 0 && (
         <div
           className="flex shrink-0 gap-1 overflow-x-auto border-b border-[var(--color-border)] px-3 py-1.5"
           role="tablist"

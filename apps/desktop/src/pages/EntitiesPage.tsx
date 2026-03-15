@@ -40,6 +40,8 @@ export interface EntitiesPageProps {
 export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
   const { t } = useTranslation('entities')
   const { t: tc } = useTranslation('common')
+  /** When navigated from a sidebar type item, lock the view to that type only. */
+  const isLocked = initialTypeSlug !== null
 
   const [entityTypes, setEntityTypes] = useState<EntityType[]>([])
   const [entities, setEntities] = useState<Entity[]>([])
@@ -218,7 +220,22 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
     <div className="flex h-full flex-col overflow-hidden">
       {/* Header */}
       <header className="flex h-10 shrink-0 items-center justify-between border-b border-[var(--color-border)] px-4">
-        <h1 className="text-sm font-semibold text-[var(--color-text-primary)]">{t('title')}</h1>
+        <h1 className="flex items-center gap-2 text-sm font-semibold text-[var(--color-text-primary)]">
+          {(() => {
+            const lockedType = isLocked
+              ? entityTypes.find((et) => et.slug === initialTypeSlug)
+              : null
+            if (lockedType) {
+              return (
+                <>
+                  {lockedType.icon && <span aria-hidden="true">{lockedType.icon}</span>}
+                  {lockedType.name}
+                </>
+              )
+            }
+            return t('title')
+          })()}
+        </h1>
         <div className="flex items-center gap-1.5">
           <button
             type="button"
@@ -230,7 +247,6 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
             title="Manage entity types"
           >
             <Settings2 size={14} aria-hidden />
-            Manage types
           </button>
           <HelpButton topic="entities.overview" />
         </div>
@@ -247,6 +263,7 @@ export function EntitiesPage({ initialTypeSlug = null }: EntitiesPageProps) {
             search={search}
             loading={loadingList}
             selectedEntityId={selectedEntityId}
+            showTypeTabs={!isLocked}
             onTypeFilter={handleTypeFilter}
             onSearch={handleSearch}
             onSelectEntity={(e) => {
